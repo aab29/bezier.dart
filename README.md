@@ -129,4 +129,4 @@ void main() {
 
 ## Submitting bugs, requesting features
 
-Please file feature requests and bugs using the GitHub issues tab.
+Please file feature requests and bugs using the GitHub [issues tab](https://github.com/aab29/bezier.dart/issues).
