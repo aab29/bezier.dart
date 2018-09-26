@@ -1,0 +1,10 @@
+.idea
+.children
+.project
+.dart_tool/
+.pub
+.packages
+pubspec.lock
+build/
+doc/api/
+*.iml
