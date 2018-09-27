@@ -127,6 +127,20 @@ void main() {
 }
 ```
 
+## Formatting
+
+Whenever possible, this library is formatted using [dartfmt](https://github.com/dart-lang/dart_style).
+
+## Running Automated Tests
+
+To run the test cases from the terminal, run the following command from the **bezier.dart** root directory.
+
+```bash
+pub run test:test
+```
+
+Most IDEs now provide interfaces for running tests, which are generally easier to work with.  In most cases you can simply right click on the test file or directory and select the menu option to run the test.
+
 ## Submitting bugs, requesting features
 
 Please file feature requests and bugs using the GitHub [issues tab](https://github.com/aab29/bezier.dart/issues).
