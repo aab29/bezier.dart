@@ -139,7 +139,7 @@ To run the test cases from the terminal, run the following command from the **be
 pub run test:test
 ```
 
-Most IDEs now provide interfaces for running tests, which are generally easier to work with.  In most cases you can simply right click on the test file or directory and select the menu option to run the test.
+Most IDEs now provide interfaces for running tests, which are generally easier to work with.  In most cases you can simply right click on the test file or directory in the project tree view and select the menu option to run the test.
 
 ## Submitting bugs, requesting features
 
