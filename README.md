@@ -136,10 +136,10 @@ Whenever possible, this library is formatted using [dartfmt](https://github.com/
 To run the test cases from the terminal, run the following command from the **bezier.dart** root directory.
 
 ```bash
-pub run test:test
+pub run test
 ```
 
-Most IDEs now provide interfaces for running tests, which are generally easier to work with.  In most cases you can simply right click on the test file or directory in the project tree view and select the menu option to run the test.
+Most IDEs now provide interfaces for running tests, which are generally easier to work with.  In most cases you can simply right click on a test file or directory in the project tree view and select the menu option to run the selected tests.
 
 ## Submitting bugs, requesting features
 
