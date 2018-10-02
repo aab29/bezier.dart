@@ -520,14 +520,14 @@ abstract class Bezier {
   }
 
   /// Returns a [List] of intersection results after removing duplicates in [intersectionsToFilter].
-  static List<BDIntersection> _removeDuplicateIntersections(List<BDIntersection> intersectionsToFilter, double minTValueDifference) {
+  static List<Intersection> _removeDuplicateIntersections(List<Intersection> intersectionsToFilter, double minTValueDifference) {
     if (intersectionsToFilter.length <= 1) {
       return intersectionsToFilter;
     }
 
     var firstIntersection = intersectionsToFilter[0];
     var sublist = intersectionsToFilter.sublist(1);
-    final filteredList = <BDIntersection>[firstIntersection];
+    final filteredList = <Intersection>[firstIntersection];
     while (sublist.length > 0) {
       sublist.removeWhere((intersection) {
         return intersection.isWithinTValueOf(firstIntersection, minTValueDifference);
@@ -543,7 +543,7 @@ abstract class Bezier {
   }
 
   /// Returns a [List] of intersection results between [curve1] and [curve2].
-  static List<BDIntersection> _locateIntersections(List<BDBezierSlice> curve1,
+  static List<Intersection> _locateIntersections(List<BDBezierSlice> curve1,
       List<BDBezierSlice> curve2, double curveIntersectionThreshold, double minTValueDifference) {
     final leftOverlappingSegments = <BDBezierSlice>[];
     final rightOverlappingSegments = <BDBezierSlice>[];
@@ -556,7 +556,7 @@ abstract class Bezier {
       });
     });
 
-    final intersections = <BDIntersection>[];
+    final intersections = <Intersection>[];
     final overlappingSegmentsCount = leftOverlappingSegments.length;
     for (var pairIndex = 0; pairIndex < overlappingSegmentsCount; pairIndex++) {
       final leftCurve = leftOverlappingSegments[pairIndex];
@@ -582,7 +582,7 @@ abstract class Bezier {
   /// shallow angle or pass extremely close to each other. Decreasing
   /// [curveIntersectionThreshold] or increasing [minTValueDifference] may
   /// reduce the number of intersections returned in such cases.
-  List<BDIntersection> intersectionsWithCurve(Bezier curve, {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
+  List<Intersection> intersectionsWithCurve(Bezier curve, {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
     final reducedSegments = simpleSlices();
     final curveReducedSegments = curve.simpleSlices();
 
@@ -592,9 +592,9 @@ abstract class Bezier {
   /// Returns the [List] of intersections between [this] and itself.
   ///
   /// See [intersectionsWithCurve] for information about the optional parameters.
-  List<BDIntersection> intersectionsWithSelf({double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
+  List<Intersection> intersectionsWithSelf({double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
     final reducedSegments = simpleSlices();
-    final results = <BDIntersection>[];
+    final results = <Intersection>[];
 
     for (var segmentIndex = 0; segmentIndex < reducedSegments.length - 2; segmentIndex++) {
       final left = reducedSegments.sublist(segmentIndex, segmentIndex + 1);

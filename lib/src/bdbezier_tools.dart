@@ -344,7 +344,7 @@ List<int> indicesOfOverlappingSegmentPairs(
 /// threshold of [curveIntersectionThreshold].  It divides the bounding boxes
 /// of the [Bezier] curves in half and calls itself recursively with
 /// overlapping pairs of divided curve segments.
-List<BDIntersection> locateIntersectionsRecursively(BDBezierSlice curve1,
+List<Intersection> locateIntersectionsRecursively(BDBezierSlice curve1,
     BDBezierSlice curve2, double curveIntersectionThreshold) {
   final curve1Box = curve1.subcurve.boundingBox;
   final curve2Box = curve2.subcurve.boundingBox;
@@ -353,7 +353,7 @@ List<BDIntersection> locateIntersectionsRecursively(BDBezierSlice curve1,
       boundingBoxIsSmallerThanSize(curve2Box, curveIntersectionThreshold)) {
     final firstIntersectionT = (curve1.t1 + curve1.t2) / 2.0;
     final secondIntersectionT = (curve2.t1 + curve2.t2) / 2.0;
-    return [new BDIntersection(firstIntersectionT, secondIntersectionT)];
+    return [new Intersection(firstIntersectionT, secondIntersectionT)];
   }
 
   final centerT = 0.5;
@@ -382,7 +382,7 @@ List<BDIntersection> locateIntersectionsRecursively(BDBezierSlice curve1,
   final overlappingPairIndices =
       indicesOfOverlappingSegmentPairs(pairLeftSides, pairRightSides);
 
-  final results = <BDIntersection>[];
+  final results = <Intersection>[];
   if (overlappingPairIndices.length == 0) {
     return results;
   }
