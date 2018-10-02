@@ -4,7 +4,7 @@ void main() {
   group("pointAt", () {
 
     test("quadratic pointAt", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
@@ -37,7 +37,7 @@ void main() {
 
   group("hullPointsAt", () {
     test("quadratic hullPointsAt", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -142,7 +142,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final hull1 = curve.hullPointsAt(0.5);
       expect(hull1, hasLength(6));
@@ -168,7 +168,7 @@ void main() {
 
   group("derivativeAt", () {
     test("quadratic derivativeAt", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
@@ -232,7 +232,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       expect(curve.normalVectorAt(0.5), closeToVector(new Vector2(-0.9974586963653564, 0.07124704867601395)));
       expect(curve.normalVectorAt(0.23), closeToVector(new Vector2(-0.9185916185379028, 0.3952080309391022)));
@@ -271,7 +271,7 @@ void main() {
         new Vector2(65.0, 20.0),
         new Vector2(70.0, 95.0),
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final pointA = curve.offsetPointAt(0.5, 12.0);
       expect(pointA, closeToVector(new Vector2(48.78436279296875, 62.17439651489258)));
@@ -287,7 +287,7 @@ void main() {
     });
 
     test("quadratic offsetPointAt, negative distance", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -320,7 +320,7 @@ void main() {
 
   group("positionLookUpTable", () {
     test("quadratic positionLookUpTable, default intervalsCount", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)

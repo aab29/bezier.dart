@@ -3,13 +3,13 @@ import "../testing_tools/testing_tools.dart";
 void main() {
   group("intersectionsWithCurve", () {
     test("quadratic intersectionsWithCurve", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 50.0),
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(0.0, 50.0),
         new Vector2(50.0, -100.0),
         new Vector2(100.0, 50.0)
@@ -52,7 +52,7 @@ void main() {
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(-10.0, 15.0),
         new Vector2(50.0, 25.0),
         new Vector2(110.0, 15.0)
@@ -66,13 +66,13 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, one intersection", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(50.0, 0.0),
         new Vector2(150.0, 300.0),
         new Vector2(250.0, 0.0)
@@ -87,13 +87,13 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, two intersections", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(25.0, 100.0),
         new Vector2(75.0, -100.0),
         new Vector2(125.0, 100.0)
@@ -107,13 +107,13 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, four intersections", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 200.0),
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(-50.0, 0.0),
         new Vector2(250.0, 50.0),
         new Vector2(-50.0, 100.0)
@@ -127,7 +127,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve with looped cubic near self-intersection point, two intersections", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -196,13 +196,13 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with increased minTValueDifference", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
         new Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(0.0, 10.0),
         new Vector2(50.0, 25.0),
         new Vector2(100.0, 90.0)
@@ -217,13 +217,13 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with decreased curveIntersectionThreshold", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
         new Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(0.0, 10.0),
         new Vector2(50.0, 25.0),
         new Vector2(100.0, 90.0)
@@ -315,7 +315,7 @@ void main() {
         new Vector2(50.0, 0.0),
         new Vector2(90.0, 500.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final point1 = new Vector2(0.0, 400.0);
       final point2 = new Vector2(100.0, 410.0);
@@ -325,7 +325,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, vertical line with single intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -338,7 +338,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, horizontal line through left half, single intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -351,7 +351,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, horizontal line tangent to apex, single intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -364,7 +364,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, horizontal line just above apex, no intersections", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -377,7 +377,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, horizontal line just below apex, two intersections", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -390,7 +390,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, horizontal line through diagonal curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 100.0)
@@ -403,7 +403,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, vertical line through diagonal curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 100.0)
@@ -416,7 +416,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, parallel diagonal line through diagonal curve, two intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 100.0)
@@ -429,7 +429,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, perpendicular diagonal line through diagonal curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 100.0)
@@ -442,7 +442,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, slanted diagonal line through diagonal curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 100.0)
@@ -455,7 +455,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, slanted line through linear curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(100.0, 100.0)
@@ -468,7 +468,7 @@ void main() {
     });
 
     test("quadratic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(100.0, 100.0)

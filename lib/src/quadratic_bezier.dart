@@ -1,10 +1,10 @@
 import "package:bezier/bezier.dart";
 
 /// Concrete class of quadratic Bézier curves.
-class BDQuadraticBezier extends Bezier {
+class QuadraticBezier extends Bezier {
 
   /// Constructs a quadratic Bézier curve from a [List] of [Vector2].
-  BDQuadraticBezier(List<Vector2> points) : super(points) {
+  QuadraticBezier(List<Vector2> points) : super(points) {
     if (points.length != 3) {
       throw(new ArgumentError("Quadratic Bézier curves require exactly three points"));
     }

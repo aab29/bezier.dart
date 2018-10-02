@@ -25,7 +25,7 @@ abstract class Bezier {
   /// based on the number of entries in [curvePoints].
   factory Bezier.fromPoints(List<Vector2> curvePoints) {
     if (curvePoints.length == 3) {
-      return new BDQuadraticBezier(curvePoints);
+      return new QuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
       return new BDCubicBezier(curvePoints);
     } else {
@@ -188,7 +188,7 @@ abstract class Bezier {
     final hullPoints = hullPointsAt(t);
 
     if (order == 2) {
-      return new BDQuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
+      return new QuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
     } else if (order == 3) {
       return new BDCubicBezier([hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
     } else {
@@ -207,7 +207,7 @@ abstract class Bezier {
 
     final hullPoints = hullPointsAt(t);
     if (order == 2) {
-      return new BDQuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
+      return new QuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
     } else if (order == 3) {
       return new BDCubicBezier([hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
     } else {

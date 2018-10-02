@@ -3,7 +3,7 @@ import "../testing_tools/testing_tools.dart";
 void main() {
   group("startPoint", () {
     test("quadratic startPoint", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
@@ -24,7 +24,7 @@ void main() {
 
   group("endPoint", () {
     test("quadratic endPoint", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
@@ -47,7 +47,7 @@ void main() {
   group("derivativePoints", () {
 
     test("quadratic derivativePoints", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
@@ -98,7 +98,7 @@ void main() {
         new Vector2(30.0, 10.0),
         new Vector2(55.0, 25.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final dpoints1 = curve.derivativePoints();
       expect(dpoints1, hasLength(2));
@@ -114,7 +114,7 @@ void main() {
 
   group("isClockwise", () {
     test("quadratic isClockwise", () {
-      final clockwiseCurve = new BDQuadraticBezier([
+      final clockwiseCurve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0)
@@ -122,7 +122,7 @@ void main() {
 
       expect(clockwiseCurve.isClockwise, isTrue);
 
-      final counterclockwiseCurve = new BDQuadraticBezier([
+      final counterclockwiseCurve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, -100.0),
         new Vector2(100.0, 0.0)
@@ -130,7 +130,7 @@ void main() {
 
       expect(counterclockwiseCurve.isClockwise, isFalse);
 
-      final linearCurve = new BDQuadraticBezier([
+      final linearCurve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(100.0, 100.0)
@@ -185,7 +185,7 @@ void main() {
         new Vector2(30.0, 10.0),
         new Vector2(55.0, 25.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.isClockwise, isTrue);
     });
 
@@ -206,12 +206,12 @@ void main() {
         new Vector2(40.0, 40.0),
         new Vector2(30.0, 10.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.isClockwise, isFalse);
     });
 
     test("quadratic isClockwise, diagonal degenerate curve with control point beyond end point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 100.0),
         new Vector2(20.0, 20.0)
@@ -220,7 +220,7 @@ void main() {
     });
 
     test("quadratic isClockwise, diagonal degenerate curve with control point before start point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -100.0),
         new Vector2(20.0, 20.0)
@@ -229,7 +229,7 @@ void main() {
     });
 
     test("quadratic isClockwise, horizontal degenerate curve with control point beyond end point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(20.0, 0.0)
@@ -238,7 +238,7 @@ void main() {
     });
 
     test("quadratic isClockwise, horizontal degenerate curve with control point before start point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, 0.0),
         new Vector2(20.0, 0.0)
@@ -249,7 +249,7 @@ void main() {
 
   group("isLinear", () {
     test("quadratic isLinear", () {
-      final linearCurve = new BDQuadraticBezier([
+      final linearCurve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(100.0, 100.0)
@@ -257,7 +257,7 @@ void main() {
 
       expect(linearCurve.isLinear, isTrue);
 
-      final nonlinearCurve = new BDQuadraticBezier([
+      final nonlinearCurve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(-50.0, 100.0)
@@ -303,7 +303,7 @@ void main() {
         new Vector2(20.0, 20.0),
         new Vector2(90.0, 90.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.isLinear, isTrue);
     });
 
@@ -324,12 +324,12 @@ void main() {
         new Vector2(20.0, 20.0),
         new Vector2(50.001, 50.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.isLinear, isFalse);
     });
 
     test("quadratic isLinear, diagonal degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -100.0),
         new Vector2(20.0, 20.0)
@@ -338,7 +338,7 @@ void main() {
     });
 
     test("quadratic isLinear, horizontal degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, 0.0),
         new Vector2(20.0, 0.0)
@@ -388,7 +388,7 @@ void main() {
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.length, closeToDouble(102.64876949628173));
     });
 
@@ -409,12 +409,12 @@ void main() {
         new Vector2(-80.0, -80.0),
         new Vector2(-100.0, -100.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
       expect(curve.length, closeToDouble(42.426406480714064));
     });
 
     test("quadratic length, degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(50.0, 0.0)
@@ -464,7 +464,7 @@ void main() {
         new Vector2(60.0, 60.0),
         new Vector2(100.0, 100.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       expect(curve.isSimple, isTrue);
     });
@@ -475,7 +475,7 @@ void main() {
         new Vector2(100.0, 20.0),
         new Vector2(0.0, 100.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       expect(curve.isSimple, isFalse);
     });
@@ -492,7 +492,7 @@ void main() {
     });
 
     test("quadratic isSimple, simple curve border case", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 28.86),
         new Vector2(100.0, 0.0)
@@ -502,7 +502,7 @@ void main() {
     });
 
     test("quadratic isSimple, non-simple curve border case", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 28.87),
         new Vector2(100.0, 0.0)
@@ -545,7 +545,7 @@ void main() {
     });
 
     test("quadratic isSimple, diagonal degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 30.0),
         new Vector2(50.0, 15.0)
@@ -554,7 +554,7 @@ void main() {
     });
 
     test("quadratic isSimple, horizontal degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(50.0, 0.0)
@@ -623,7 +623,7 @@ void main() {
     });
 
     test("quadratic isSimple, degenerate curve with control point overlapping end point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(100.0, 0.0)

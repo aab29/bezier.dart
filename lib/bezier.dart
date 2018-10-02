@@ -16,4 +16,4 @@ export "src/bdbezier_slice.dart";
 export "src/bdcubic_bezier.dart";
 export "src/bdeven_spacer.dart";
 export "src/bdintersection.dart";
-export "src/bdquadratic_bezier.dart";
+export "src/quadratic_bezier.dart";

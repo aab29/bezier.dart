@@ -30,11 +30,11 @@ void main() {
         new Vector2(30.0, 1.0),
         new Vector2(60.0, 0.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final result = curve.scaledCurve(10.0);
-      expect(result, new TypeMatcher<BDQuadraticBezier>());
-      final scaledCurve = result as BDQuadraticBezier;
+      expect(result, new TypeMatcher<QuadraticBezier>());
+      final scaledCurve = result as QuadraticBezier;
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(9.50062370300293, 9.987524032592773),
@@ -45,14 +45,14 @@ void main() {
     });
 
     test("quadratic scaledCurve, linear curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 50.0),
         new Vector2(100.0, 100.0)
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDQuadraticBezier>());
+      expect(scaledCurve, new TypeMatcher<QuadraticBezier>());
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-7.071067810058594, 7.071067810058594),
@@ -155,14 +155,14 @@ void main() {
     });
 
     test("quadratic scaledCurve, linear curve with control point overlapping start point", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0)
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDQuadraticBezier>());
+      expect(scaledCurve, new TypeMatcher<QuadraticBezier>());
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(0.0, 10.0),
         new Vector2(0.0, 10.0),
@@ -196,7 +196,7 @@ void main() {
         new Vector2(70.0, 95.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final cubicCurve = curve.toCubicBezier();
 
@@ -261,7 +261,7 @@ void main() {
         new Vector2(20.0, 20.0),
         new Vector2(15.0, 30.0),
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final offsetCurves = curve.offsetCurve(10.0);
       expect(offsetCurves, hasLength(2));
@@ -306,7 +306,7 @@ void main() {
         new Vector2(20.0, 5.0),
         new Vector2(40.0, 10.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final offsetCurves = curve.offsetCurve(5.0);
       expect(offsetCurves, hasLength(1));

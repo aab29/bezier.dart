@@ -8,9 +8,9 @@ void main() {
         new Vector2(30.0, 10.0),
         new Vector2(55.0, 25.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
-      expect(curve, new TypeMatcher<BDQuadraticBezier>());
+      expect(curve, new TypeMatcher<QuadraticBezier>());
       expect(curve.order, equals(2));
       expect(curve.points, hasLength(3));
     });
@@ -39,7 +39,7 @@ void main() {
       ];
       final curve = new Bezier.fromPoints(points);
 
-      expect(curve, new TypeMatcher<BDQuadraticBezier>());
+      expect(curve, new TypeMatcher<QuadraticBezier>());
       expect(curve.order, equals(2));
       expect(curve.points, hasLength(3));
     });

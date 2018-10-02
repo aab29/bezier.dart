@@ -25,7 +25,7 @@ void main() {
         new Vector2(-25.0, -20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final box = curve.boundingBox;
       expect(box, new TypeMatcher<Aabb2>());
@@ -70,19 +70,19 @@ void main() {
     });
 
     test("quadratic overlaps with other quadratic curve", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(-70.0, -95.0),
         new Vector2(-25.0, -20.0),
         new Vector2(-15.0, -80.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(105.0, 70.0),
         new Vector2(50.0, 50.0),
         new Vector2(50.0, 80.0)
       ]);
 
-      final curveC = new BDQuadraticBezier([
+      final curveC = new QuadraticBezier([
         new Vector2(-80.0, 65.0),
         new Vector2(90.0, -55.0),
         new Vector2(110.0, -90.0)
@@ -99,13 +99,13 @@ void main() {
     });
 
     test("quadratic overlaps with quadratic and cubic curves", () {
-      final curveA = new BDQuadraticBezier([
+      final curveA = new QuadraticBezier([
         new Vector2(-70.0, -95.0),
         new Vector2(-25.0, -20.0),
         new Vector2(-15.0, 5.0)
       ]);
 
-      final curveB = new BDQuadraticBezier([
+      final curveB = new QuadraticBezier([
         new Vector2(105.0, 70.0),
         new Vector2(50.0, 50.0),
         new Vector2(50.0, 80.0)
@@ -153,7 +153,7 @@ void main() {
         new Vector2(70.0, 95.0),
         new Vector2(25.0, 20.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final result = curve.extremaOnX;
       expect(result, new TypeMatcher<List<double>>());
@@ -188,7 +188,7 @@ void main() {
         new Vector2(70.0, 95.0),
         new Vector2(25.0, 20.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final result = curve.extremaOnY;
       expect(result, new TypeMatcher<List<double>>());
@@ -225,7 +225,7 @@ void main() {
         new Vector2(70.0, 95.0),
         new Vector2(25.0, 20.0)
       ];
-      final curve = new BDQuadraticBezier(points);
+      final curve = new QuadraticBezier(points);
 
       final result = curve.extrema;
       expect(result, new TypeMatcher<List<double>>());
@@ -236,7 +236,7 @@ void main() {
     });
 
     test("quadratic extrema, degenerate curve", () {
-      final curve = new BDQuadraticBezier([
+      final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(50.0, 0.0)
