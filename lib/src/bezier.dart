@@ -215,7 +215,7 @@ abstract class Bezier {
     }
   }
 
-  /// Returns the sub-curve obtained by taking the portion of the curve between
+  /// Returns the subcurve obtained by taking the portion of the curve between
   /// parameter values [t1] and [t2].
   Bezier subcurveBetween(double t1, double t2) {
     final rightOfT1 = rightSubcurveAt(t1);
