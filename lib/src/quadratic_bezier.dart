@@ -39,10 +39,10 @@ class QuadraticBezier extends Bezier {
     return result;
   }
 
-  /// Returns a [BDCubicBezier] instance with the same start and end points as [this]
+  /// Returns a [CubicBezier] instance with the same start and end points as [this]
   /// and control points positioned so it produces identical points along the
   /// curve as [this].
-  BDCubicBezier toCubicBezier() {
+  CubicBezier toCubicBezier() {
     final cubicCurvePoints = new List<Vector2>();
     cubicCurvePoints.add(startPoint);
 
@@ -60,7 +60,7 @@ class QuadraticBezier extends Bezier {
 
     cubicCurvePoints.add(endPoint);
 
-    return new BDCubicBezier(cubicCurvePoints);
+    return new CubicBezier(cubicCurvePoints);
   }
 
   @override

@@ -1,10 +1,10 @@
 import "package:bezier/bezier.dart";
 
 /// Concrete class of cubic Bézier curves.
-class BDCubicBezier extends Bezier {
+class CubicBezier extends Bezier {
 
   /// Constructs a cubic Bézier curve from a [List] of [Vector2].
-  BDCubicBezier(List<Vector2> points) : super(points) {
+  CubicBezier(List<Vector2> points) : super(points) {
     if (points.length != 4) {
       throw(new ArgumentError("Cubic Bézier curves require exactly four points"));
     }

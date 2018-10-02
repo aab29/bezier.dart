@@ -27,7 +27,7 @@ abstract class Bezier {
     if (curvePoints.length == 3) {
       return new QuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
-      return new BDCubicBezier(curvePoints);
+      return new CubicBezier(curvePoints);
     } else {
       throw(new UnsupportedError("Unsupported number of curve points"));
     }
@@ -190,7 +190,7 @@ abstract class Bezier {
     if (order == 2) {
       return new QuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
     } else if (order == 3) {
-      return new BDCubicBezier([hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
+      return new CubicBezier([hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
     } else {
       throw(new UnsupportedError("Unsupported curve order"));
     }
@@ -209,7 +209,7 @@ abstract class Bezier {
     if (order == 2) {
       return new QuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
     } else if (order == 3) {
-      return new BDCubicBezier([hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
+      return new CubicBezier([hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
     } else {
       throw(new UnsupportedError("Unsupported curve order"));
     }

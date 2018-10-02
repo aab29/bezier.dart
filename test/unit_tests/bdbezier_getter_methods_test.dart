@@ -12,7 +12,7 @@ void main() {
     });
 
     test("cubic startPoint", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(90.0, 80.0),
         new Vector2(50.0, 10.0),
         new Vector2(40.0, 85.0),
@@ -33,7 +33,7 @@ void main() {
     });
 
     test("cubic endPoint", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(90.0, 80.0),
         new Vector2(50.0, 10.0),
         new Vector2(40.0, 85.0),
@@ -74,7 +74,7 @@ void main() {
         new Vector2(95.0, 30.0)
       ];
 
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final dpoints1 = curve.derivativePoints();
       expect(dpoints1, hasLength(3));
@@ -140,7 +140,7 @@ void main() {
     });
 
     test("cubic isClockwise", () {
-      final clockwiseCurve = new BDCubicBezier([
+      final clockwiseCurve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 250.0),
         new Vector2(-50.0, 20.0),
@@ -149,7 +149,7 @@ void main() {
 
       expect(clockwiseCurve.isClockwise, isTrue);
 
-      final counterclockwiseCurve = new BDCubicBezier([
+      final counterclockwiseCurve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -250.0),
         new Vector2(50.0, 20.0),
@@ -158,7 +158,7 @@ void main() {
 
       expect(counterclockwiseCurve.isClockwise, isFalse);
 
-      final linearCurve = new BDCubicBezier([
+      final linearCurve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(33.0, 33.0),
         new Vector2(66.0, 66.0),
@@ -175,7 +175,7 @@ void main() {
         new Vector2(95.0, 30.0),
         new Vector2(90.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.isClockwise, isTrue);
     });
 
@@ -196,7 +196,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.isClockwise, isFalse);
     });
 
@@ -267,7 +267,7 @@ void main() {
     });
 
     test("cubic isLinear", () {
-      final linearCurve = new BDCubicBezier([
+      final linearCurve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(33.0, 33.0),
         new Vector2(66.0, 66.0),
@@ -276,7 +276,7 @@ void main() {
 
       expect(linearCurve.isLinear, isTrue);
 
-      final nonLinearCurve = new BDCubicBezier([
+      final nonLinearCurve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-40.0, 100.0),
         new Vector2(66.0, -50.0),
@@ -293,7 +293,7 @@ void main() {
         new Vector2(50.0, 50.0),
         new Vector2(180.0, 180.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.isLinear, isTrue);
     });
 
@@ -314,7 +314,7 @@ void main() {
         new Vector2(50.0, 50.0),
         new Vector2(180.0, 180.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.isLinear, isFalse);
     });
 
@@ -347,7 +347,7 @@ void main() {
     });
 
     test("cubic isLinear, diagonal degenerate curve", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -30.0),
         new Vector2(100.0, 30.0),
@@ -358,7 +358,7 @@ void main() {
     });
 
     test("cubic isLinear, horizontal degenerate curve", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -378,7 +378,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.length, closeToDouble(95.80310376637526));
     });
 
@@ -399,7 +399,7 @@ void main() {
         new Vector2(-80.0, -80.0),
         new Vector2(-100.0, -100.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
       expect(curve.length, closeToDouble(141.42135469034142));
     });
 
@@ -423,7 +423,7 @@ void main() {
     });
 
     test("cubic length, degenerate curve", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -441,7 +441,7 @@ void main() {
         new Vector2(30.0, 20.0),
         new Vector2(0.0, 0.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       expect(curve.isSimple, isTrue);
     });
@@ -453,7 +453,7 @@ void main() {
         new Vector2(50.0, 80.0),
         new Vector2(135.0, 95.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       expect(curve.isSimple, isFalse);
     });
@@ -481,7 +481,7 @@ void main() {
     });
 
     test("cubic isSimple, non-simple curve with near-parallel endpoint normal vectors", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(50.0, -99.0),
@@ -512,7 +512,7 @@ void main() {
     });
 
     test("cubic isSimple, simple curve border case", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(25.0, -20.0),
         new Vector2(112.18, -20.0),
@@ -523,7 +523,7 @@ void main() {
     });
 
     test("cubic isSimple, non-simple curve border case", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(25.0, -20.0),
         new Vector2(112.19, -20.0),
@@ -534,7 +534,7 @@ void main() {
     });
 
     test("cubic isSimple, simple curve with points close together", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.5, 0.2),
         new Vector2(0.995, 0.398),
@@ -563,7 +563,7 @@ void main() {
     });
 
     test("cubic isSimple, diagonal degenerate curve, both control points on outside", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -30.0),
         new Vector2(100.0, 30.0),
@@ -573,7 +573,7 @@ void main() {
     });
 
     test("cubic isSimple, horizontal degenerate curve, both control points on outside", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-2000.0, 0.0),
         new Vector2(2500.0, 0.0),
@@ -583,7 +583,7 @@ void main() {
     });
 
     test("cubic isSimple, horizontal degenerate curve, both control points going past opposite endpoint", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
         new Vector2(-2500.0, 0.0),
@@ -593,7 +593,7 @@ void main() {
     });
 
     test("cubic isSimple, horizontal degenerate curve, one control point on outside", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-2000.0, 0.0),
         new Vector2(25.0, 0.0),
@@ -603,7 +603,7 @@ void main() {
     });
 
     test("cubic isSimple, horizontal degenerate curve, one control point going past opposite endpoint", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
         new Vector2(25.0, 0.0),
@@ -613,7 +613,7 @@ void main() {
     });
 
     test("cubic isSimple, horizontal degenerate curve, one control point on outside, other going past opposite endpoint", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
         new Vector2(2500.0, 0.0),
@@ -632,7 +632,7 @@ void main() {
     });
 
     test("cubic isSimple, linear degenerate curve with one control point overlapping adjacent end point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(25.0, 0.0),
@@ -642,7 +642,7 @@ void main() {
     });
 
     test("cubic isSimple, simple non-linear degenerate curve with one control point overlapping adjacent end point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 5.0),
@@ -652,7 +652,7 @@ void main() {
     });
 
     test("cubic isSimple, non-simple non-linear degenerate curve with one control point overlapping adjacent end point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(2500.0, 10.0),
@@ -662,7 +662,7 @@ void main() {
     });
 
     test("cubic isSimple, degenerate curve with both control points overlapping adjacent end point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),

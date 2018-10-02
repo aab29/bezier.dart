@@ -9,7 +9,7 @@ void main() {
         new Vector2(-25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final box = curve.boundingBox;
       expect(box, new TypeMatcher<Aabb2>());
@@ -38,21 +38,21 @@ void main() {
 
   group("overlaps", () {
     test("cubic overlaps with other cubic curve", () {
-      final curveA = new BDCubicBezier([
+      final curveA = new CubicBezier([
         new Vector2(-10.0, -10.0),
         new Vector2(-70.0, -95.0),
         new Vector2(-25.0, -20.0),
         new Vector2(-15.0, -80.0)
       ]);
 
-      final curveB = new BDCubicBezier([
+      final curveB = new CubicBezier([
         new Vector2(105.0, 70.0),
         new Vector2(50.0, 50.0),
         new Vector2(50.0, 80.0),
         new Vector2(135.0, 95.0)
       ]);
 
-      final curveC = new BDCubicBezier([
+      final curveC = new CubicBezier([
         new Vector2(-80.0, 65.0),
         new Vector2(90.0, -55.0),
         new Vector2(110.0, -90.0),
@@ -111,7 +111,7 @@ void main() {
         new Vector2(50.0, 80.0)
       ]);
 
-      final curveC = new BDCubicBezier([
+      final curveC = new CubicBezier([
         new Vector2(-80.0, 65.0),
         new Vector2(90.0, -55.0),
         new Vector2(110.0, -90.0),
@@ -137,7 +137,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.extremaOnX;
       expect(result, new TypeMatcher<List<double>>());
@@ -171,7 +171,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.extremaOnY;
       expect(result, new TypeMatcher<List<double>>());
@@ -206,7 +206,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.extrema;
       expect(result, new TypeMatcher<List<double>>());

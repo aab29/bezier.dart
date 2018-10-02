@@ -22,9 +22,9 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
-      expect(curve, new TypeMatcher<BDCubicBezier>());
+      expect(curve, new TypeMatcher<CubicBezier>());
       expect(curve.order, equals(3));
       expect(curve.points, hasLength(4));
     });
@@ -53,7 +53,7 @@ void main() {
       ];
       final curve = new Bezier.fromPoints(points);
 
-      expect(curve, new TypeMatcher<BDCubicBezier>());
+      expect(curve, new TypeMatcher<CubicBezier>());
       expect(curve.order, equals(3));
       expect(curve.points, hasLength(4));
     });

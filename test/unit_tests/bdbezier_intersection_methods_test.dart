@@ -23,14 +23,14 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve", () {
-      final curveA = new BDCubicBezier([
+      final curveA = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 50.0),
         new Vector2(100.0, 50.0),
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDCubicBezier([
+      final curveB = new CubicBezier([
         new Vector2(-10.0, 15.0),
         new Vector2(10.0, 25.0),
         new Vector2(90.0, 25.0),
@@ -45,7 +45,7 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve with quadratic curve", () {
-      final curveA = new BDCubicBezier([
+      final curveA = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 50.0),
         new Vector2(100.0, 50.0),
@@ -133,7 +133,7 @@ void main() {
         new Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new BDCubicBezier([
+      final curveB = new CubicBezier([
         new Vector2(0.0, 100.0),
         new Vector2(200.0, -66.7),
         new Vector2(-100.0, -66.7),
@@ -152,14 +152,14 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve, five intersections", () {
-      final curveA = new BDCubicBezier([
+      final curveA = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 300.0),
         new Vector2(50.0, -200.0),
         new Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new BDCubicBezier([
+      final curveB = new CubicBezier([
         new Vector2(0.0, 100.0),
         new Vector2(200.0, -66.7),
         new Vector2(-100.0, -66.7),
@@ -174,14 +174,14 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve(), nine intersections", () {
-      final curveA = new BDCubicBezier([
+      final curveA = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 300.0),
         new Vector2(50.0, -200.0),
         new Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new BDCubicBezier([
+      final curveB = new CubicBezier([
         new Vector2(0.0, 80.0),
         new Vector2(350.0, 50.0),
         new Vector2(-300.0, 50.0),
@@ -247,7 +247,7 @@ void main() {
         new Vector2(80.0, 40.0),
         new Vector2(100.0, 0.0)
       ];
-      final curveA = new BDCubicBezier(points);
+      final curveA = new CubicBezier(points);
 
       final result = curveA.intersectionsWithSelf();
       expect(result, isEmpty);
@@ -260,14 +260,14 @@ void main() {
         new Vector2(-100.0, 100.0),
         new Vector2(100.0, 0.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.intersectionsWithSelf();
       expect(result, hasLength(1));
     });
 
     test("cubic intersectionsWithSelf, one intersection again", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(40.0, 0.0),
         new Vector2(200.0, 100.0),
         new Vector2(-100.0, 100.0),
@@ -279,7 +279,7 @@ void main() {
     });
 
     test("cubic intersectionsWithSelf with shallow angle, one intersection with reduced curveIntersectionThreshold", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(10.0, 0.0),
         new Vector2(180.0, 200.0),
         new Vector2(200.0, 180.0),
@@ -300,7 +300,7 @@ void main() {
         new Vector2(80.0, 40.0),
         new Vector2(100.0, 0.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final point1 = new Vector2(0.0, 38.0);
       final point2 = new Vector2(110.0, 2.0);
@@ -481,7 +481,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, horizontal line, one intersection", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(50.0, 0.0),
@@ -495,7 +495,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, horizontal line, two intersections", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 100.0),
         new Vector2(80.0, 200.0),
@@ -509,7 +509,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, horizontal line, three intersections", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 200.0),
         new Vector2(50.0, -100.0),
@@ -523,7 +523,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, vertical line, one intersection", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 200.0),
         new Vector2(50.0, -100.0),
@@ -537,7 +537,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, vertical line with looped curve, three intersection", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(200.0, 100.0),
         new Vector2(-100.0, 100.0),
@@ -551,7 +551,7 @@ void main() {
     });
 
     test("cubic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
         new Vector2(50.0, 50.0),

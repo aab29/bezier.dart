@@ -9,11 +9,11 @@ void main() {
         new Vector2(5.0, 30.0),
         new Vector2(0.0, 45.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.scaledCurve(1.0);
-      expect(result, new TypeMatcher<BDCubicBezier>());
-      final scaledCurve = result as BDCubicBezier;
+      expect(result, new TypeMatcher<CubicBezier>());
+      final scaledCurve = result as CubicBezier;
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-0.9486833214759827, 0.3162277638912201),
@@ -62,7 +62,7 @@ void main() {
     });
 
     test("cubic scaledCurve, parallel endpoint normals", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 100.0),
         new Vector2(100.0, -100.0),
@@ -70,7 +70,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-10.0, 0.0),
@@ -81,7 +81,7 @@ void main() {
     });
 
     test("cubic scaledCurve, parallel endpoint normals, another test", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -89,7 +89,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(0.0, 10.0),
@@ -100,7 +100,7 @@ void main() {
     });
 
     test("cubic scaledCurve, anti-parallel endpoint normals", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 100.0),
         new Vector2(100.0, 100.0),
@@ -108,7 +108,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
 
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-10.0, 0.0),
@@ -119,7 +119,7 @@ void main() {
     });
 
     test("cubic scaledCurve, non-linear curve with first control point overlapping start point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -127,7 +127,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-8.9442720413208, 4.4721360206604),
         new Vector2(-8.9442720413208, 4.4721360206604),
@@ -137,7 +137,7 @@ void main() {
     });
 
     test("cubic scaledCurve, non-linear curve with second control point overlapping end point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(100.0, 0.0),
@@ -145,7 +145,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(-8.9442720413208, 4.4721360206604),
         new Vector2(50.0, 122.36067962646484),
@@ -171,7 +171,7 @@ void main() {
     });
 
     test("cubic scaledCurve, linear curve with first control point overlapping start point", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 0.0),
@@ -179,7 +179,7 @@ void main() {
       ]);
 
       final scaledCurve = curve.scaledCurve(10.0);
-      expect(scaledCurve, new TypeMatcher<BDCubicBezier>());
+      expect(scaledCurve, new TypeMatcher<CubicBezier>());
       expect(scaledCurve.points, closeToVectorList([
         new Vector2(0.0, 10.0),
         new Vector2(0.0, 10.0),
@@ -200,7 +200,7 @@ void main() {
 
       final cubicCurve = curve.toCubicBezier();
 
-      expect(cubicCurve, new TypeMatcher<BDCubicBezier>());
+      expect(cubicCurve, new TypeMatcher<CubicBezier>());
 
       expect(cubicCurve.points, closeToVectorList([
         new Vector2(10.0, 10.0),
@@ -220,7 +220,7 @@ void main() {
         new Vector2(20.0, 95.0),
         new Vector2(25.0, 10.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final offsetCurves = curve.offsetCurve(1.0);
       expect(offsetCurves, hasLength(4));
@@ -287,7 +287,7 @@ void main() {
         new Vector2(100.0, 300.0),
         new Vector2(100.0, 400.0),
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final offsetCurves = curve.offsetCurve(1000.0);
       expect(offsetCurves, hasLength(1));

@@ -13,7 +13,7 @@ export "package:vector_math/vector_math.dart" show Vector, Vector2, Aabb2;
 
 export "src/bezier.dart";
 export "src/bdbezier_slice.dart";
-export "src/bdcubic_bezier.dart";
+export "src/cubic_bezier.dart";
 export "src/bdeven_spacer.dart";
 export "src/bdintersection.dart";
 export "src/quadratic_bezier.dart";

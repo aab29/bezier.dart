@@ -19,7 +19,7 @@ void main() {
     });
 
     test("cubic pointAt", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(25.0, 20.0),
@@ -64,7 +64,7 @@ void main() {
     });
 
     test("cubic hullPointsAt", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 100.0),
         new Vector2(50.0, -100.0),
@@ -107,7 +107,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final hull1 = curve.hullPointsAt(0.5);
       expect(hull1, hasLength(10));
@@ -187,7 +187,7 @@ void main() {
     });
 
     test("cubic derivativeAt", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(10.0, 10.0),
         new Vector2(70.0, 95.0),
         new Vector2(25.0, 20.0),
@@ -217,7 +217,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       expect(curve.normalVectorAt(0.5), closeToVector(new Vector2(0.12403473258018494, -0.9922778606414795)));
       expect(curve.normalVectorAt(0.23), closeToVector(new Vector2(-0.8163508176803589, 0.5775563716888428)));
@@ -250,7 +250,7 @@ void main() {
         new Vector2(15.0, 70.0),
         new Vector2(25.0, 20.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final pointA = curve.offsetPointAt(0.5, 3.0);
       expect(pointA, closeToVector(new Vector2(37.30337142944336, 62.81601333618164)));
@@ -302,7 +302,7 @@ void main() {
     });
 
     test("cubic offsetPointAt, negativeDistance", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 100.0),
         new Vector2(250.0, 0.0),
         new Vector2(-150.0, 50.0),
@@ -340,7 +340,7 @@ void main() {
     });
 
     test("cubic positionLookUpTable, default intervalsCount", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
         new Vector2(50.0, 0.0),

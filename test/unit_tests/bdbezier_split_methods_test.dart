@@ -33,7 +33,7 @@ void main() {
     });
 
     test("cubic leftSubcurveAt", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -41,24 +41,24 @@ void main() {
       ]);
 
       final result1 = curve.leftSubcurveAt(0.5);
-      expect(result1, new TypeMatcher<BDCubicBezier>());
-      final curve1 = result1 as BDCubicBezier;
+      expect(result1, new TypeMatcher<CubicBezier>());
+      final curve1 = result1 as CubicBezier;
       expect(curve1.points[0], closeToVector(new Vector2(0.0, 0.0)));
       expect(curve1.points[1], closeToVector(new Vector2(75.0, 100.0)));
       expect(curve1.points[2], closeToVector(new Vector2(62.5, 75.0)));
       expect(curve1.points[3], closeToVector(new Vector2(50.0, 37.5)));
 
       final result2 = curve.leftSubcurveAt(0.8);
-      expect(result2, new TypeMatcher<BDCubicBezier>());
-      final curve2 = result2 as BDCubicBezier;
+      expect(result2, new TypeMatcher<CubicBezier>());
+      final curve2 = result2 as CubicBezier;
       expect(curve2.points[0], closeToVector(new Vector2(0.0, 0.0)));
       expect(curve2.points[1], closeToVector(new Vector2(120.0, 160.0)));
       expect(curve2.points[2], closeToVector(new Vector2(16.0, 0.0)));
       expect(curve2.points[3], closeToVector(new Vector2(46.400001525878906, -19.200000762939453)));
 
       final result3 = curve.leftSubcurveAt(0.3);
-      expect(result3, new TypeMatcher<BDCubicBezier>());
-      final curve3 = result3 as BDCubicBezier;
+      expect(result3, new TypeMatcher<CubicBezier>());
+      final curve3 = result3 as CubicBezier;
       expect(curve3.points[0], closeToVector(new Vector2(0.0, 0.0)));
       expect(curve3.points[1], closeToVector(new Vector2(45.0, 60.0)));
       expect(curve3.points[2], closeToVector(new Vector2(58.5, 75.0)));
@@ -83,7 +83,7 @@ void main() {
     });
 
     test("cubic leftSubcurveAt, t > 1.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -91,8 +91,8 @@ void main() {
       ]);
 
       final result = curve.leftSubcurveAt(1.1);
-      expect(result, new TypeMatcher<BDCubicBezier>());
-      final splitCurve = result as BDCubicBezier;
+      expect(result, new TypeMatcher<CubicBezier>());
+      final splitCurve = result as CubicBezier;
       expect(splitCurve.points, closeToVectorList([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
@@ -112,7 +112,7 @@ void main() {
     });
 
     test("cubic leftSubcurveAt, t == 0.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -133,7 +133,7 @@ void main() {
     });
 
     test("cubic leftSubcurveAt, t < 0.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -175,7 +175,7 @@ void main() {
     });
 
     test("cubic rightSubcurveAt", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -183,24 +183,24 @@ void main() {
       ]);
 
       final result1 = curve.rightSubcurveAt(0.5);
-      expect(result1, new TypeMatcher<BDCubicBezier>());
-      final curve1 = result1 as BDCubicBezier;
+      expect(result1, new TypeMatcher<CubicBezier>());
+      final curve1 = result1 as CubicBezier;
       expect(curve1.points[0], closeToVector(new Vector2(50.0, 37.5)));
       expect(curve1.points[1], closeToVector(new Vector2(37.5, 0.0)));
       expect(curve1.points[2], closeToVector(new Vector2(25.0, -50.0)));
       expect(curve1.points[3], closeToVector(new Vector2(100.0, 0.0)));
 
       final result2 = curve.rightSubcurveAt(0.8);
-      expect(result2, new TypeMatcher<BDCubicBezier>());
-      final curve2 = result2 as BDCubicBezier;
+      expect(result2, new TypeMatcher<CubicBezier>());
+      final curve2 = result2 as CubicBezier;
       expect(curve2.points[0], closeToVector(new Vector2(46.400001525878906, -19.200000762939453)));
       expect(curve2.points[1], closeToVector(new Vector2(54.0, -24.0)));
       expect(curve2.points[2], closeToVector(new Vector2(70.0, -20.0)));
       expect(curve2.points[3], closeToVector(new Vector2(100.0, 0.0)));
 
       final result3 = curve.rightSubcurveAt(0.3);
-      expect(result3, new TypeMatcher<BDCubicBezier>());
-      final curve3 = result3 as BDCubicBezier;
+      expect(result3, new TypeMatcher<CubicBezier>());
+      final curve3 = result3 as CubicBezier;
       expect(curve3.points[0], closeToVector(new Vector2(59.400001525878906, 69.30000305175781)));
       expect(curve3.points[1], closeToVector(new Vector2(61.5, 56.0)));
       expect(curve3.points[2], closeToVector(new Vector2(-5.0, -70.0)));
@@ -226,7 +226,7 @@ void main() {
     });
 
     test("cubic rightSubcurveAt, t < 0.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -234,8 +234,8 @@ void main() {
       ]);
 
       final result = curve.rightSubcurveAt(-0.2);
-      expect(result, new TypeMatcher<BDCubicBezier>());
-      final splitCurve = result as BDCubicBezier;
+      expect(result, new TypeMatcher<CubicBezier>());
+      final splitCurve = result as CubicBezier;
       expect(splitCurve.points, closeToVectorList([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
@@ -255,7 +255,7 @@ void main() {
     });
 
     test("cubic rightSubcurveAt, t == 1.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -276,7 +276,7 @@ void main() {
     });
 
     test("cubic rightSubcurveAt, t > 1.0", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(150.0, 200.0),
         new Vector2(-50.0, -100.0),
@@ -295,11 +295,11 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(15.0, 80.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result1 = curve.subcurveBetween(0.25, 0.75);
-      expect(result1, new TypeMatcher<BDCubicBezier>());
-      final curve1 = result1 as BDCubicBezier;
+      expect(result1, new TypeMatcher<CubicBezier>());
+      final curve1 = result1 as CubicBezier;
       expect(curve1.points[0], closeToVector(new Vector2(37.5, 48.359375)));
       expect(curve1.points[1], closeToVector(new Vector2(45.625, 60.078125)));
       expect(curve1.points[2], closeToVector(new Vector2(36.25, 50.234375)));
@@ -332,7 +332,7 @@ void main() {
         new Vector2(-10.0, 80.0),
         new Vector2(135.0, 95.0)
       ];
-      final curve = new BDCubicBezier(points);
+      final curve = new CubicBezier(points);
 
       final result = curve.simpleSubcurves();
       expect(result, hasLength(5));
@@ -442,7 +442,7 @@ void main() {
     });
 
     test("cubic simpleSubcurves, wavy curve", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
         new Vector2(50.0, -20.0),
@@ -454,7 +454,7 @@ void main() {
     });
 
     test("cubic simpleSubcurves, arched curve", () {
-      final curve = new BDCubicBezier([
+      final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
         new Vector2(50.0, 20.0),
