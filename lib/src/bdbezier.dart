@@ -1,14 +1,3 @@
-
-//import "dart:math";
-//
-//import "package:vector_math/vector_math.dart";
-//
-//import "bdbezier_tools.dart" as BDBezierTools;
-//import "bdquadratic_bezier.dart";
-//import "bdcubic_bezier.dart";
-//import "bdintersection.dart";
-//import "bdbezier_slice.dart";
-
 import "dart:math";
 
 import "package:vector_math/vector_math.dart" as vector_math;
