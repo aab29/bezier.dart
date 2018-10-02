@@ -2,7 +2,7 @@
 
 The library was developed, documented, and published by [Aaron Barrett](http://www.aaronbarrett.com) and Isaac Barrett.  It is based heavily on the work of [Pomax](https://pomax.github.io/), including his excellent [Primer on Bézier Curves](https://pomax.github.io/bezierinfo/) and his original JavaScript library, [Bezier.js](https://pomax.github.io/bezierjs/).
 
-We tried to assume as little as possible about the kind of applications that might want to incorporate **bezier.js**.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
+We're trying to design **bezier.js** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
 
 ## Features
 
@@ -127,9 +127,11 @@ void main() {
 }
 ```
 
-## Formatting
+## Style, Formatting, Philosophy
 
-Whenever possible, this library is formatted using [dartfmt](https://github.com/dart-lang/dart_style).
+We've made our best effort to conform to the recommendations outlined in the [Effective Dart](https://www.dartlang.org/guides/language/effective-dart) guide.  Accordingly, this library is formatted using [dartfmt](https://github.com/dart-lang/dart_style).
+
+As fervent believers in the value of clean code, we are constantly seeking to improve the library and make it easier to work with.  Please alert us to any issues you notice, no matter how trivial.  We wholeheartedly welcome criticism and friendly debate!  :nerd_face:
 
 ## Running Automated Tests
 
