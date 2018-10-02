@@ -7,7 +7,7 @@ import "package:bezier/bezier.dart";
 import "bdbezier_tools.dart";
 
 /// Abstract base class of Bézier curves.
-abstract class BDBezier {
+abstract class Bezier {
 
   /// Maximum distance threshold used for determination of linear curves.
   static const linearTolerance = 0.0001;
@@ -19,11 +19,11 @@ abstract class BDBezier {
   final List<Vector2> points;
 
   /// Constructs a Bézier curve from a [List] of [Vector2].
-  BDBezier(this.points);
+  Bezier(this.points);
 
-  /// Factory constructor that returns a new instance of the proper subclass of [BDBezier]
+  /// Factory constructor that returns a new instance of the proper subclass of [Bezier]
   /// based on the number of entries in [curvePoints].
-  factory BDBezier.fromPoints(List<Vector2> curvePoints) {
+  factory Bezier.fromPoints(List<Vector2> curvePoints) {
     if (curvePoints.length == 3) {
       return new BDQuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
@@ -169,7 +169,7 @@ abstract class BDBezier {
   }
 
   /// True if the bounding box of [this] intersects with the bounding box of [curve].
-  bool overlaps(BDBezier curve) {
+  bool overlaps(Bezier curve) {
     final thisBox = boundingBox;
     final otherBox = curve.boundingBox;
 
@@ -178,7 +178,7 @@ abstract class BDBezier {
 
   /// Returns the subcurve obtained by taking the portion of the curve to the
   /// left of parameter value [t].
-  BDBezier leftSubcurveAt(double t) {
+  Bezier leftSubcurveAt(double t) {
     if (t <= 0.0) {
       throw(new ArgumentError("Cannot split curve left of start point"));
     }
@@ -198,7 +198,7 @@ abstract class BDBezier {
 
   /// Returns the subcurve obtained by taking the portion of the curve to the
   /// right of parameter value [t].
-  BDBezier rightSubcurveAt(double t) {
+  Bezier rightSubcurveAt(double t) {
     if (t >= 1.0) {
       throw(new ArgumentError("Cannot split curve right of end point"));
     }
@@ -217,7 +217,7 @@ abstract class BDBezier {
 
   /// Returns the sub-curve obtained by taking the portion of the curve between
   /// parameter values [t1] and [t2].
-  BDBezier subcurveBetween(double t1, double t2) {
+  Bezier subcurveBetween(double t1, double t2) {
     final rightOfT1 = rightSubcurveAt(t1);
     final adjustedT2 = inverseMix(t1, 1.0, t2);
 
@@ -391,7 +391,7 @@ abstract class BDBezier {
     return simpleSlices;
   }
 
-  /// Returns a [List] of [BDBezierSlice] instances containing simple [BDBezier]
+  /// Returns a [List] of [BDBezierSlice] instances containing simple [Bezier]
   /// instances along with their endpoint parameter values from [this].
   ///
   /// Refer to [simpleSubcurves] for information about the optional parameter [stepSize].
@@ -402,7 +402,7 @@ abstract class BDBezier {
     return _divideNonSimpleSlices(subcurvesBetweenExtrema, stepSize);
   }
 
-  /// Returns a [List] of simple [BDBezier] instances that make up [this] when taken together.
+  /// Returns a [List] of simple [Bezier] instances that make up [this] when taken together.
   ///
   /// The first pass splits the curve at the parameter values of extrema along the
   /// x and y axes.  The second pass divides any non-simple portions of the curve
@@ -412,7 +412,7 @@ abstract class BDBezier {
   /// will do around one hundred iterations for each segment between the parameter
   /// values for extrema.  Reducing the value of [stepSize] will increase the
   /// number of iterations.
-  List<BDBezier> simpleSubcurves({double stepSize = 0.01}) {
+  List<Bezier> simpleSubcurves({double stepSize = 0.01}) {
     final reductionResults = simpleSlices(stepSize: stepSize);
     return reductionResults.map((r) => r.subcurve).toList();
   }
@@ -429,9 +429,9 @@ abstract class BDBezier {
     return offsetPoint;
   }
 
-  /// Returns a [List] of [BDBezier] instances that, when taken together, form an approximation
+  /// Returns a [List] of [Bezier] instances that, when taken together, form an approximation
   /// of the offset curve [distance] units away from [this].
-  List<BDBezier> offsetCurve(double distance) {
+  List<Bezier> offsetCurve(double distance) {
     if (isLinear) {
       return [_translatedLinearCurve(distance)];
     }
@@ -441,9 +441,9 @@ abstract class BDBezier {
     return offsetSegments.toList();
   }
 
-  /// Returns a [BDBezier] instance with [points] translated by [distance] units
+  /// Returns a [Bezier] instance with [points] translated by [distance] units
   /// along the normal vector at the start point.
-  BDBezier _translatedLinearCurve(double distance) {
+  Bezier _translatedLinearCurve(double distance) {
     final normalVector = _nonOverlappingNormalVectorAt(0.0, 0);
     final translatedPoints = <Vector2>[];
     for (final point in points) {
@@ -451,7 +451,7 @@ abstract class BDBezier {
       translatedPoint.addScaled(normalVector, distance);
       translatedPoints.add(translatedPoint);
     }
-    return new BDBezier.fromPoints(translatedPoints);
+    return new Bezier.fromPoints(translatedPoints);
   }
 
   /// Returns the origin used for calculating control point positions in scaled curves.
@@ -481,12 +481,12 @@ abstract class BDBezier {
     return offsetPoint;
   }
 
-  /// Returns a [BDBezier] instance whose endpoints are [distance] units away from the
+  /// Returns a [Bezier] instance whose endpoints are [distance] units away from the
   /// endpoints of [this] and whose control points have been moved in the same direction.
   ///
   /// A scaled linear curve is translated by [distance] units along its start
   /// point normal vector.
-  BDBezier scaledCurve(double distance) {
+  Bezier scaledCurve(double distance) {
     if (isLinear) {
       return _translatedLinearCurve(distance);
     }
@@ -516,7 +516,7 @@ abstract class BDBezier {
       scaledCurvePoints[2] ??= endTangentPoint;
     }
 
-    return new BDBezier.fromPoints(scaledCurvePoints);
+    return new Bezier.fromPoints(scaledCurvePoints);
   }
 
   /// Returns a [List] of intersection results after removing duplicates in [intersectionsToFilter].
@@ -582,7 +582,7 @@ abstract class BDBezier {
   /// shallow angle or pass extremely close to each other. Decreasing
   /// [curveIntersectionThreshold] or increasing [minTValueDifference] may
   /// reduce the number of intersections returned in such cases.
-  List<BDIntersection> intersectionsWithCurve(BDBezier curve, {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
+  List<BDIntersection> intersectionsWithCurve(Bezier curve, {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
     final reducedSegments = simpleSlices();
     final curveReducedSegments = curve.simpleSlices();
 

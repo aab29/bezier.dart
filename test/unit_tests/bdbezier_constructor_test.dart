@@ -37,7 +37,7 @@ void main() {
         new Vector2(250.0, -50.0),
         new Vector2(100.0, 80.0)
       ];
-      final curve = new BDBezier.fromPoints(points);
+      final curve = new Bezier.fromPoints(points);
 
       expect(curve, new TypeMatcher<BDQuadraticBezier>());
       expect(curve.order, equals(2));
@@ -51,7 +51,7 @@ void main() {
         new Vector2(25.0, 20.0),
         new Vector2(100.0, -100.0)
       ];
-      final curve = new BDBezier.fromPoints(points);
+      final curve = new Bezier.fromPoints(points);
 
       expect(curve, new TypeMatcher<BDCubicBezier>());
       expect(curve.order, equals(3));
@@ -66,7 +66,7 @@ void main() {
         new Vector2(100.0, -100.0),
         new Vector2(-30.0, 100.0)
       ];
-      expect(() => new BDBezier.fromPoints(points), throwsA(new TypeMatcher<Error>()));
+      expect(() => new Bezier.fromPoints(points), throwsA(new TypeMatcher<Error>()));
     });
   });
 }

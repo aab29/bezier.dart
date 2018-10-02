@@ -1,7 +1,7 @@
 import "package:bezier/bezier.dart";
 
 /// Concrete class of cubic Bézier curves.
-class BDCubicBezier extends BDBezier {
+class BDCubicBezier extends Bezier {
 
   /// Constructs a cubic Bézier curve from a [List] of [Vector2].
   BDCubicBezier(List<Vector2> points) : super(points) {

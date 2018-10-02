@@ -11,7 +11,7 @@ library bezier;
 
 export "package:vector_math/vector_math.dart" show Vector, Vector2, Aabb2;
 
-export "src/bdbezier.dart";
+export "src/bezier.dart";
 export "src/bdbezier_slice.dart";
 export "src/bdcubic_bezier.dart";
 export "src/bdeven_spacer.dart";

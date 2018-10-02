@@ -342,7 +342,7 @@ List<int> indicesOfOverlappingSegmentPairs(
 
 /// Returns a [List] of intersections between [curve1] and [curve2] using a
 /// threshold of [curveIntersectionThreshold].  It divides the bounding boxes
-/// of the [BDBezier] curves in half and calls itself recursively with
+/// of the [Bezier] curves in half and calls itself recursively with
 /// overlapping pairs of divided curve segments.
 List<BDIntersection> locateIntersectionsRecursively(BDBezierSlice curve1,
     BDBezierSlice curve2, double curveIntersectionThreshold) {
