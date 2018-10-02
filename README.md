@@ -11,7 +11,7 @@ We're trying to design **bezier.js** to be both platform independent and context
 - Derivative and normal values at any `t` parameter value
 - Accurate length approximations (using the Legendre-Gauss quadrature algorithm)
 - Split a curve into equivalent subcurves at any `t` parameter value
-- Find the extrema of a curve on both the *x-* and *y-* axes
+- Find the extrema of a curve on both the *x* and *y* axes
 - Calculate the bounding box for a curve
 - Given any curve, derive a new curve, offset from the original curve along the normals at a given distance
 - Calculate the positions of a curve's intersections with itself, with another curve, or with a line segment
