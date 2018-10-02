@@ -8,7 +8,8 @@ import "package:bezier/bezier.dart";
 /// The roots of the Legendre polynomial for n == 30.
 ///
 /// More information about Legendre-Gauss quadrature integral approximation
-/// available at https://pomax.github.io/bezierinfo/legendre-gauss.html.
+/// available at the [resource page created by Pomax]
+/// (https://pomax.github.io/bezierinfo/legendre-gauss.html).
 const legendrePolynomialRoots = [
   -0.0514718425553177,
   0.0514718425553177,
