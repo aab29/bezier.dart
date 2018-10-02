@@ -70,7 +70,7 @@ void main() {
     new Vector2(15.0, 80.0)
   ]);
 
-  final point = curve.computePoint(0.75);
+  final computedPoint = curve.pointAt(0.75);
 }
 ```
 
@@ -87,7 +87,7 @@ void main() {
     new Vector2(15.0, 80.0)
   ]);
 
-  final subcurve = curve.splitBetween(0.2, 0.6);
+  final subcurve = curve.subcurveBetween(0.2, 0.6);
 }
 ```
 
@@ -106,7 +106,7 @@ void main() {
   final lineStart = new Vector2(0.0, 400.0);
   final lineEnd = new Vector2(100.0, 410.0);
 
-  final intersections = curve.lineIntersects(lineStart, lineEnd);
+  final intersections = curve.intersectionsWithLineSegment(lineStart, lineEnd);
 }
 ```
 
@@ -123,7 +123,7 @@ void main() {
     new Vector2(25.0, 10.0)
   ]);
 
-  final offsetSubcurves = curve.offset(12.0);
+  final subcurves = curve.offsetCurve(12.0);
 }
 ```
 
