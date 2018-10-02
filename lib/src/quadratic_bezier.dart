@@ -1,3 +1,5 @@
+import "package:vector_math/vector_math.dart";
+
 import "package:bezier/bezier.dart";
 
 /// Concrete class of quadratic Bézier curves.

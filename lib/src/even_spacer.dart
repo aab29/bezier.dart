@@ -1,4 +1,4 @@
-import "package:vector_math/vector_math.dart" as vector_math;
+import "package:vector_math/vector_math.dart";
 
 import "package:bezier/bezier.dart";
 
@@ -79,7 +79,7 @@ class EvenSpacer {
     final parameterAtLowerBound = (upperBoundIndex - 1) / parametersCount;
     final parameterAtUpperBound = upperBoundIndex / parametersCount;
 
-    return vector_math.mix(parameterAtLowerBound, parameterAtUpperBound, arcFractionParameter);
+    return mix(parameterAtLowerBound, parameterAtUpperBound, arcFractionParameter);
   }
 
   /// Returns a [List] of parameter values along the curve that are approximately evenly

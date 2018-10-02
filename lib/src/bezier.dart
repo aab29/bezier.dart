@@ -1,6 +1,6 @@
 import "dart:math";
 
-import "package:vector_math/vector_math.dart" as vector_math;
+import "package:vector_math/vector_math.dart";
 
 import "package:bezier/bezier.dart";
 
@@ -370,8 +370,8 @@ abstract class Bezier {
               return [];
             }
             subcurve = slice.subcurve.subcurveBetween(t1, t2);
-            final subcurveT1 = vector_math.mix(slice.t1, slice.t2, t1);
-            final subcurveT2 = vector_math.mix(slice.t1, slice.t2, t2);
+            final subcurveT1 = mix(slice.t1, slice.t2, t1);
+            final subcurveT2 = mix(slice.t1, slice.t2, t2);
             final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
             simpleSlices.add(result);
             t1 = t2;
@@ -381,7 +381,7 @@ abstract class Bezier {
       }
       if (t1 < 1.0) {
         subcurve = slice.subcurve.subcurveBetween(t1, 1.0);
-        final subcurveT1 = vector_math.mix(slice.t1, slice.t2, t1);
+        final subcurveT1 = mix(slice.t1, slice.t2, t1);
         final subcurveT2 = slice.t2;
         final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
         simpleSlices.add(result);

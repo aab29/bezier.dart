@@ -9,8 +9,6 @@
 /// [Bezier.js](https://pomax.github.io/bezierjs/).
 library bezier;
 
-export "package:vector_math/vector_math.dart" show Vector, Vector2, Aabb2;
-
 export "src/bezier.dart";
 export "src/bezier_slice.dart";
 export "src/cubic_bezier.dart";

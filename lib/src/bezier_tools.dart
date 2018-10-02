@@ -1,7 +1,6 @@
 import "dart:math";
 
-import "package:vector_math/vector_math.dart" show Matrix2;
-import "package:vector_math/vector_math.dart" as vector_math;
+import "package:vector_math/vector_math.dart";
 
 import "package:bezier/bezier.dart";
 
@@ -358,8 +357,8 @@ List<Intersection> locateIntersectionsRecursively(BezierSlice curve1,
   }
 
   final centerT = 0.5;
-  final curve1CenterT = vector_math.mix(curve1.t1, curve1.t2, centerT);
-  final curve2CenterT = vector_math.mix(curve2.t1, curve2.t2, centerT);
+  final curve1CenterT = mix(curve1.t1, curve1.t2, centerT);
+  final curve2CenterT = mix(curve2.t1, curve2.t2, centerT);
 
   final curve1LeftSegment = curve1.subcurve.leftSubcurveAt(centerT);
   final curve1Left =
