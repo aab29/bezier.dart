@@ -318,8 +318,8 @@ abstract class Bezier {
 
   /// Returns a [List] of subcurve segments of [this] between the parameter
   /// values for extrema.
-  List<BDBezierSlice> _slicesBetweenExtremaTValues() {
-    final curvePortionsBetweenExtrema = <BDBezierSlice>[];
+  List<BezierSlice> _slicesBetweenExtremaTValues() {
+    final curvePortionsBetweenExtrema = <BezierSlice>[];
 
     final extremaTValues = extrema;
     if (!(extremaTValues.contains(0.0))) {
@@ -333,7 +333,7 @@ abstract class Bezier {
     for (var extremityIndex = 1; extremityIndex < extremaTValues.length; extremityIndex++) {
       final t2 = extremaTValues[extremityIndex];
       final subcurve = subcurveBetween(t1, t2);
-      final reductionResult = new BDBezierSlice(subcurve, t1, t2);
+      final reductionResult = new BezierSlice(subcurve, t1, t2);
       curvePortionsBetweenExtrema.add(reductionResult);
       t1 = t2;
     }
@@ -347,8 +347,8 @@ abstract class Bezier {
   /// value to an ending parameter value in search of non-simple portions.  When
   /// a non-simple portion is found, it backtracks and adds the last known simple
   /// portion to the returned value.
-  List<BDBezierSlice> _divideNonSimpleSlices(List<BDBezierSlice> slicesToProcess, double stepSize) {
-    final simpleSlices = <BDBezierSlice>[];
+  List<BezierSlice> _divideNonSimpleSlices(List<BezierSlice> slicesToProcess, double stepSize) {
+    final simpleSlices = <BezierSlice>[];
 
     for (final slice in slicesToProcess) {
       if (slice.subcurve.isSimple) {
@@ -372,7 +372,7 @@ abstract class Bezier {
             subcurve = slice.subcurve.subcurveBetween(t1, t2);
             final subcurveT1 = vector_math.mix(slice.t1, slice.t2, t1);
             final subcurveT2 = vector_math.mix(slice.t1, slice.t2, t2);
-            final result = new BDBezierSlice(subcurve, subcurveT1, subcurveT2);
+            final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
             simpleSlices.add(result);
             t1 = t2;
             break;
@@ -383,7 +383,7 @@ abstract class Bezier {
         subcurve = slice.subcurve.subcurveBetween(t1, 1.0);
         final subcurveT1 = vector_math.mix(slice.t1, slice.t2, t1);
         final subcurveT2 = slice.t2;
-        final result = new BDBezierSlice(subcurve, subcurveT1, subcurveT2);
+        final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
         simpleSlices.add(result);
       }
     }
@@ -391,13 +391,13 @@ abstract class Bezier {
     return simpleSlices;
   }
 
-  /// Returns a [List] of [BDBezierSlice] instances containing simple [Bezier]
+  /// Returns a [List] of [BezierSlice] instances containing simple [Bezier]
   /// instances along with their endpoint parameter values from [this].
   ///
   /// Refer to [simpleSubcurves] for information about the optional parameter [stepSize].
   /// If endpoint parameter values of the component curves are not needed, use [simpleSubcurves]
   /// instead.
-  List<BDBezierSlice> simpleSlices({double stepSize = 0.01}) {
+  List<BezierSlice> simpleSlices({double stepSize = 0.01}) {
     final subcurvesBetweenExtrema = _slicesBetweenExtremaTValues();
     return _divideNonSimpleSlices(subcurvesBetweenExtrema, stepSize);
   }
@@ -543,10 +543,10 @@ abstract class Bezier {
   }
 
   /// Returns a [List] of intersection results between [curve1] and [curve2].
-  static List<Intersection> _locateIntersections(List<BDBezierSlice> curve1,
-      List<BDBezierSlice> curve2, double curveIntersectionThreshold, double minTValueDifference) {
-    final leftOverlappingSegments = <BDBezierSlice>[];
-    final rightOverlappingSegments = <BDBezierSlice>[];
+  static List<Intersection> _locateIntersections(List<BezierSlice> curve1,
+      List<BezierSlice> curve2, double curveIntersectionThreshold, double minTValueDifference) {
+    final leftOverlappingSegments = <BezierSlice>[];
+    final rightOverlappingSegments = <BezierSlice>[];
     curve1.forEach((left) {
       curve2.forEach((right) {
         if (left.subcurve.overlaps(right.subcurve)) {

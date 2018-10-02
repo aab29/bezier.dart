@@ -326,8 +326,8 @@ bool boundingBoxIsSmallerThanSize(Aabb2 box, double maxSize) {
 /// Returns the indices of pairs of curve segments that overlap from [pairLeftSides]
 /// and [pairRightSides].
 List<int> indicesOfOverlappingSegmentPairs(
-    List<BDBezierSlice> pairLeftSides,
-    List<BDBezierSlice> pairRightSides) {
+    List<BezierSlice> pairLeftSides,
+    List<BezierSlice> pairRightSides) {
   final overlappingIndices = <int>[];
   for (var pairIndex = 0; pairIndex < pairLeftSides.length; pairIndex++) {
     final leftSegment = pairLeftSides[pairIndex].subcurve;
@@ -344,8 +344,8 @@ List<int> indicesOfOverlappingSegmentPairs(
 /// threshold of [curveIntersectionThreshold].  It divides the bounding boxes
 /// of the [Bezier] curves in half and calls itself recursively with
 /// overlapping pairs of divided curve segments.
-List<Intersection> locateIntersectionsRecursively(BDBezierSlice curve1,
-    BDBezierSlice curve2, double curveIntersectionThreshold) {
+List<Intersection> locateIntersectionsRecursively(BezierSlice curve1,
+    BezierSlice curve2, double curveIntersectionThreshold) {
   final curve1Box = curve1.subcurve.boundingBox;
   final curve2Box = curve2.subcurve.boundingBox;
 
@@ -362,19 +362,19 @@ List<Intersection> locateIntersectionsRecursively(BDBezierSlice curve1,
 
   final curve1LeftSegment = curve1.subcurve.leftSubcurveAt(centerT);
   final curve1Left =
-      new BDBezierSlice(curve1LeftSegment, curve1.t1, curve1CenterT);
+      new BezierSlice(curve1LeftSegment, curve1.t1, curve1CenterT);
 
   final curve1RightSegment = curve1.subcurve.rightSubcurveAt(centerT);
   final curve1Right =
-      new BDBezierSlice(curve1RightSegment, curve1CenterT, curve1.t2);
+      new BezierSlice(curve1RightSegment, curve1CenterT, curve1.t2);
 
   final curve2LeftSegment = curve2.subcurve.leftSubcurveAt(centerT);
   final curve2Left =
-      new BDBezierSlice(curve2LeftSegment, curve2.t1, curve2CenterT);
+      new BezierSlice(curve2LeftSegment, curve2.t1, curve2CenterT);
 
   final curve2RightSegment = curve2.subcurve.rightSubcurveAt(centerT);
   final curve2Right =
-      new BDBezierSlice(curve2RightSegment, curve2CenterT, curve2.t2);
+      new BezierSlice(curve2RightSegment, curve2CenterT, curve2.t2);
 
   final pairLeftSides = [curve1Left, curve1Left, curve1Right, curve1Right];
   final pairRightSides = [curve2Left, curve2Right, curve2Left, curve2Right];
