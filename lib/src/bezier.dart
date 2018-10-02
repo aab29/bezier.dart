@@ -4,7 +4,7 @@ import "package:vector_math/vector_math.dart" as vector_math;
 
 import "package:bezier/bezier.dart";
 
-import "bdbezier_tools.dart";
+import "bezier_tools.dart";
 
 /// Abstract base class of Bézier curves.
 abstract class Bezier {
