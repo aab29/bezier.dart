@@ -27,9 +27,10 @@ dependencies:
   bezier: any
 ```
 
-2. Import **bezier.dart** from a file in your project.
+2. Import **bezier.dart** from a file in your project.  In most cases you will also want to import the [vector_math](https://pub.dartlang.org/packages/vector_math) library.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 ```
 
