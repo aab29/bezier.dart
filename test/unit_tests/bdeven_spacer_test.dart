@@ -8,8 +8,8 @@ void main() {
         new Vector2(2.0, 0.0),
         new Vector2(3.0, 0.0)
       ];
-      final object = new BDEvenSpacer(lookUpTable);
-      expect(object, new TypeMatcher<BDEvenSpacer>());
+      final object = new EvenSpacer(lookUpTable);
+      expect(object, new TypeMatcher<EvenSpacer>());
     });
 
     test("constructor with two-entry look up table", () {
@@ -18,26 +18,26 @@ void main() {
         new Vector2(100.0, 100.0)
       ];
 
-      final object = new BDEvenSpacer(lookUpTable);
-      expect(object, new TypeMatcher<BDEvenSpacer>());
+      final object = new EvenSpacer(lookUpTable);
+      expect(object, new TypeMatcher<EvenSpacer>());
     });
 
     test("constructor throws error with one-entry look up table", () {
       final lookUpTable = <Vector2>[
         new Vector2(100.0, 100.0)
       ];
-      expect(() => new BDEvenSpacer(lookUpTable),
+      expect(() => new EvenSpacer(lookUpTable),
           throwsA(new TypeMatcher<Error>()));
     });
 
     test("constructor throws error with empty look up table", () {
-      expect(() => new BDEvenSpacer([]), throwsA(new TypeMatcher<Error>()));
+      expect(() => new EvenSpacer([]), throwsA(new TypeMatcher<Error>()));
     });
   });
 
   group("arcLength getter", () {
     test("arcLength, two-entry look up table", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 100.0)
       ]);
@@ -46,7 +46,7 @@ void main() {
     });
 
     test("arcLength, three-entry look up table", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)
@@ -58,7 +58,7 @@ void main() {
 
   group("evenTValueAt()", () {
     test("evenTValueAt(), portion at border of or outside normal range", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)
@@ -78,7 +78,7 @@ void main() {
     });
 
     test("evenTValueAt(), portion in normal range, three-entry look up table", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)
@@ -96,7 +96,7 @@ void main() {
 
   group("evenTValues", () {
     test("default parametersCount", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)
@@ -113,7 +113,7 @@ void main() {
     });
 
     test("parametersCount of 100", () {
-      final arcLengthCalculator = new BDEvenSpacer([
+      final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)

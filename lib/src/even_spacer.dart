@@ -6,7 +6,7 @@ import "bdbezier_tools.dart";
 
 /// Class for calculating parameter values of points in a [Bezier] evenly spaced
 /// along its arc length.
-class BDEvenSpacer {
+class EvenSpacer {
   /// A set of points along a curve at evenly spaced parameter values including
   /// the start and end points.
   final List<Vector2> curveLookUpTable;
@@ -14,9 +14,9 @@ class BDEvenSpacer {
   /// The set of distances from the start point calculated for each point in [curveLookUpTable].
   final List<double> _cumulativeArcLengths = [0.0];
 
-  /// Constructs a [BDEvenSpacer] with a [List] of [Vector2] positions
+  /// Constructs a [EvenSpacer] with a [List] of [Vector2] positions
   /// calculated at evenly spaced parameter values within a [Bezier].
-  BDEvenSpacer(this.curveLookUpTable) {
+  EvenSpacer(this.curveLookUpTable) {
     if (curveLookUpTable.length < 2) {
       throw (new ArgumentError("look up table requires at least two entries"));
     }
@@ -30,11 +30,11 @@ class BDEvenSpacer {
     }
   }
 
-  /// Returns an instance of [BDEvenSpacer] using a position look up table
+  /// Returns an instance of [EvenSpacer] using a position look up table
   /// generated from [curve].
-  factory BDEvenSpacer.fromBezier(Bezier curve, {int intervalsCount = 50}) {
+  factory EvenSpacer.fromBezier(Bezier curve, {int intervalsCount = 50}) {
     final lookUpTable = curve.positionLookUpTable(intervalsCount: intervalsCount);
-    return new BDEvenSpacer(lookUpTable);
+    return new EvenSpacer(lookUpTable);
   }
 
   /// The approximate arc length of the curve.
