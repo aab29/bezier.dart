@@ -392,7 +392,9 @@ abstract class Bezier {
   }
 
   /// Returns a [List] of [BezierSlice] instances containing simple [Bezier]
-  /// instances along with their endpoint parameter values from [this].
+  /// instances along with their endpoint parameter values from [this].  In
+  /// cases where no simple subcurves can be found with the given [stepSize],
+  /// returns an empty [List].
   ///
   /// Refer to [simpleSubcurves] for information about the optional parameter [stepSize].
   /// If endpoint parameter values of the component curves are not needed, use [simpleSubcurves]
@@ -402,7 +404,9 @@ abstract class Bezier {
     return _divideNonSimpleSlices(subcurvesBetweenExtrema, stepSize);
   }
 
-  /// Returns a [List] of simple [Bezier] instances that make up [this] when taken together.
+  /// Returns a [List] of simple [Bezier] instances that make up [this] when
+  /// taken together.  In cases where no simple subcurves can be found with the
+  /// given [stepSize], returns an empty [List].
   ///
   /// The first pass splits the curve at the parameter values of extrema along the
   /// x and y axes.  The second pass divides any non-simple portions of the curve
