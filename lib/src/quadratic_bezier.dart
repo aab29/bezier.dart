@@ -34,8 +34,8 @@ class QuadraticBezier extends Bezier {
   }
 
   @override
-  Vector2 derivativeAt(double t) {
-    final derivativePoints = firstOrderDerivativePoints;
+  Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
+    final derivativePoints = cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
     final result = new Vector2.zero();
     Vector2.mix(derivativePoints[0], derivativePoints[1], t, result);
     return result;

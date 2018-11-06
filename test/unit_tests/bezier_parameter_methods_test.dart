@@ -219,11 +219,11 @@ void main() {
       ];
       final curve = new CubicBezier(points);
 
-      expect(curve.normalVectorAt(0.5), closeToVector(new Vector2(0.12403473258018494, -0.9922778606414795)));
-      expect(curve.normalVectorAt(0.23), closeToVector(new Vector2(-0.8163508176803589, 0.5775563716888428)));
-      expect(curve.normalVectorAt(0.69), closeToVector(new Vector2(-0.24693183600902557, -0.9690328240394592)));
-      expect(curve.normalVectorAt(0.0), closeToVector(new Vector2(-0.8169678449630737, 0.5766832232475281)));
-      expect(curve.normalVectorAt(1.0), closeToVector(new Vector2(-0.986393928527832, -0.16439898312091827)));
+      expect(curve.normalAt(0.5), closeToVector(new Vector2(0.12403473258018494, -0.9922778606414795)));
+      expect(curve.normalAt(0.23), closeToVector(new Vector2(-0.8163508176803589, 0.5775563716888428)));
+      expect(curve.normalAt(0.69), closeToVector(new Vector2(-0.24693183600902557, -0.9690328240394592)));
+      expect(curve.normalAt(0.0), closeToVector(new Vector2(-0.8169678449630737, 0.5766832232475281)));
+      expect(curve.normalAt(1.0), closeToVector(new Vector2(-0.986393928527832, -0.16439898312091827)));
     });
 
     test("quadratic normalVectorAt", () {
@@ -234,11 +234,11 @@ void main() {
       ];
       final curve = new QuadraticBezier(points);
 
-      expect(curve.normalVectorAt(0.5), closeToVector(new Vector2(-0.9974586963653564, 0.07124704867601395)));
-      expect(curve.normalVectorAt(0.23), closeToVector(new Vector2(-0.9185916185379028, 0.3952080309391022)));
-      expect(curve.normalVectorAt(0.69), closeToVector(new Vector2(-0.9987242221832275, -0.05049728974699974)));
-      expect(curve.normalVectorAt(0.0), closeToVector(new Vector2(-0.5547001957893372, 0.8320503234863281)));
-      expect(curve.normalVectorAt(1.0), closeToVector(new Vector2(-0.986393928527832, -0.16439898312091827)));
+      expect(curve.normalAt(0.5), closeToVector(new Vector2(-0.9974586963653564, 0.07124704867601395)));
+      expect(curve.normalAt(0.23), closeToVector(new Vector2(-0.9185916185379028, 0.3952080309391022)));
+      expect(curve.normalAt(0.69), closeToVector(new Vector2(-0.9987242221832275, -0.05049728974699974)));
+      expect(curve.normalAt(0.0), closeToVector(new Vector2(-0.5547001957893372, 0.8320503234863281)));
+      expect(curve.normalAt(1.0), closeToVector(new Vector2(-0.986393928527832, -0.16439898312091827)));
     });
   });
 

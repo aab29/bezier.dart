@@ -36,8 +36,8 @@ class CubicBezier extends Bezier {
   }
 
   @override
-  Vector2 derivativeAt(double t) {
-    final derivativePoints = firstOrderDerivativePoints;
+  Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
+    final derivativePoints = cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
     final mt = 1.0 - t;
     final a = mt * mt;
     final b = 2.0 * mt * t;

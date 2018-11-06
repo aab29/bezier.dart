@@ -71,7 +71,7 @@ abstract class Bezier {
   /// Returns the tangent vector at parameter [t].
   ///
   /// The return value is not normalized.
-  Vector2 derivativeAt(double t);
+  Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints});
 
   /// True if the curve is clockwise.
   ///
@@ -138,11 +138,10 @@ abstract class Bezier {
 
   /// The normal vector of the curve at parameter value [t].
   ///
-  /// The result is normalized.
-  Vector2 normalVectorAt(double t) {
-    final d = derivativeAt(t);
-    d.normalize();
-
+  /// The return value is normalized.
+  Vector2 normalAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
+    final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)
+      ..normalize();
     return new Vector2(-d.y, d.x);
   }
 
@@ -266,7 +265,7 @@ abstract class Bezier {
   /// The normal vector at [t] taking into account overlapping control
   /// points at the end point with index [endPointIndex] in [points].
   Vector2 _nonOverlappingNormalVectorAt(double t, int endPointIndex) {
-    final normalVector = normalVectorAt(t);
+    final normalVector = normalAt(t);
     if ((normalVector.x != 0.0) || (normalVector.y != 0.0)) {
       return normalVector;
     }
@@ -423,12 +422,11 @@ abstract class Bezier {
 
   /// Returns the point [distance] units away in the clockwise direction from
   /// the point along the curve at parameter value [t].
-  Vector2 offsetPointAt(double t, double distance) {
+  Vector2 offsetPointAt(double t, double distance, {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final offsetPoint = pointAt(t);
-    final normalVector = normalVectorAt(t);
-    normalVector.scale(distance);
+    final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints);
 
-    offsetPoint.add(normalVector);
+    offsetPoint.addScaled(normalVector, distance);
 
     return offsetPoint;
   }
