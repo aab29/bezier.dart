@@ -416,6 +416,29 @@ void main() {
       expect(curve.offsetPointAt(1.0, -50.0), closeToVector(new Vector2(109.8058090209961, 50.97096633911133)));
       expect(curve.offsetPointAt(0.0, -100.0), closeToVector(new Vector2(-37.139068603515625, 7.1523284912109375)));
     });
+
+    test("quadratic offsetPointAt, specified cachedFirstOrderDerivativePoints", () {
+      final curve = new QuadraticBezier([
+        new Vector2(0.0, 0.0),
+        new Vector2(50.0, 100.0),
+        new Vector2(100.0, 0.0)
+      ]);
+
+      final cachedPoints = <Vector2>[
+        new Vector2(100.0, 200.0),
+        new Vector2(100.0, -200.0)
+      ];
+
+      expect(curve.firstOrderDerivativePoints, closeToVectorList(cachedPoints));
+
+      expect(curve.offsetPointAt(0.0, 10.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-8.9442720413208, 4.4721360206604)));
+      expect(curve.offsetPointAt(0.25, 40.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-3.284270763397217, 65.78427124023438)));
+      expect(curve.offsetPointAt(0.5, 24.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(50.0, 74.0)));
+      expect(curve.offsetPointAt(0.5, -30.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(50.0, 20.0)));
+      expect(curve.offsetPointAt(0.55, -30.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(49.11651611328125, 20.082578659057617)));
+      expect(curve.offsetPointAt(0.83, 40.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(114.88368225097656, 52.374305725097656)));
+      expect(curve.offsetPointAt(1.0, -10.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(91.05572509765625, -4.4721360206604)));
+    });
   });
 
   group("positionLookUpTable", () {
