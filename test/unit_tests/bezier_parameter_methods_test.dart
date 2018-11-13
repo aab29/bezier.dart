@@ -206,6 +206,31 @@ void main() {
 
     });
 
+    test("quadratic derivativeAt, specified cachedFirstOrderDerivativePoints", () {
+      final curve = new QuadraticBezier([
+        new Vector2(10.0, 10.0),
+        new Vector2(70.0, 95.0),
+        new Vector2(15.0, 80.0)
+      ]);
+
+      final cachedPoints = <Vector2>[
+        new Vector2(120.0, 170.0),
+        new Vector2(-110.0, -30.0)
+      ];
+
+      expect(curve.firstOrderDerivativePoints, closeToVectorList(cachedPoints));
+
+      expect(curve.derivativeAt(0.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(120.0, 170.0)));
+      expect(curve.derivativeAt(0.1, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(97.0, 150.0)));
+      expect(curve.derivativeAt(0.25, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(62.5, 120.0)));
+      expect(curve.derivativeAt(0.33333, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(43.33409881591797,103.33399963378906)));
+      expect(curve.derivativeAt(0.5, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(5.0, 70.0)));
+      expect(curve.derivativeAt(0.6827, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-37.020999908447266,33.459999084472656)));
+      expect(curve.derivativeAt(0.75, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-52.5, 20.0)));
+      expect(curve.derivativeAt(0.9, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-87.0, -10.0)));
+      expect(curve.derivativeAt(1.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-110.0, -30.0)));
+    });
+
 
   });
 
