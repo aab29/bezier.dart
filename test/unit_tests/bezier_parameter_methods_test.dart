@@ -317,6 +317,29 @@ void main() {
       expect(curve.normalAt(0.82, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.5096653699874878, 0.8603727221488953)));
       expect(curve.normalAt(1.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.9805806875228882, 0.1961161345243454)));
     });
+
+    test("quadratic normalAt, specified cachedFirstOrderDerivativePoints", () {
+      final curve = new QuadraticBezier([
+        new Vector2(130.0, -40.0),
+        new Vector2(110.0, 85.0),
+        new Vector2(-45.0, 170.0)
+      ]);
+
+      final cachedPoints = <Vector2>[
+        new Vector2(-40.0, 250.0),
+        new Vector2(-310.0, 170.0),
+      ];
+
+      expect(curve.firstOrderDerivativePoints, closeToVectorList(cachedPoints));
+
+      expect(curve.normalAt(0.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.9874406456947327, -0.157990500330925)));
+      expect(curve.normalAt(0.18, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.936002254486084, -0.35199403762817383)));
+      expect(curve.normalAt(0.375, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.8414890170097351, -0.5402742028236389)));
+      expect(curve.normalAt(0.5, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.7682212591171265, -0.6401844024658203)));
+      expect(curve.normalAt(0.625, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.6918114423751831, -0.7220782041549683)));
+      expect(curve.normalAt(0.82, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.5764377117156982, -0.8171411156654358)));
+      expect(curve.normalAt(1.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.48083260655403137, -0.8768123984336853)));
+    });
   });
 
   group("offsetPointAt", () {
