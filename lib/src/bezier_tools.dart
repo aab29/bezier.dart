@@ -144,24 +144,6 @@ List<Vector2> alignWithLineSegment(
   return alignedPoints;
 }
 
-/// Returns an approximation of the arc length given the function [derivativeFunction]
-/// that takes a double value for a parameter along a Bézier curve and returns the tangent
-/// vector as a [Vector2].
-///
-/// It uses a 30th order Legendre polynomial for calculating
-/// the parameter values and weights to use to approximate the arc length.
-double computeLength(Vector2 Function(double) derivativeFunction) {
-  final z = 0.5;
-  final tValuesCount = legendrePolynomialRoots.length;
-  var sum = 0.0;
-  for (var index = 0; index < tValuesCount; index++) {
-    final t = z * legendrePolynomialRoots[index] + z;
-    final d = derivativeFunction(t);
-    sum += legendrePolynomialWeights[index] * d.length;
-  }
-  return z * sum;
-}
-
 /// Returns the linear parameter value for where [t] lies in the interval
 /// between [min] and [max].
 ///
