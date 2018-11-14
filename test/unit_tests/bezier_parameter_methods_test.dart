@@ -439,6 +439,32 @@ void main() {
       expect(curve.offsetPointAt(0.83, 40.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(114.88368225097656, 52.374305725097656)));
       expect(curve.offsetPointAt(1.0, -10.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(91.05572509765625, -4.4721360206604)));
     });
+
+    test("cubic offsetPointAt, specified cachedFirstOrderDerivativePoints", () {
+      final curve = new CubicBezier([
+        new Vector2(0.0, 100.0),
+        new Vector2(250.0, 0.0),
+        new Vector2(-150.0, 50.0),
+        new Vector2(100.0, 100.0)
+      ]);
+
+      final cachedPoints = <Vector2>[
+        new Vector2(750.0, -300.0),
+        new Vector2(-1200.0, 150.0),
+        new Vector2(750.0, 150.0)
+      ];
+
+      expect(curve.firstOrderDerivativePoints, closeToVectorList(cachedPoints));
+
+      expect(curve.offsetPointAt(0.0, 10.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(3.713906764984131, 109.2847671508789)));
+      expect(curve.offsetPointAt(0.25, 40.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(125.29229736328125, 57.936668395996094)));
+      expect(curve.offsetPointAt(0.5, 24.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(46.05442428588867, 20.07654571533203)));
+      expect(curve.offsetPointAt(0.5, -30.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(54.931968688964844, 73.3418197631836)));
+      expect(curve.offsetPointAt(0.55, -30.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(46.82734680175781,75.10584259033203)));
+      expect(curve.offsetPointAt(0.83, 40.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(-0.15876483917236328, 108.22217559814453)));
+      expect(curve.offsetPointAt(1.0, -10.0, cachedFirstOrderDerivativePoints: cachedPoints), closeToVector(new Vector2(101.9611587524414, 90.1941909790039)));
+      
+    });
   });
 
   group("positionLookUpTable", () {
