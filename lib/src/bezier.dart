@@ -70,7 +70,9 @@ abstract class Bezier {
 
   /// Returns the tangent vector at parameter [t].
   ///
-  /// The return value is not normalized.
+  /// The return value is not normalized.  The optional parameter [cachedFirstOrderDerivativePoints]
+  /// allows the method to use previously calculated values for [firstOrderDerivativePoints] instead
+  /// of repeating the calculations.
   Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints});
 
   /// True if the curve is clockwise.
@@ -97,8 +99,22 @@ abstract class Bezier {
     return true;
   }
 
-  /// The approximate arc length of the curve computed using 24th order Legendre polynomials.
-  double get length => computeLength(derivativeAt);
+  /// The approximate arc length of the curve.
+  ///
+  /// The arc length is computed using a 30th order Legendre polynomial.
+  double get length {
+    final z = 0.5;
+    final tValuesCount = legendrePolynomialRoots.length;
+    var sum = 0.0;
+    final cachedPoints = firstOrderDerivativePoints;
+    for (var index = 0; index < tValuesCount; index++) {
+      final t = z * legendrePolynomialRoots[index] + z;
+      final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedPoints);
+      sum += legendrePolynomialWeights[index] * d.length;
+    }
+    return z * sum;
+  }
+
 
   List<Vector2> _interpolatedPoints(List<Vector2> pointsToInterpolate, double t) {
     final interpolatedPoints = <Vector2>[];
@@ -138,7 +154,8 @@ abstract class Bezier {
 
   /// The normal vector of the curve at parameter value [t].
   ///
-  /// The return value is normalized.
+  /// The return value is normalized.  See [derivativeAt] for information about
+  /// the optional parameter [cachedFirstOrderDerivativePoints].
   Vector2 normalAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)
       ..normalize();
@@ -423,6 +440,8 @@ abstract class Bezier {
 
   /// Returns the point [distance] units away in the clockwise direction from
   /// the point along the curve at parameter value [t].
+  ///
+  /// See [derivativeAt] for information about the optional parameter [cachedFirstOrderDerivativePoints].
   Vector2 offsetPointAt(double t, double distance, {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final offsetPoint = pointAt(t);
     final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints);
@@ -434,12 +453,14 @@ abstract class Bezier {
 
   /// Returns a [List] of [Bezier] instances that, when taken together, form an approximation
   /// of the offset curve [distance] units away from [this].
-  List<Bezier> offsetCurve(double distance) {
+  ///
+  /// See [simpleSubcurves] for information about the optional parameter [stepSize].
+  List<Bezier> offsetCurve(double distance, {double stepSize = 0.01}) {
     if (isLinear) {
       return [_translatedLinearCurve(distance)];
     }
 
-    final reducedSegments = simpleSubcurves();
+    final reducedSegments = simpleSubcurves(stepSize: stepSize);
     final offsetSegments = reducedSegments.map((s) => s.scaledCurve(distance));
     return offsetSegments.toList();
   }
