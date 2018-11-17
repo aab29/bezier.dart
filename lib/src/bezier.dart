@@ -70,7 +70,9 @@ abstract class Bezier {
 
   /// Returns the tangent vector at parameter [t].
   ///
-  /// The return value is not normalized.
+  /// The return value is not normalized.  The optional parameter [cachedFirstOrderDerivativePoints]
+  /// allows the method to use previously calculated values for [firstOrderDerivativePoints] instead
+  /// of repeating the calculations.
   Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints});
 
   /// True if the curve is clockwise.
@@ -97,8 +99,22 @@ abstract class Bezier {
     return true;
   }
 
-  /// The approximate arc length of the curve computed using 24th order Legendre polynomials.
-  double get length => computeLength(derivativeAt);
+  /// The approximate arc length of the curve.
+  ///
+  /// The arc length is computed using a 30th order Legendre polynomial.
+  double get length {
+    final z = 0.5;
+    final tValuesCount = legendrePolynomialRoots.length;
+    var sum = 0.0;
+    final cachedPoints = firstOrderDerivativePoints;
+    for (var index = 0; index < tValuesCount; index++) {
+      final t = z * legendrePolynomialRoots[index] + z;
+      final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedPoints);
+      sum += legendrePolynomialWeights[index] * d.length;
+    }
+    return z * sum;
+  }
+
 
   List<Vector2> _interpolatedPoints(List<Vector2> pointsToInterpolate, double t) {
     final interpolatedPoints = <Vector2>[];
@@ -138,7 +154,8 @@ abstract class Bezier {
 
   /// The normal vector of the curve at parameter value [t].
   ///
-  /// The return value is normalized.
+  /// The return value is normalized.  See [derivativeAt] for information about
+  /// the optional parameter [cachedFirstOrderDerivativePoints].
   Vector2 normalAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)
       ..normalize();
@@ -264,8 +281,8 @@ abstract class Bezier {
 
   /// The normal vector at [t] taking into account overlapping control
   /// points at the end point with index [endPointIndex] in [points].
-  Vector2 _nonOverlappingNormalVectorAt(double t, int endPointIndex) {
-    final normalVector = normalAt(t);
+  Vector2 _nonOverlappingNormalVectorAt(double t, int endPointIndex, List<Vector2> cachedPoints) {
+    final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedPoints);
     if ((normalVector.x != 0.0) || (normalVector.y != 0.0)) {
       return normalVector;
     }
@@ -305,8 +322,9 @@ abstract class Bezier {
       }
     }
 
-    final startPointNormal = _nonOverlappingNormalVectorAt(0.0, 0);
-    final endPointNormal = _nonOverlappingNormalVectorAt(1.0, order);
+    final firstOrderPoints = firstOrderDerivativePoints;
+    final startPointNormal = _nonOverlappingNormalVectorAt(0.0, 0, firstOrderPoints);
+    final endPointNormal = _nonOverlappingNormalVectorAt(1.0, order, firstOrderPoints);
 
     final normalDotProduct = startPointNormal.dot(endPointNormal);
     final clampedDotProduct = normalDotProduct.clamp(-1.0, 1.0);
@@ -422,6 +440,8 @@ abstract class Bezier {
 
   /// Returns the point [distance] units away in the clockwise direction from
   /// the point along the curve at parameter value [t].
+  ///
+  /// See [derivativeAt] for information about the optional parameter [cachedFirstOrderDerivativePoints].
   Vector2 offsetPointAt(double t, double distance, {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final offsetPoint = pointAt(t);
     final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints);
@@ -433,12 +453,14 @@ abstract class Bezier {
 
   /// Returns a [List] of [Bezier] instances that, when taken together, form an approximation
   /// of the offset curve [distance] units away from [this].
-  List<Bezier> offsetCurve(double distance) {
+  ///
+  /// See [simpleSubcurves] for information about the optional parameter [stepSize].
+  List<Bezier> offsetCurve(double distance, {double stepSize = 0.01}) {
     if (isLinear) {
       return [_translatedLinearCurve(distance)];
     }
 
-    final reducedSegments = simpleSubcurves();
+    final reducedSegments = simpleSubcurves(stepSize: stepSize);
     final offsetSegments = reducedSegments.map((s) => s.scaledCurve(distance));
     return offsetSegments.toList();
   }
@@ -446,7 +468,7 @@ abstract class Bezier {
   /// Returns a [Bezier] instance with [points] translated by [distance] units
   /// along the normal vector at the start point.
   Bezier _translatedLinearCurve(double distance) {
-    final normalVector = _nonOverlappingNormalVectorAt(0.0, 0);
+    final normalVector = _nonOverlappingNormalVectorAt(0.0, 0, firstOrderDerivativePoints);
     final translatedPoints = <Vector2>[];
     for (final point in points) {
       final translatedPoint = new Vector2.copy(point);
@@ -462,8 +484,9 @@ abstract class Bezier {
   /// case of cubic curves with parallel or anti-parallel endpoint normal vectors,
   /// the origin is the midpoint between the start and end points.
   Vector2 get _scalingOrigin {
-    final offsetStart = _nonOverlappingOffsetPointAt(0.0, originIntersectionTestDistance, 0);
-    final offsetEnd = _nonOverlappingOffsetPointAt(1.0, originIntersectionTestDistance, order);
+    final firstOrderPoints = firstOrderDerivativePoints;
+    final offsetStart = _nonOverlappingOffsetPointAt(0.0, originIntersectionTestDistance, 0, firstOrderPoints);
+    final offsetEnd = _nonOverlappingOffsetPointAt(1.0, originIntersectionTestDistance, order, firstOrderPoints);
     final intersectionPoint = intersectionPointBetweenTwoLines(offsetStart, startPoint, offsetEnd, endPoint);
     if (intersectionPoint == null) {
       final centerPoint = new Vector2.zero();
@@ -476,9 +499,9 @@ abstract class Bezier {
 
   /// Returns the point at [t] offset by [distance] along the normal vector calculated
   /// by [_nonOverlappingNormalVectorAt].
-  Vector2 _nonOverlappingOffsetPointAt(double t, double distance, int endPointIndex) {
+  Vector2 _nonOverlappingOffsetPointAt(double t, double distance, int endPointIndex, List<Vector2> cachedPoints) {
     final offsetPoint = pointAt(t);
-    final normalVector = _nonOverlappingNormalVectorAt(t, endPointIndex);
+    final normalVector = _nonOverlappingNormalVectorAt(t, endPointIndex, cachedPoints);
     offsetPoint.addScaled(normalVector, distance);
     return offsetPoint;
   }
@@ -498,21 +521,23 @@ abstract class Bezier {
     final listLength = order + 1;
     final scaledCurvePoints = new List<Vector2>(listLength);
 
-    final scaledStartPoint = _nonOverlappingOffsetPointAt(0.0, distance, 0);
+    final firstOrderPoints = firstOrderDerivativePoints;
+
+    final scaledStartPoint = _nonOverlappingOffsetPointAt(0.0, distance, 0, firstOrderPoints);
     scaledCurvePoints[0] = scaledStartPoint;
 
-    final scaledEndPoint = _nonOverlappingOffsetPointAt(1.0, distance, order);
+    final scaledEndPoint = _nonOverlappingOffsetPointAt(1.0, distance, order, firstOrderPoints);
     scaledCurvePoints[order] = scaledEndPoint;
 
     final startTangentPoint = new Vector2.copy(scaledStartPoint);
-    startTangentPoint.add(derivativeAt(0.0));
+    startTangentPoint.add(derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
     scaledCurvePoints[1] = intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]);
 
     scaledCurvePoints[1] ??= startTangentPoint;
 
     if (order == 3) {
       final endTangentPoint = new Vector2.copy(scaledEndPoint);
-      endTangentPoint.add(derivativeAt(1.0));
+      endTangentPoint.add(derivativeAt(1.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
       scaledCurvePoints[2] = intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]);
 
       scaledCurvePoints[2] ??= endTangentPoint;
