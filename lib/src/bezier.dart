@@ -21,8 +21,10 @@ abstract class Bezier {
   /// Constructs a Bézier curve from a [List] of [Vector2].
   Bezier(this.points);
 
-  /// Factory constructor that returns a new instance of the proper subclass of [Bezier]
-  /// based on the number of entries in [curvePoints].
+  /// Returns a new instance of the proper subclass of [Bezier] based on
+  /// the number of entries in [curvePoints].  If [curvePoints] contains three points,
+  /// returns a [QuadraticBezier].  If [curvePoints] contains four points, returns a
+  /// [CubicBezier].
   factory Bezier.fromPoints(List<Vector2> curvePoints) {
     if (curvePoints.length == 3) {
       return new QuadraticBezier(curvePoints);
@@ -51,7 +53,9 @@ abstract class Bezier {
   List<Vector2> get firstOrderDerivativePoints =>
       computeDerivativePoints(points);
 
-  /// Derivative points for the order [derivativeOrder].
+  /// Derivative points for the order [derivativeOrder].  Derivative points describe
+  /// the derivative function of the polynomial function of [this] and are
+  /// used by other methods to calculate derivative values.
   ///
   /// Orders beyond the first are calculated with the previous order.
   List<Vector2> derivativePoints({int derivativeOrder = 1}) {
@@ -79,8 +83,8 @@ abstract class Bezier {
   ///
   /// A curve is clockwise if the angle between the line connecting the start and end points
   /// and the line connecting the start point and first control point is positive.
-  /// When the end point is to the right of the start point, a clockwise curve will arch
-  /// upward initially.
+  /// On a standard Cartesian plane, when the end point is to the right of the start
+  /// point, a clockwise curve will arch upward initially.
   bool get isClockwise {
     final firstControlPoint = points[1];
     final angle = cornerAngle(startPoint, endPoint, firstControlPoint);
@@ -425,14 +429,14 @@ abstract class Bezier {
   /// taken together.  In cases where no simple subcurves can be found with the
   /// given [stepSize], returns an empty [List].
   ///
-  /// The first pass splits the curve at the parameter values of extrema along the
-  /// x and y axes.  The second pass divides any non-simple portions of the curve
-  /// into simple curves.  The optional [stepSize] parameter determines how much
-  /// to increment the parameter value at each iteration when searching for non-simple
-  /// portions of curves.  The default [stepSize] value of 0.01 means that the function
-  /// will do around one hundred iterations for each segment between the parameter
-  /// values for extrema.  Reducing the value of [stepSize] will increase the
-  /// number of iterations.
+  /// Reduction is performed in two passes.  The first pass splits the curve at the
+  /// parameter values of extrema along the x and y axes.  The second pass divides
+  /// any non-simple portions of the curve into simple curves.  The optional [stepSize]
+  /// parameter determines how much to increment the parameter value at each iteration
+  /// when searching for non-simple portions of curves.  The default [stepSize]
+  /// value of 0.01 means that the function will do around one hundred iterations
+  /// for each segment between the parameter values for extrema.  Reducing the value
+  /// of [stepSize] will increase the number of iterations.
   List<Bezier> simpleSubcurves({double stepSize = 0.01}) {
     final reductionResults = simpleSlices(stepSize: stepSize);
     return reductionResults.map((r) => r.subcurve).toList();
@@ -508,6 +512,10 @@ abstract class Bezier {
 
   /// Returns a [Bezier] instance whose endpoints are [distance] units away from the
   /// endpoints of [this] and whose control points have been moved in the same direction.
+  ///
+  /// Results are best on simple curves.  Although [scaledCurve] can be called on non-simple
+  /// curves, the return value may not resemble a proper offset curve.  For better results
+  /// on non-simple curves, try [offsetCurve].
   ///
   /// A scaled linear curve is translated by [distance] units along its start
   /// point normal vector.
