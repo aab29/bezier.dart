@@ -2,7 +2,7 @@
 
 The library was developed, documented, and published by [Aaron Barrett](http://www.aaronbarrett.com) and Isaac Barrett.  It is based heavily on the work of [Pomax](https://pomax.github.io/), including his excellent [Primer on Bézier Curves](https://pomax.github.io/bezierinfo/) and his original JavaScript library, [Bezier.js](https://pomax.github.io/bezierjs/).
 
-We're trying to design **bezier.js** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
+We're trying to design **bezier.dart** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
 
 ## Features
 
