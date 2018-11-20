@@ -666,6 +666,10 @@ abstract class Bezier {
   ///
   /// The [intervalsCount] parameter is used to calculate the size of the interval.
   /// The returned List will contain [intervalsCount] + 1 entries.
+  ///
+  /// Note that although the returned positions will be parametrically equidistant,
+  /// the arc length between them may vary significantly.  To obtain more evenly
+  /// distributed positions along the arc, use the [EvenSpacer] class.
   List<Vector2> positionLookUpTable({int intervalsCount = 50}) {
     final lookUpTable = <Vector2>[];
 
