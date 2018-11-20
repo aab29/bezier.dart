@@ -5,7 +5,6 @@ import "package:vector_math/vector_math.dart";
 import "close_to_double.dart";
 
 class CloseToVectorMatcher extends Matcher {
-
   Vector vector;
   double delta;
 
@@ -38,8 +37,8 @@ class CloseToVectorMatcher extends Matcher {
   }
 
   @override
-  Description describe(Description description) => description.addDescriptionOf(vector);
-
+  Description describe(Description description) =>
+      description.addDescriptionOf(vector);
 }
 
 Matcher closeToVector(Vector vector, [double delta = defaultDelta]) =>

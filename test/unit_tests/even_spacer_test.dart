@@ -23,11 +23,9 @@ void main() {
     });
 
     test("constructor throws error with one-entry look up table", () {
-      final lookUpTable = <Vector2>[
-        new Vector2(100.0, 100.0)
-      ];
-      expect(() => new EvenSpacer(lookUpTable),
-          throwsA(new TypeMatcher<Error>()));
+      final lookUpTable = <Vector2>[new Vector2(100.0, 100.0)];
+      expect(
+          () => new EvenSpacer(lookUpTable), throwsA(new TypeMatcher<Error>()));
     });
 
     test("constructor throws error with empty look up table", () {
@@ -37,10 +35,8 @@ void main() {
 
   group("arcLength getter", () {
     test("arcLength, two-entry look up table", () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
+      final arcLengthCalculator =
+          new EvenSpacer([new Vector2(0.0, 0.0), new Vector2(100.0, 100.0)]);
       final result = arcLengthCalculator.arcLength;
       expect(result, closeToDouble(141.4213562373095));
     });
@@ -77,17 +73,21 @@ void main() {
       expect(result4, closeToDouble(1.0));
     });
 
-    test("evenTValueAt(), portion in normal range, three-entry look up table", () {
+    test("evenTValueAt(), portion in normal range, three-entry look up table",
+        () {
       final arcLengthCalculator = new EvenSpacer([
         new Vector2(0.0, 0.0),
         new Vector2(3.0, 0.0),
         new Vector2(3.0, 1.0)
       ]);
 
-      expect(arcLengthCalculator.evenTValueAt(0.1), closeToDouble(0.06666666666));
-      expect(arcLengthCalculator.evenTValueAt(0.25), closeToDouble(0.16666666666));
+      expect(
+          arcLengthCalculator.evenTValueAt(0.1), closeToDouble(0.06666666666));
+      expect(
+          arcLengthCalculator.evenTValueAt(0.25), closeToDouble(0.16666666666));
       expect(arcLengthCalculator.evenTValueAt(0.375), closeToDouble(0.25));
-      expect(arcLengthCalculator.evenTValueAt(0.5), closeToDouble(0.33333333333));
+      expect(
+          arcLengthCalculator.evenTValueAt(0.5), closeToDouble(0.33333333333));
       expect(arcLengthCalculator.evenTValueAt(0.75), closeToDouble(0.5));
       expect(arcLengthCalculator.evenTValueAt(0.875), closeToDouble(0.75));
       expect(arcLengthCalculator.evenTValueAt(0.9), closeToDouble(0.8));

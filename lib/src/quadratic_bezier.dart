@@ -4,13 +4,13 @@ import "package:bezier/bezier.dart";
 
 /// Concrete class of quadratic Bézier curves.
 class QuadraticBezier extends Bezier {
-
   /// Constructs a quadratic Bézier curve from a [List] of [Vector2].  The first
   /// point in [points] will be the curve's start point, the second its control
   /// point, and the third its end point.
   QuadraticBezier(List<Vector2> points) : super(points) {
     if (points.length != 3) {
-      throw(new ArgumentError("Quadratic Bézier curves require exactly three points"));
+      throw (new ArgumentError(
+          "Quadratic Bézier curves require exactly three points"));
     }
   }
 
@@ -36,8 +36,10 @@ class QuadraticBezier extends Bezier {
   }
 
   @override
-  Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
-    final derivativePoints = cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
+  Vector2 derivativeAt(double t,
+      {List<Vector2> cachedFirstOrderDerivativePoints}) {
+    final derivativePoints =
+        cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
     final result = new Vector2.zero();
     Vector2.mix(derivativePoints[0], derivativePoints[1], t, result);
     return result;
@@ -68,6 +70,6 @@ class QuadraticBezier extends Bezier {
   }
 
   @override
-  String toString() => "BDQuadraticBezier([${points[0]}, ${points[1]}, ${points[2]}])";
-
+  String toString() =>
+      "BDQuadraticBezier([${points[0]}, ${points[1]}, ${points[2]}])";
 }

@@ -83,7 +83,6 @@ void main() {
 
       final resultB = curveB.intersectionsWithCurve(curveA);
       expect(resultB, hasLength(1));
-
     });
 
     test("quadratic intersectionsWithCurve, two intersections", () {
@@ -126,7 +125,9 @@ void main() {
       expect(resultB, hasLength(4));
     });
 
-    test("quadratic intersectionsWithCurve with looped cubic near self-intersection point, two intersections", () {
+    test(
+        "quadratic intersectionsWithCurve with looped cubic near self-intersection point, two intersections",
+        () {
       final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -195,7 +196,9 @@ void main() {
       expect(resultB, hasLength(9));
     });
 
-    test("quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with increased minTValueDifference", () {
+    test(
+        "quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with increased minTValueDifference",
+        () {
       final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
@@ -209,14 +212,18 @@ void main() {
       ]);
 
       final difference = 0.04;
-      final resultA = curveA.intersectionsWithCurve(curveB, minTValueDifference: difference);
+      final resultA = curveA.intersectionsWithCurve(curveB,
+          minTValueDifference: difference);
       expect(resultA, hasLength(1));
 
-      final resultB = curveB.intersectionsWithCurve(curveA, minTValueDifference: difference);
+      final resultB = curveB.intersectionsWithCurve(curveA,
+          minTValueDifference: difference);
       expect(resultB, hasLength(1));
     });
 
-    test("quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with decreased curveIntersectionThreshold", () {
+    test(
+        "quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with decreased curveIntersectionThreshold",
+        () {
       final curveA = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 20.0),
@@ -230,13 +237,14 @@ void main() {
       ]);
 
       final threshold = 0.05;
-      final resultA = curveA.intersectionsWithCurve(curveB, curveIntersectionThreshold: threshold);
+      final resultA = curveA.intersectionsWithCurve(curveB,
+          curveIntersectionThreshold: threshold);
       expect(resultA, hasLength(1));
 
-      final resultB = curveB.intersectionsWithCurve(curveA, curveIntersectionThreshold: threshold);
+      final resultB = curveB.intersectionsWithCurve(curveA,
+          curveIntersectionThreshold: threshold);
       expect(resultB, hasLength(1));
     });
-
   });
 
   group("intersectionsWithSelf", () {
@@ -278,7 +286,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("cubic intersectionsWithSelf with shallow angle, one intersection with reduced curveIntersectionThreshold", () {
+    test(
+        "cubic intersectionsWithSelf with shallow angle, one intersection with reduced curveIntersectionThreshold",
+        () {
       final curve = new CubicBezier([
         new Vector2(10.0, 0.0),
         new Vector2(180.0, 200.0),
@@ -287,13 +297,16 @@ void main() {
       ]);
 
       final threshold = 0.15;
-      final result = curve.intersectionsWithSelf(curveIntersectionThreshold: threshold);
+      final result =
+          curve.intersectionsWithSelf(curveIntersectionThreshold: threshold);
       expect(result, hasLength(1));
     });
   });
 
   group("intersectionsWithLineSegment", () {
-    test("cubic intersectionsWithLineSegment, diagonal line with two intersections", () {
+    test(
+        "cubic intersectionsWithLineSegment, diagonal line with two intersections",
+        () {
       final points = [
         new Vector2(10.0, 30.0),
         new Vector2(50.0, 50.0),
@@ -309,7 +322,9 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("quadratic intersectionsWithLineSegment, diagonal line with two intersections", () {
+    test(
+        "quadratic intersectionsWithLineSegment, diagonal line with two intersections",
+        () {
       final points = [
         new Vector2(10.0, 500.0),
         new Vector2(50.0, 0.0),
@@ -324,7 +339,9 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("quadratic intersectionsWithLineSegment, vertical line with single intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, vertical line with single intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -337,7 +354,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, horizontal line through left half, single intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, horizontal line through left half, single intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -350,7 +369,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, horizontal line tangent to apex, single intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, horizontal line tangent to apex, single intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -363,7 +384,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, horizontal line just above apex, no intersections", () {
+    test(
+        "quadratic intersectionsWithLineSegment, horizontal line just above apex, no intersections",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -376,7 +399,9 @@ void main() {
       expect(result, hasLength(0));
     });
 
-    test("quadratic intersectionsWithLineSegment, horizontal line just below apex, two intersections", () {
+    test(
+        "quadratic intersectionsWithLineSegment, horizontal line just below apex, two intersections",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -389,7 +414,9 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("quadratic intersectionsWithLineSegment, horizontal line through diagonal curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, horizontal line through diagonal curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -402,7 +429,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, vertical line through diagonal curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, vertical line through diagonal curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -415,7 +444,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, parallel diagonal line through diagonal curve, two intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, parallel diagonal line through diagonal curve, two intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -428,7 +459,9 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("quadratic intersectionsWithLineSegment, perpendicular diagonal line through diagonal curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, perpendicular diagonal line through diagonal curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -441,7 +474,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, slanted diagonal line through diagonal curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, slanted diagonal line through diagonal curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -454,7 +489,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, slanted line through linear curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, slanted line through linear curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
@@ -467,7 +504,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("quadratic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection", () {
+    test(
+        "quadratic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
@@ -480,7 +519,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("cubic intersectionsWithLineSegment, horizontal line, one intersection", () {
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line, one intersection",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -494,7 +535,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("cubic intersectionsWithLineSegment, horizontal line, two intersections", () {
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line, two intersections",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 100.0),
@@ -508,7 +551,9 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("cubic intersectionsWithLineSegment, horizontal line, three intersections", () {
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line, three intersections",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 200.0),
@@ -522,7 +567,8 @@ void main() {
       expect(result, hasLength(3));
     });
 
-    test("cubic intersectionsWithLineSegment, vertical line, one intersection", () {
+    test("cubic intersectionsWithLineSegment, vertical line, one intersection",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 200.0),
@@ -536,7 +582,9 @@ void main() {
       expect(result, hasLength(1));
     });
 
-    test("cubic intersectionsWithLineSegment, vertical line with looped curve, three intersection", () {
+    test(
+        "cubic intersectionsWithLineSegment, vertical line with looped curve, three intersection",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(200.0, 100.0),
@@ -550,7 +598,9 @@ void main() {
       expect(result, hasLength(3));
     });
 
-    test("cubic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection", () {
+    test(
+        "cubic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(20.0, 20.0),
@@ -563,6 +613,5 @@ void main() {
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
     });
-
   });
 }

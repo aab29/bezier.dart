@@ -30,8 +30,10 @@ void main() {
       final box = curve.boundingBox;
       expect(box, new TypeMatcher<Aabb2>());
 
-      expect(box.min, closeToVector(new Vector2(2.692307710647583, 33.488372802734375)));
-      expect(box.center, closeToVector(new Vector2(33.84615385532379, 64.24418640136719)));
+      expect(box.min,
+          closeToVector(new Vector2(2.692307710647583, 33.488372802734375)));
+      expect(box.center,
+          closeToVector(new Vector2(33.84615385532379, 64.24418640136719)));
       expect(box.max, closeToVector(new Vector2(65.0, 95.0)));
     });
   });

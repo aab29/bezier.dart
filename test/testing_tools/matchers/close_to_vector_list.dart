@@ -6,7 +6,6 @@ import "close_to_double.dart";
 import "close_to_vector.dart";
 
 class CloseToVectorListMatcher extends Matcher {
-
   List<Vector> vectors;
   double delta;
 
@@ -14,7 +13,6 @@ class CloseToVectorListMatcher extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-
     if (!(item is List<Vector>)) {
       return false;
     }
@@ -40,9 +38,10 @@ class CloseToVectorListMatcher extends Matcher {
   }
 
   @override
-  Description describe(Description description) => description.addDescriptionOf(vectors);
-
+  Description describe(Description description) =>
+      description.addDescriptionOf(vectors);
 }
 
-Matcher closeToVectorList(List<Vector> vectors, [double delta = defaultDelta]) =>
+Matcher closeToVectorList(List<Vector> vectors,
+        [double delta = defaultDelta]) =>
     new CloseToVectorListMatcher(vectors, delta);
