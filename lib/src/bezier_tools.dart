@@ -80,7 +80,6 @@ const legendrePolynomialWeights = [
 bool isApproximately(double a, double b, {double precision = 0.000001}) =>
     ((a - b).abs() <= precision);
 
-
 /// Returns the cube root of [realNumber] from within the real numbers such that
 /// the result raised to the third power equals [realNumber].
 double principalCubeRoot(double realNumber) {
@@ -291,7 +290,8 @@ Vector2 intersectionPointBetweenTwoLines(
 
   final xNumerator = cross1 * (p3.x - p4.x) - (p1.x - p2.x) * cross2;
   final yNumerator = cross1 * (p3.y - p4.y) - (p1.y - p2.y) * cross2;
-  final denominator = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
+  final denominator =
+      (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
   if (denominator == 0.0) {
     return null;
   }
@@ -308,8 +308,7 @@ bool boundingBoxIsSmallerThanSize(Aabb2 box, double maxSize) {
 /// Returns the indices of pairs of curve segments that overlap from [pairLeftSides]
 /// and [pairRightSides].
 List<int> indicesOfOverlappingSegmentPairs(
-    List<BezierSlice> pairLeftSides,
-    List<BezierSlice> pairRightSides) {
+    List<BezierSlice> pairLeftSides, List<BezierSlice> pairRightSides) {
   final overlappingIndices = <int>[];
   for (var pairIndex = 0; pairIndex < pairLeftSides.length; pairIndex++) {
     final leftSegment = pairLeftSides[pairIndex].subcurve;
@@ -326,8 +325,8 @@ List<int> indicesOfOverlappingSegmentPairs(
 /// threshold of [curveIntersectionThreshold].  It divides the bounding boxes
 /// of the [Bezier] curves in half and calls itself recursively with
 /// overlapping pairs of divided curve segments.
-List<Intersection> locateIntersectionsRecursively(BezierSlice curve1,
-    BezierSlice curve2, double curveIntersectionThreshold) {
+List<Intersection> locateIntersectionsRecursively(
+    BezierSlice curve1, BezierSlice curve2, double curveIntersectionThreshold) {
   final curve1Box = curve1.subcurve.boundingBox;
   final curve2Box = curve2.subcurve.boundingBox;
 

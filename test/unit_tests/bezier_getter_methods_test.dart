@@ -43,9 +43,7 @@ void main() {
     });
   });
 
-
   group("derivativePoints", () {
-
     test("quadratic derivativePoints", () {
       final curve = new QuadraticBezier([
         new Vector2(10.0, 10.0),
@@ -55,13 +53,15 @@ void main() {
 
       final firstDerivativePoints = curve.derivativePoints();
       expect(firstDerivativePoints, hasLength(2));
-      expect(firstDerivativePoints[0], closeToVector(new Vector2(120.0, 170.0)));
-      expect(firstDerivativePoints[1], closeToVector(new Vector2(-110.0, -30.0)));
-
+      expect(
+          firstDerivativePoints[0], closeToVector(new Vector2(120.0, 170.0)));
+      expect(
+          firstDerivativePoints[1], closeToVector(new Vector2(-110.0, -30.0)));
 
       final secondDerivativePoints = curve.derivativePoints(derivativeOrder: 2);
       expect(secondDerivativePoints, hasLength(1));
-      expect(secondDerivativePoints[0], closeToVector(new Vector2(-230.0, -200.0)));
+      expect(secondDerivativePoints[0],
+          closeToVector(new Vector2(-230.0, -200.0)));
 
       expect(curve.derivativePoints(derivativeOrder: 3), isEmpty);
     });
@@ -109,7 +109,6 @@ void main() {
       expect(dpoints2, hasLength(1));
       expect(dpoints2[0], closeToVector(new Vector2(70.0, 90.0)));
     });
-
   });
 
   group("isClockwise", () {
@@ -210,7 +209,9 @@ void main() {
       expect(curve.isClockwise, isFalse);
     });
 
-    test("quadratic isClockwise, diagonal degenerate curve with control point beyond end point", () {
+    test(
+        "quadratic isClockwise, diagonal degenerate curve with control point beyond end point",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 100.0),
@@ -219,7 +220,9 @@ void main() {
       expect(curve.isClockwise, isFalse);
     });
 
-    test("quadratic isClockwise, diagonal degenerate curve with control point before start point", () {
+    test(
+        "quadratic isClockwise, diagonal degenerate curve with control point before start point",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -100.0),
@@ -228,7 +231,9 @@ void main() {
       expect(curve.isClockwise, isTrue);
     });
 
-    test("quadratic isClockwise, horizontal degenerate curve with control point beyond end point", () {
+    test(
+        "quadratic isClockwise, horizontal degenerate curve with control point beyond end point",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -237,7 +242,9 @@ void main() {
       expect(curve.isClockwise, isFalse);
     });
 
-    test("quadratic isClockwise, horizontal degenerate curve with control point before start point", () {
+    test(
+        "quadratic isClockwise, horizontal degenerate curve with control point before start point",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, 0.0),
@@ -352,7 +359,6 @@ void main() {
         new Vector2(-100.0, -30.0),
         new Vector2(100.0, 30.0),
         new Vector2(10.0, 3.0)
-
       ]);
       expect(curve.isLinear, isTrue);
     });
@@ -363,11 +369,9 @@ void main() {
         new Vector2(-100.0, 0.0),
         new Vector2(100.0, 0.0),
         new Vector2(10.0, 0.0)
-
       ]);
       expect(curve.isLinear, isTrue);
     });
-
   });
 
   group("length", () {
@@ -480,7 +484,9 @@ void main() {
       expect(curve.isSimple, isFalse);
     });
 
-    test("cubic isSimple, non-simple curve with near-parallel endpoint normal vectors", () {
+    test(
+        "cubic isSimple, non-simple curve with near-parallel endpoint normal vectors",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(50.0, 100.0),
@@ -562,7 +568,9 @@ void main() {
       expect(curve.isSimple, isFalse);
     });
 
-    test("cubic isSimple, diagonal degenerate curve, both control points on outside", () {
+    test(
+        "cubic isSimple, diagonal degenerate curve, both control points on outside",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-100.0, -30.0),
@@ -572,7 +580,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, horizontal degenerate curve, both control points on outside", () {
+    test(
+        "cubic isSimple, horizontal degenerate curve, both control points on outside",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-2000.0, 0.0),
@@ -582,7 +592,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, horizontal degenerate curve, both control points going past opposite endpoint", () {
+    test(
+        "cubic isSimple, horizontal degenerate curve, both control points going past opposite endpoint",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
@@ -592,7 +604,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, horizontal degenerate curve, one control point on outside", () {
+    test(
+        "cubic isSimple, horizontal degenerate curve, one control point on outside",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(-2000.0, 0.0),
@@ -602,7 +616,9 @@ void main() {
       expect(curve.isSimple, isFalse);
     });
 
-    test("cubic isSimple, horizontal degenerate curve, one control point going past opposite endpoint", () {
+    test(
+        "cubic isSimple, horizontal degenerate curve, one control point going past opposite endpoint",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
@@ -612,7 +628,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, horizontal degenerate curve, one control point on outside, other going past opposite endpoint", () {
+    test(
+        "cubic isSimple, horizontal degenerate curve, one control point on outside, other going past opposite endpoint",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(2000.0, 0.0),
@@ -622,7 +640,9 @@ void main() {
       expect(curve.isSimple, isFalse);
     });
 
-    test("quadratic isSimple, degenerate curve with control point overlapping end point", () {
+    test(
+        "quadratic isSimple, degenerate curve with control point overlapping end point",
+        () {
       final curve = new QuadraticBezier([
         new Vector2(0.0, 0.0),
         new Vector2(100.0, 0.0),
@@ -631,7 +651,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, linear degenerate curve with one control point overlapping adjacent end point", () {
+    test(
+        "cubic isSimple, linear degenerate curve with one control point overlapping adjacent end point",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
@@ -641,7 +663,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, simple non-linear degenerate curve with one control point overlapping adjacent end point", () {
+    test(
+        "cubic isSimple, simple non-linear degenerate curve with one control point overlapping adjacent end point",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
@@ -651,7 +675,9 @@ void main() {
       expect(curve.isSimple, isTrue);
     });
 
-    test("cubic isSimple, non-simple non-linear degenerate curve with one control point overlapping adjacent end point", () {
+    test(
+        "cubic isSimple, non-simple non-linear degenerate curve with one control point overlapping adjacent end point",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
@@ -661,7 +687,9 @@ void main() {
       expect(curve.isSimple, isFalse);
     });
 
-    test("cubic isSimple, degenerate curve with both control points overlapping adjacent end point", () {
+    test(
+        "cubic isSimple, degenerate curve with both control points overlapping adjacent end point",
+        () {
       final curve = new CubicBezier([
         new Vector2(0.0, 0.0),
         new Vector2(0.0, 0.0),
@@ -670,6 +698,5 @@ void main() {
       ]);
       expect(curve.isSimple, isTrue);
     });
-
   });
 }

@@ -2,7 +2,7 @@
 
 The library was developed, documented, and published by [Aaron Barrett](http://www.aaronbarrett.com) and Isaac Barrett.  It is based heavily on the work of [Pomax](https://pomax.github.io/), including his excellent [Primer on Bézier Curves](https://pomax.github.io/bezierinfo/) and his original JavaScript library, [Bezier.js](https://pomax.github.io/bezierjs/).
 
-We're trying to design **bezier.js** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
+We're trying to design **bezier.dart** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
 
 ## Features
 
@@ -10,11 +10,12 @@ We're trying to design **bezier.js** to be both platform independent and context
 - Calculate the coordinates of a point at any parameter value `t` along a curve
 - Derivative and normal values at any `t` parameter value
 - Accurate length approximations (using the Legendre-Gauss quadrature algorithm)
-- Split a curve into equivalent subcurves at any `t` parameter value
-- Find the extrema of a curve on both the *x* and *y* axes
+- Split a curve into equivalent subcurves between any `t` parameter values
+- Find the extrema of a curve on both the x and y axes
 - Calculate the bounding box for a curve
 - Given any curve, derive a new curve, offset from the original curve along the normals at a given distance
 - Calculate the positions of a curve's intersections with itself, with another curve, or with a line segment
+- Find points evenly spaced along the arc length of a curve
 - Heavily documented and tested
 - Straightforward, readable code
 
@@ -39,6 +40,7 @@ import "package:bezier/bezier.dart";
 * Instantiate a Bézier curve.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
@@ -62,6 +64,7 @@ void main() {
 * Compute a point along a curve at `t` of `0.75`.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
@@ -78,6 +81,7 @@ void main() {
 * Split a curve between the `t` parameter values of `0.2` and `0.6`.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
@@ -95,6 +99,7 @@ void main() {
 * Find the intersection `t` values between a curve and a line segment.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
@@ -114,6 +119,7 @@ void main() {
 * Derive an offset curve (composed of a series of subcurves) at distance `12.0`.
 
 ```dart
+import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {

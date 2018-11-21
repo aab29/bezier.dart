@@ -4,11 +4,13 @@ import "package:bezier/bezier.dart";
 
 /// Concrete class of cubic Bézier curves.
 class CubicBezier extends Bezier {
-
-  /// Constructs a cubic Bézier curve from a [List] of [Vector2].
+  /// Constructs a cubic Bézier curve from a [List] of [Vector2].  The first point
+  /// in [points] will be the curve's start point, the second and third points will
+  /// be its control points, and the fourth point will be its end point.
   CubicBezier(List<Vector2> points) : super(points) {
     if (points.length != 4) {
-      throw(new ArgumentError("Cubic Bézier curves require exactly four points"));
+      throw (new ArgumentError(
+          "Cubic Bézier curves require exactly four points"));
     }
   }
 
@@ -36,8 +38,10 @@ class CubicBezier extends Bezier {
   }
 
   @override
-  Vector2 derivativeAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
-    final derivativePoints = cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
+  Vector2 derivativeAt(double t,
+      {List<Vector2> cachedFirstOrderDerivativePoints}) {
+    final derivativePoints =
+        cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
     final mt = 1.0 - t;
     final a = mt * mt;
     final b = 2.0 * mt * t;
@@ -51,6 +55,6 @@ class CubicBezier extends Bezier {
   }
 
   @override
-  String toString() => "BDCubicBezier([${points[0]}, ${points[1]}, ${points[2]}, ${points[3]}])";
-
+  String toString() =>
+      "BDCubicBezier([${points[0]}, ${points[1]}, ${points[2]}, ${points[3]}])";
 }

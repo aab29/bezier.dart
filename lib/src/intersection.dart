@@ -2,7 +2,6 @@ import "dart:math";
 
 /// Describes intersections between two Bézier curves.
 class Intersection {
-
   /// Parameter value on the first curve of the intersection.
   final double t1;
 

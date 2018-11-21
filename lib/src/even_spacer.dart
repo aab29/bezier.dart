@@ -33,7 +33,8 @@ class EvenSpacer {
   /// Returns an instance of [EvenSpacer] using a position look up table
   /// generated from [curve].
   factory EvenSpacer.fromBezier(Bezier curve, {int intervalsCount = 50}) {
-    final lookUpTable = curve.positionLookUpTable(intervalsCount: intervalsCount);
+    final lookUpTable =
+        curve.positionLookUpTable(intervalsCount: intervalsCount);
     return new EvenSpacer(lookUpTable);
   }
 
@@ -72,14 +73,16 @@ class EvenSpacer {
     final lowerBoundArcFraction = lowerBoundArcLength / arcLength;
     final upperBoundArcFraction = upperBoundArcLength / arcLength;
 
-    final arcFractionParameter = inverseMix(lowerBoundArcFraction, upperBoundArcFraction, t);
+    final arcFractionParameter =
+        inverseMix(lowerBoundArcFraction, upperBoundArcFraction, t);
 
     final parametersCount = curveLookUpTable.length - 1;
 
     final parameterAtLowerBound = (upperBoundIndex - 1) / parametersCount;
     final parameterAtUpperBound = upperBoundIndex / parametersCount;
 
-    return mix(parameterAtLowerBound, parameterAtUpperBound, arcFractionParameter);
+    return mix(
+        parameterAtLowerBound, parameterAtUpperBound, arcFractionParameter);
   }
 
   /// Returns a [List] of parameter values along the curve that are approximately evenly
@@ -90,7 +93,9 @@ class EvenSpacer {
   List<double> evenTValues({int parametersCount = 50}) {
     final evenlySpacedParameters = <double>[];
 
-    for (var parameterIndex = 0; parameterIndex <= parametersCount; parameterIndex++) {
+    for (var parameterIndex = 0;
+        parameterIndex <= parametersCount;
+        parameterIndex++) {
       final arcLengthPortion = parameterIndex / parametersCount;
       final parameterValue = evenTValueAt(arcLengthPortion);
       evenlySpacedParameters.add(parameterValue);
