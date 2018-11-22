@@ -4,6 +4,8 @@ The library was developed, documented, and published by [Aaron Barrett](http://w
 
 We're trying to design **bezier.dart** to be both platform independent and context independent.  You can run the library anywhere you can run Dart: in a web browser, in a [Flutter](https://flutter.io/) application, server side, and beyond.
 
+For live examples of the library's API, see the project page at [dartographer.com/bezier](https://www.dartographer.com/bezier).
+
 ## Features
 
 - Supports both quadratic and cubic two dimensional Bézier curves
