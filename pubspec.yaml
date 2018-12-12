@@ -1,12 +1,14 @@
 name: bezier
-version: 1.0.0
+version: 1.0.1
 authors:
   - Aaron Barrett <aaron@aaronbarrett.com>
   - Isaac Barrett <ikebart9999@gmail.com>
 description: >-
   A 2D Bézier curve math library. Based heavily on the work of @TheRealPomax
-  and his original JavaScript library, Bezier.js <https://pomax.github.io/bezierjs/>.
-homepage: https://www.dartographer.com/bezier
+  and his original JavaScript library, [Bezier.js](https://pomax.github.io/bezierjs/).
+
+  Live examples can be found at [https://www.dartographer.com/bezier].
+homepage: https://github.com/aab29/bezier.dart
 environment:
   sdk: ">=2.0.0 <3.0.0"
 dependencies:
