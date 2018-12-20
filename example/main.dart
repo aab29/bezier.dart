@@ -65,10 +65,10 @@ void clearCanvas() {
 
 void drawCircle(Vector2 center, {double radius = 3.0}) {
   context
-      ..beginPath()
-      ..arc(center.x, center.y, radius, 0.0, 2.0 * pi)
-      ..stroke()
-      ..closePath();
+    ..beginPath()
+    ..arc(center.x, center.y, radius, 0.0, 2.0 * pi)
+    ..stroke()
+    ..closePath();
 }
 
 void drawCurve(CubicBezier curve) {
@@ -135,9 +135,9 @@ void drawOutlines(CubicBezier curve) {
 }
 
 Vector2 lineSegmentPointAtTime(double radius, double time) => new Vector2(
-  canvas.width * (0.5 + radius * cos(time * 0.00042)),
-  canvas.height * (0.5 + radius * sin(time * 0.00042)),
-  );
+      canvas.width * (0.5 + radius * cos(time * 0.00042)),
+      canvas.height * (0.5 + radius * sin(time * 0.00042)),
+    );
 
 void drawLineSegmentIntersections(CubicBezier curve, double time) {
   final startPoint = lineSegmentPointAtTime(-0.25, time);
@@ -150,7 +150,8 @@ void drawLineSegmentIntersections(CubicBezier curve, double time) {
     ..lineTo(endPoint.x, endPoint.y)
     ..stroke();
 
-  final intersectionTValues = curve.intersectionsWithLineSegment(startPoint, endPoint);
+  final intersectionTValues =
+      curve.intersectionsWithLineSegment(startPoint, endPoint);
 
   context.setStrokeColorRgb(255, 0, 0);
   intersectionTValues.forEach((t) {
@@ -162,7 +163,7 @@ void drawLineSegmentIntersections(CubicBezier curve, double time) {
 void drawExtrema(CubicBezier curve) {
   final xExtremaTValues = curve.extremaOnX;
   final yExtremaTValues = curve.extremaOnY;
-  
+
   context.setStrokeColorRgb(255, 0, 0);
   xExtremaTValues.forEach((t) => drawCircle(curve.pointAt(t)));
 
