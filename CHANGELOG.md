@@ -1,5 +1,10 @@
 # Changelog - bezier
 
+## v 1.0.2 - December 20 2018
+
+- Added example directory with a simple HTML demo app
+- Adjusted the description in pubspec again to meet character count limits
+
 ## v 1.0.1 - December 12 2018
 
 - Adjusted minor details in pubspec
