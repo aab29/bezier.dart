@@ -725,4 +725,66 @@ abstract class Bezier {
 
     return lookUpTable;
   }
+
+  /// Returns a [ProjectionResult] object with the closest point to the closest off curve point 
+  /// provided as the [point] parameter.
+  ///
+  /// Finds the on-curve point closest to the specific off-curve point, using a two-pass projection 
+  /// test based on the curve's LUT. A distance comparison finds the closest match, after which a 
+  /// fine interval around that match is checked to see if a better projection can be found.
+  ProjectionResult project(Vector2 point) {
+    // coarse check
+    final List<Vector2> lookUpTable = positionLookUpTable(intervalsCount: 100);
+
+    // Find closest in LUT
+    double mdist = double.maxFinite;
+    int mpos = 0;
+    int length = lookUpTable.length;
+    for (int i = 0; i < length; i++) {
+      final Vector2 p = lookUpTable[i];
+      double d2 = p.distanceToSquared(point);
+      if (d2 < mdist) {
+        mdist = d2;
+        mpos = i;
+      }
+    }
+
+    if (mpos == 0 || mpos == length - 1) {
+      // At start/end
+      double t = mpos / (length - 1);
+
+      return ProjectionResult()
+        ..point = pointAt(t)
+        ..t = t
+        ..distance = sqrt(mdist);
+    }
+
+    // Fine check
+    Vector2 p;
+    int l = length - 1;
+    double d, t1 = (mpos - 1) / l, t2 = (mpos + 1) / l, step = 0.1 / l;
+    mdist += 1;
+    double t = t1;
+    double ft = t;
+    while (t < t2 + step) {
+      p = pointAt(t);
+      d = point.distanceToSquared(p);
+      if (d < mdist) {
+        mdist = d;
+        ft = t;
+      }
+      t += step;
+    }
+    return ProjectionResult()
+      ..point = pointAt(ft)
+      ..t = ft
+      ..distance = sqrt(mdist);
+  }
+}
+
+/// Result class for projection operation on beziers.
+class ProjectionResult {
+  Vector2 point;
+  double distance;
+  double t;
 }
