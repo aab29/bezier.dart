@@ -13,6 +13,22 @@ void main() {
       expect(indexOfNearestPoint(points, new Vector2(80.0, -40.0)), equals(0));
     });
 
+    test("two points", () {
+      final points = [
+        new Vector2(-1.0, -1.0),
+        new Vector2(1.0, 1.0)
+      ];
+
+      expect(indexOfNearestPoint(points, new Vector2(-1.0, -1.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(1.0, 1.0)), equals(1));
+      expect(indexOfNearestPoint(points, new Vector2(0.01, 0.01)), equals(1));
+      expect(indexOfNearestPoint(points, new Vector2(-0.01, -0.01)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(500.0, 500.0)), equals(1));
+      expect(indexOfNearestPoint(points, new Vector2(-10.0, -10.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(-10.0, 2.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(7.0, -200.0)), equals(0));
+    });
+
     test("distribution a", () {
       final points = [
         new Vector2(500.0, 10.0),
