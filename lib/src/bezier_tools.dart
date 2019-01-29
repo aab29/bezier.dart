@@ -377,3 +377,20 @@ List<Intersection> locateIntersectionsRecursively(
 
   return results;
 }
+
+int indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+  var minSquaredDistance = double.maxFinite;
+  var index;
+
+  final pointsCount = points.length;
+  for (var pointIndex = 0; pointIndex < pointsCount; pointIndex++) {
+    final point = points[pointIndex];
+    final squaredDistance = targetPoint.distanceToSquared(point);
+    if (squaredDistance < minSquaredDistance) {
+      minSquaredDistance = squaredDistance;
+      index = pointIndex;
+    }
+  }
+
+  return index;
+}
