@@ -59,5 +59,27 @@ void main() {
       expect(indexOfNearestPoint(points, new Vector2(200.0, 0.0)), equals(3));
       expect(indexOfNearestPoint(points, new Vector2(-100.0, 0.0)), equals(1));
     });
+
+    test("from a look-up table", () {
+      final curve = new CubicBezier([
+        new Vector2(-100.0, 25.0),
+        new Vector2(-65.0, -110.0),
+        new Vector2(0.0, 20.0),
+        new Vector2(95.0, -100.0)
+      ]);
+
+      final points = curve.positionLookUpTable(intervalsCount: 200);
+
+      expect(indexOfNearestPoint(points, new Vector2(0.0, 0.0)), equals(122));
+      expect(indexOfNearestPoint(points, new Vector2(800.0, 800.0)), equals(180));
+      expect(indexOfNearestPoint(points, new Vector2(-1000.0, 1000.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(0.0, 100.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(-100.0, 0.0)), equals(13));
+      expect(indexOfNearestPoint(points, new Vector2(100.0, 0.0)), equals(172));
+      expect(indexOfNearestPoint(points, new Vector2(-40.0, -10.0)), equals(81));
+      expect(indexOfNearestPoint(points, new Vector2(-100.0, 25.0)), equals(0));
+      expect(indexOfNearestPoint(points, new Vector2(95.0, -100.0)), equals(200));
+      expect(indexOfNearestPoint(points, new Vector2(95.0, -190.0)), equals(200));
+    });
   });
 }
