@@ -97,12 +97,63 @@ void main() {
       expect(curve.nearestTValue(new Vector2(91.0, 5.0)), equals(0.0));
       expect(curve.nearestTValue(new Vector2(-48.0, 48.0)), equals(1.0));
       expect(curve.nearestTValue(new Vector2(0.0, 0.0)), closeToDouble(0.586));
+      expect(curve.nearestTValue(new Vector2(35.0, -20.0)), closeToDouble(0.306));
+      expect(curve.nearestTValue(new Vector2(-45.0, 10.0)), closeToDouble(0.84));
       expect(curve.nearestTValue(curve.pointAt(0.034)), closeToDouble(0.034));
       expect(curve.nearestTValue(curve.pointAt(0.5)), closeToDouble(0.5));
       expect(curve.nearestTValue(curve.pointAt(0.666)), closeToDouble(0.666));
       expect(curve.nearestTValue(curve.pointAt(0.75)), closeToDouble(0.75));
       expect(curve.nearestTValue(curve.pointAt(0.77)), closeToDouble(0.77));
       expect(curve.nearestTValue(curve.pointAt(0.99)), closeToDouble(0.99));
+
+      final lookUpTable = curve.positionLookUpTable(intervalsCount: 300);
+
+      expect(curve.nearestTValue(new Vector2(91.0, 5.0), cachedPositionLookUpTable: lookUpTable), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(-48.0, 48.0), cachedPositionLookUpTable: lookUpTable), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0), cachedPositionLookUpTable: lookUpTable), closeToDouble(0.58666666666));
+      expect(curve.nearestTValue(new Vector2(24.0, 42.0), cachedPositionLookUpTable: lookUpTable), closeToDouble(0.57233333333));
+
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0), cachedPositionLookUpTable: lookUpTable, stepSize: 0.4), closeToDouble(0.58733333333));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0), cachedPositionLookUpTable: lookUpTable, stepSize: 0.01), closeToDouble(0.5866999999999));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0), stepSize: 0.01), closeToDouble(0.586599999999));
+    });
+
+    test("cubic", () {
+      final curve = new CubicBezier([
+        new Vector2(-100.0, -100.0),
+        new Vector2(-80.0, 50.0),
+        new Vector2(70.0, -50.0),
+        new Vector2(100.0, 100.0)
+      ]);
+
+      expect(curve.nearestTValue(new Vector2(-100.0, -100.0)), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(100.0, 100.0)), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(-80.0, 50.0)), closeToDouble(0.328));
+      expect(curve.nearestTValue(new Vector2(70.0, -50.0)), closeToDouble(0.666));
+      expect(curve.nearestTValue(new Vector2(-110.0, -110.0)), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(150.0, 190.0)), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0)), closeToDouble(0.514));
+      expect(curve.nearestTValue(new Vector2(17.0, -80.0)), closeToDouble(0.492));
+      expect(curve.nearestTValue(new Vector2(-55.0, -55.0)), closeToDouble(0.192));
+      expect(curve.nearestTValue(new Vector2(25.0, -90.0)), closeToDouble(0.51));
+      expect(curve.nearestTValue(curve.pointAt(0.01)), closeToDouble(0.01));
+      expect(curve.nearestTValue(curve.pointAt(0.11)), closeToDouble(0.11));
+      expect(curve.nearestTValue(curve.pointAt(0.34)), closeToDouble(0.34));
+      expect(curve.nearestTValue(curve.pointAt(0.5)), closeToDouble(0.5));
+      expect(curve.nearestTValue(curve.pointAt(0.55)), closeToDouble(0.55));
+      expect(curve.nearestTValue(curve.pointAt(0.83)), closeToDouble(0.83));
+      expect(curve.nearestTValue(curve.pointAt(0.99)), closeToDouble(0.99));
+
+      final lookUpTable = curve.positionLookUpTable(intervalsCount: 10);
+
+      expect(curve.nearestTValue(new Vector2(-110.0, -110.0), cachedPositionLookUpTable: lookUpTable), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(150.0, 190.0), cachedPositionLookUpTable: lookUpTable), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0), cachedPositionLookUpTable: lookUpTable), closeToDouble(0.51));
+      expect(curve.nearestTValue(new Vector2(40.0, -40.0), cachedPositionLookUpTable: lookUpTable), closeToDouble(0.6));
+
+      expect(curve.nearestTValue(new Vector2(40.0, -40.0), cachedPositionLookUpTable: lookUpTable, stepSize: 0.4), closeToDouble(0.62));
+      expect(curve.nearestTValue(new Vector2(40.0, -40.0), cachedPositionLookUpTable: lookUpTable, stepSize: 0.01), closeToDouble(0.602));
+      expect(curve.nearestTValue(new Vector2(40.0, -40.0), stepSize: 0.01), closeToDouble(0.6024));
     });
   });
 }
