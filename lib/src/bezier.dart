@@ -741,13 +741,14 @@ abstract class Bezier {
   /// [stepSize] value of 0.1 means that the function will do around twenty
   /// iterations.  Reducing the value of [stepSize] will increase the number of
   /// iterations.
-  double nearestTValue(Vector2 point, {List<Vector2> cachedPositionLookUpTable, double stepSize = 0.1}) {
+  double nearestTValue(Vector2 point,
+      {List<Vector2> cachedPositionLookUpTable, double stepSize = 0.1}) {
     final lookUpTable = cachedPositionLookUpTable ?? positionLookUpTable();
 
     final index = indexOfNearestPoint(lookUpTable, point);
 
     final maxIndex = lookUpTable.length - 1;
-    
+
     if (index == 0) {
       return 0.0;
     } else if (index == maxIndex) {
