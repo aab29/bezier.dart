@@ -2,7 +2,7 @@
 
 ## v 1.1.0 - January 30 2019
 
-- Added `nearestTValue` method to `Bezier` class
+- Added `nearestTValue` method to `Bezier` class, based on work by @luigi-rosso -- Thanks!
 - Added `indexOfNearestPoint` method (to support `nearestTValue`) in `bezier_tools`
 - Added unit tests for both new methods in `bezier_nearest_methods_test`
 
