@@ -82,4 +82,27 @@ void main() {
       expect(indexOfNearestPoint(points, new Vector2(95.0, -190.0)), equals(200));
     });
   });
+
+  group("nearestTValue", () {
+    test("quadratic", () {
+      final curve = new QuadraticBezier([
+        new Vector2(90.0, 0.0),
+        new Vector2(-10.0, -50.0),
+        new Vector2(-45.0, 45.0)
+      ]);
+      
+      expect(curve.nearestTValue(new Vector2(90.0, 0.0)), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(-45.0, 45.0)), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(-10.0, -50.0)), closeToDouble(0.518));
+      expect(curve.nearestTValue(new Vector2(91.0, 5.0)), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(-48.0, 48.0)), equals(1.0));
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0)), closeToDouble(0.586));
+      expect(curve.nearestTValue(curve.pointAt(0.034)), closeToDouble(0.034));
+      expect(curve.nearestTValue(curve.pointAt(0.5)), closeToDouble(0.5));
+      expect(curve.nearestTValue(curve.pointAt(0.666)), closeToDouble(0.666));
+      expect(curve.nearestTValue(curve.pointAt(0.75)), closeToDouble(0.75));
+      expect(curve.nearestTValue(curve.pointAt(0.77)), closeToDouble(0.77));
+      expect(curve.nearestTValue(curve.pointAt(0.99)), closeToDouble(0.99));
+    });
+  });
 }

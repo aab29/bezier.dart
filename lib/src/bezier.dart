@@ -725,6 +725,45 @@ abstract class Bezier {
 
     return lookUpTable;
   }
+  
+  double nearestTValue(Vector2 point, {List<Vector2> cachedPositionLookUpTable, double stepSize = 0.1}) {
+    final lookUpTable = cachedPositionLookUpTable ?? positionLookUpTable();
+
+    final index = indexOfNearestPoint(lookUpTable, point);
+
+    final maxIndex = lookUpTable.length - 1;
+    
+    if (index == 0) {
+      return 0.0;
+    } else if (index == maxIndex) {
+      return 1.0;
+    }
+
+    final divisor = maxIndex.toDouble();
+    final t1 = (index - 1) / divisor;
+    final t2 = (index + 1) / divisor;
+
+    final tIncrement = stepSize / divisor;
+    final maxT = t2 + tIncrement;
+
+    var t = t1;
+    var minSquaredDistance = double.maxFinite;
+    var nearestT = t1;
+
+    while (t < maxT) {
+      final pointOnCurve = pointAt(t);
+      final squaredDistance = point.distanceToSquared(pointOnCurve);
+
+      if (squaredDistance < minSquaredDistance) {
+        minSquaredDistance = squaredDistance;
+        nearestT = t;
+      }
+
+      t += tIncrement;
+    }
+
+    return nearestT;
+  }
 
   /// Returns a [ProjectionResult] object with the closest point to the closest off curve point 
   /// provided as the [point] parameter.
