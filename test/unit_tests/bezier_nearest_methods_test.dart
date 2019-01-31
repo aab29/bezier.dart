@@ -25,6 +25,12 @@ void main() {
       expect(indexOfNearestPoint(points, new Vector2(7.0, -200.0)), equals(0));
     });
 
+    test("equidistant solutions prefers earlier element", () {
+      final points = [new Vector2(-100.0, 0.0), new Vector2(100.0, 0.0)];
+
+      expect(indexOfNearestPoint(points, new Vector2(0.0, 0.0)), equals(0));
+    });
+
     test("distribution a", () {
       final points = [
         new Vector2(500.0, 10.0),
@@ -145,6 +151,17 @@ void main() {
           closeToDouble(0.5866999999999));
       expect(curve.nearestTValue(new Vector2(0.0, 0.0), stepSize: 0.01),
           closeToDouble(0.586599999999));
+    });
+
+    test("quadratic, equidistant solutions prefers earlier t value", () {
+      final curve = new QuadraticBezier([
+        new Vector2(-1.0, 0.0),
+        new Vector2(0.0, 100.0),
+        new Vector2(1.0, 0.0),
+      ]);
+
+      expect(curve.nearestTValue(new Vector2(0.0, 0.0)), equals(0.0));
+      expect(curve.nearestTValue(new Vector2(0.0, 20.0)), closeToDouble(0.112));
     });
 
     test("cubic", () {
