@@ -755,11 +755,11 @@ abstract class Bezier {
       return 1.0;
     }
 
-    final divisor = maxIndex.toDouble();
-    final t1 = (index - 1) / divisor;
-    final t2 = (index + 1) / divisor;
+    final intervalsCount = maxIndex.toDouble();
+    final t1 = (index - 1) / intervalsCount;
+    final t2 = (index + 1) / intervalsCount;
 
-    final tIncrement = stepSize / divisor;
+    final tIncrement = stepSize / intervalsCount;
     final maxT = t2 + tIncrement;
 
     var t = t1;
