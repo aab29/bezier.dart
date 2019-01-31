@@ -725,4 +725,59 @@ abstract class Bezier {
 
     return lookUpTable;
   }
+
+  /// Returns the parameter value along the curve that is closest (in terms of
+  /// geometric distance) to the given [point].  The approximation uses a
+  /// two-pass projection test that relies on the curve's position look up
+  /// table.  First, the method determines the point in the look up table that
+  /// is closest to [point].  Afterward, it checks the fine interval around that
+  /// point to see if a better projection can be found.
+  ///
+  /// The optional parameter [cachedPositionLookUpTable] allows the method to
+  /// use previously calculated values for [positionLookUpTable] instead
+  /// of repeating the calculations.  The optional [stepSize] parameter
+  /// determines how much to increment the parameter value at each iteration
+  /// when searching the fine interval for the best projection.  The default
+  /// [stepSize] value of 0.1 means that the function will do around twenty
+  /// iterations.  Reducing the value of [stepSize] will increase the number of
+  /// iterations.
+  double nearestTValue(Vector2 point,
+      {List<Vector2> cachedPositionLookUpTable, double stepSize = 0.1}) {
+    final lookUpTable = cachedPositionLookUpTable ?? positionLookUpTable();
+
+    final index = indexOfNearestPoint(lookUpTable, point);
+
+    final maxIndex = lookUpTable.length - 1;
+
+    if (index == 0) {
+      return 0.0;
+    } else if (index == maxIndex) {
+      return 1.0;
+    }
+
+    final intervalsCount = maxIndex.toDouble();
+    final t1 = (index - 1) / intervalsCount;
+    final t2 = (index + 1) / intervalsCount;
+
+    final tIncrement = stepSize / intervalsCount;
+    final maxT = t2 + tIncrement;
+
+    var t = t1;
+    var minSquaredDistance = double.maxFinite;
+    var nearestT = t1;
+
+    while (t < maxT) {
+      final pointOnCurve = pointAt(t);
+      final squaredDistance = point.distanceToSquared(pointOnCurve);
+
+      if (squaredDistance < minSquaredDistance) {
+        minSquaredDistance = squaredDistance;
+        nearestT = t;
+      }
+
+      t += tIncrement;
+    }
+
+    return nearestT;
+  }
 }

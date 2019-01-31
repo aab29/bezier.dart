@@ -1,5 +1,15 @@
 # Changelog - bezier
 
+## v 1.1.0 - January 30 2019
+
+- Added `nearestTValue` method to `Bezier` class, based on work by @luigi-rosso -- Thanks!
+- Added `indexOfNearestPoint` method (to support `nearestTValue`) in `bezier_tools`
+- Added unit tests for both new methods in `bezier_nearest_methods_test`
+
+## v 1.0.3 - December 20 2018
+
+- Corrected the version number in the pubspec, since I forgot to commit it in 1.0.2
+
 ## v 1.0.2 - December 20 2018
 
 - Added example directory with a simple HTML demo app
