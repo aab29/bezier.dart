@@ -364,7 +364,7 @@ List<Intersection> locateIntersectionsRecursively(
       indicesOfOverlappingSegmentPairs(pairLeftSides, pairRightSides);
 
   final results = <Intersection>[];
-  if (overlappingPairIndices.length == 0) {
+  if (overlappingPairIndices.isEmpty) {
     return results;
   }
 

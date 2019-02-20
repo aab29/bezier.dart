@@ -593,13 +593,13 @@ abstract class Bezier {
     var firstIntersection = intersectionsToFilter[0];
     var sublist = intersectionsToFilter.sublist(1);
     final filteredList = <Intersection>[firstIntersection];
-    while (sublist.length > 0) {
+    while (sublist.isNotEmpty) {
       sublist.removeWhere((intersection) {
         return intersection.isWithinTValueOf(
             firstIntersection, minTValueDifference);
       });
 
-      if (sublist.length > 0) {
+      if (sublist.isNotEmpty) {
         firstIntersection = sublist[0];
         sublist = sublist.sublist(1);
         filteredList.add(firstIntersection);

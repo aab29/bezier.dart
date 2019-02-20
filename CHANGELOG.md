@@ -1,5 +1,10 @@
 # Changelog - bezier
 
+## v 1.1.1 - February 20 2019
+
+- Changed usages of `length == 0` and `length > 0` to `isEmpty` and `isNotEmpty`,
+  respectively, in accordance with hints provided by Pub
+
 ## v 1.1.0 - January 30 2019
 
 - Added `nearestTValue` method to `Bezier` class, based on work by @luigi-rosso -- Thanks!
