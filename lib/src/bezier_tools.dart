@@ -80,6 +80,24 @@ const legendrePolynomialWeights = [
 bool isApproximately(double a, double b, {double precision = 0.000001}) =>
     ((a - b).abs() <= precision);
 
+/// True if [point] intersects [boundingBox], or is within [precision] of the border.
+bool pointIntersectsBoundingBoxApproximately(Vector2 point, Aabb2 boundingBox,
+    {double precision = 0.0001}) {
+  final x = point.x;
+  final y = point.y;
+  final min = boundingBox.min;
+  final max = boundingBox.max;
+
+  final xIsInBoundingBox = ((min.x <= x) && (x <= max.x)) ||
+      isApproximately(x, min.x, precision: precision) ||
+      isApproximately(x, max.x, precision: precision);
+  final yIsInBoundingBox = ((min.y <= y) && (y <= max.y)) ||
+      isApproximately(y, min.y, precision: precision) ||
+      isApproximately(y, max.y, precision: precision);
+
+  return xIsInBoundingBox && yIsInBoundingBox;
+}
+
 /// Returns the cube root of [realNumber] from within the real numbers such that
 /// the result raised to the third power equals [realNumber].
 double principalCubeRoot(double realNumber) {
