@@ -613,5 +613,88 @@ void main() {
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
     });
+
+    test(
+        "cubic intersectionsWithLineSegment, y axis through typical curve, one intersection",
+        () {
+      final curve = new CubicBezier([
+        Vector2(-214.5, 80.0),
+        Vector2(-52.0, 80.0),
+        Vector2(52.0, 530.0),
+        Vector2(214.5, 530.0)
+      ]);
+      final p1 = new Vector2(0.0, 0.0);
+      final p2 = new Vector2(0.0, 1080.0);
+
+      final result = curve.intersectionsWithLineSegment(p1, p2);
+      expect(result, hasLength(1));
+    });
+
+    test(
+        "cubic intersectionsWithLineSegment, y axis through typical curve, translated to the right, one intersection",
+        () {
+      final offset = 429.0;
+      final curve = new CubicBezier([
+        Vector2(-214.5 + offset, 80.0),
+        Vector2(-52.0 + offset, 80.0),
+        Vector2(52.0 + offset, 530.0),
+        Vector2(214.5 + offset, 530.0)
+      ]);
+      final p1 = new Vector2(0.0 + offset, 0.0);
+      final p2 = new Vector2(0.0 + offset, 1080.0);
+
+      final result = curve.intersectionsWithLineSegment(p1, p2);
+      expect(result, hasLength(1));
+    });
+
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line through typical curve",
+        () {
+      final curve = new CubicBezier([
+        Vector2(214.5, 630.0),
+        Vector2(308.25, 630.0),
+        Vector2(368.625, 492.5),
+        Vector2(429.0, 355.0)
+      ]);
+      final p1 = new Vector2(0.0, 580.0);
+      final p2 = new Vector2(430.0, 580.0);
+
+      final result = curve.intersectionsWithLineSegment(p1, p2);
+      expect(result, hasLength(1));
+    });
+
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line through typical curve, translated up",
+        () {
+      final offset = 6.0;
+      final curve = new CubicBezier([
+        Vector2(214.5, 630.0 + offset),
+        Vector2(308.25, 630.0 + offset),
+        Vector2(368.625, 492.5 + offset),
+        Vector2(429.0, 355.0 + offset)
+      ]);
+      final p1 = new Vector2(0.0, 580.0 + offset);
+      final p2 = new Vector2(430.0, 580.0 + offset);
+
+      final result = curve.intersectionsWithLineSegment(p1, p2);
+      expect(result, hasLength(1));
+    });
+
+    test(
+        "cubic intersectionsWithLineSegment, horizontal line through typical curve, translated down",
+        () {
+      final offset = -6.0;
+      final curve = new CubicBezier([
+        Vector2(214.5, 630.0 + offset),
+        Vector2(308.25, 630.0 + offset),
+        Vector2(368.625, 492.5 + offset),
+        Vector2(429.0, 355.0 + offset)
+      ]);
+      final p1 = new Vector2(0.0, 580.0 + offset);
+      final p2 = new Vector2(430.0, 580.0 + offset);
+
+      final result = curve.intersectionsWithLineSegment(p1, p2);
+      expect(result, hasLength(1));
+    });
   });
 }
