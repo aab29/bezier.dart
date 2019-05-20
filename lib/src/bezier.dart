@@ -699,7 +699,7 @@ abstract class Bezier {
     final roots = rootsAlongLine(points, lineStartPoint, lineEndPoint);
     roots.retainWhere((t) {
       final p = pointAt(t);
-      return boundingBox.intersectsWithVector2(p);
+      return pointIntersectsBoundingBoxApproximately(p, boundingBox);
     });
     final rootsSet = new Set<double>.from(roots);
     final uniqueRoots = rootsSet.toList();

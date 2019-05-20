@@ -1,5 +1,11 @@
 # Changelog - bezier
 
+## v 1.1.2 - May 19 2019
+
+- Fixed certain cases, reported by @fidlip (Thank you!), where `intersectionsWithLineSegment` failed to find intersections
+- Added `pointIntersectsBoundingBoxApproximately` in `bezier_tools` to support `intersectionsWithLineSegment`
+- Added more unit tests for `intersectionsWithLineSegment`, based on cases reported by @fidlip
+
 ## v 1.1.1 - February 20 2019
 
 - Changed usages of `length == 0` and `length > 0` to `isEmpty` and `isNotEmpty`,
