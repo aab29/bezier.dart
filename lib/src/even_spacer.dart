@@ -18,7 +18,7 @@ class EvenSpacer {
   /// calculated at evenly spaced parameter values within a [Bezier].
   EvenSpacer(this.curveLookUpTable) {
     if (curveLookUpTable.length < 2) {
-      throw (new ArgumentError("look up table requires at least two entries"));
+      throw ArgumentError("look up table requires at least two entries");
     }
 
     for (var index = 1; index < curveLookUpTable.length; index++) {
@@ -35,7 +35,7 @@ class EvenSpacer {
   factory EvenSpacer.fromBezier(Bezier curve, {int intervalsCount = 50}) {
     final lookUpTable =
         curve.positionLookUpTable(intervalsCount: intervalsCount);
-    return new EvenSpacer(lookUpTable);
+    return EvenSpacer(lookUpTable);
   }
 
   /// The approximate arc length of the curve.

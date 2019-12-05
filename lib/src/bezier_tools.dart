@@ -112,11 +112,11 @@ double principalCubeRoot(double realNumber) {
 /// polynomial function described by [points].
 List<Vector2> computeDerivativePoints(List<Vector2> points) {
   final derivativePointsCount = points.length - 1;
-  final derivativePoints = new List<Vector2>(derivativePointsCount);
+  final derivativePoints = List<Vector2>(derivativePointsCount);
   final multiplier = derivativePointsCount.toDouble();
 
   for (var index = 0; index < derivativePointsCount; index++) {
-    final point = new Vector2.copy(points[index + 1]);
+    final point = Vector2.copy(points[index + 1]);
     point.sub(points[index]);
     point.scale(multiplier);
     derivativePoints[index] = point;
@@ -129,10 +129,10 @@ List<Vector2> computeDerivativePoints(List<Vector2> points) {
 /// to [firstEndpoint] and [cornerPoint] to [secondEndpoint].
 double cornerAngle(
     Vector2 cornerPoint, Vector2 firstEndpoint, Vector2 secondEndpoint) {
-  final deltaVector1 = new Vector2.copy(firstEndpoint);
+  final deltaVector1 = Vector2.copy(firstEndpoint);
   deltaVector1.sub(cornerPoint);
 
-  final deltaVector2 = new Vector2.copy(secondEndpoint);
+  final deltaVector2 = Vector2.copy(secondEndpoint);
   deltaVector2.sub(cornerPoint);
 
   return deltaVector1.angleToSigned(deltaVector2);
@@ -143,17 +143,17 @@ double cornerAngle(
 /// the positive X axis.
 List<Vector2> alignWithLineSegment(
     List<Vector2> points, Vector2 lineStartPoint, Vector2 lineEndPoint) {
-  final lineDeltaVector = new Vector2.copy(lineEndPoint);
+  final lineDeltaVector = Vector2.copy(lineEndPoint);
   lineDeltaVector.sub(lineStartPoint);
 
-  final xAxis = new Vector2(1.0, 0.0);
+  final xAxis = Vector2(1.0, 0.0);
 
   final lineAngle = -xAxis.angleToSigned(lineDeltaVector);
-  final rotationMatrix = new Matrix2.rotation(lineAngle);
+  final rotationMatrix = Matrix2.rotation(lineAngle);
 
   final alignedPoints = <Vector2>[];
   for (final point in points) {
-    final alignedPoint = new Vector2.copy(point);
+    final alignedPoint = Vector2.copy(point);
     alignedPoint.sub(lineStartPoint);
     rotationMatrix.transform(alignedPoint);
     alignedPoints.add(alignedPoint);
@@ -274,8 +274,8 @@ List<double> polynomialRoots(List<double> polynomial) {
   } else if (polynomial.length < 2) {
     return <double>[];
   } else {
-    throw (new UnsupportedError(
-        "Fourth and higher order polynomials not supported."));
+    throw UnsupportedError(
+        "Fourth and higher order polynomials not supported.");
   }
 }
 
@@ -313,7 +313,7 @@ Vector2 intersectionPointBetweenTwoLines(
   if (denominator == 0.0) {
     return null;
   }
-  return new Vector2(xNumerator / denominator, yNumerator / denominator);
+  return Vector2(xNumerator / denominator, yNumerator / denominator);
 }
 
 /// Returns true if the dimensions of [box] when added together are smaller than
@@ -352,7 +352,7 @@ List<Intersection> locateIntersectionsRecursively(
       boundingBoxIsSmallerThanSize(curve2Box, curveIntersectionThreshold)) {
     final firstIntersectionT = (curve1.t1 + curve1.t2) / 2.0;
     final secondIntersectionT = (curve2.t1 + curve2.t2) / 2.0;
-    return [new Intersection(firstIntersectionT, secondIntersectionT)];
+    return [Intersection(firstIntersectionT, secondIntersectionT)];
   }
 
   final centerT = 0.5;
@@ -360,20 +360,16 @@ List<Intersection> locateIntersectionsRecursively(
   final curve2CenterT = mix(curve2.t1, curve2.t2, centerT);
 
   final curve1LeftSegment = curve1.subcurve.leftSubcurveAt(centerT);
-  final curve1Left =
-      new BezierSlice(curve1LeftSegment, curve1.t1, curve1CenterT);
+  final curve1Left = BezierSlice(curve1LeftSegment, curve1.t1, curve1CenterT);
 
   final curve1RightSegment = curve1.subcurve.rightSubcurveAt(centerT);
-  final curve1Right =
-      new BezierSlice(curve1RightSegment, curve1CenterT, curve1.t2);
+  final curve1Right = BezierSlice(curve1RightSegment, curve1CenterT, curve1.t2);
 
   final curve2LeftSegment = curve2.subcurve.leftSubcurveAt(centerT);
-  final curve2Left =
-      new BezierSlice(curve2LeftSegment, curve2.t1, curve2CenterT);
+  final curve2Left = BezierSlice(curve2LeftSegment, curve2.t1, curve2CenterT);
 
   final curve2RightSegment = curve2.subcurve.rightSubcurveAt(centerT);
-  final curve2Right =
-      new BezierSlice(curve2RightSegment, curve2CenterT, curve2.t2);
+  final curve2Right = BezierSlice(curve2RightSegment, curve2CenterT, curve2.t2);
 
   final pairLeftSides = [curve1Left, curve1Left, curve1Right, curve1Right];
   final pairRightSides = [curve2Left, curve2Right, curve2Left, curve2Right];

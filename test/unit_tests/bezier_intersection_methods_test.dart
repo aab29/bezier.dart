@@ -3,17 +3,11 @@ import "../testing_tools/testing_tools.dart";
 void main() {
   group("intersectionsWithCurve", () {
     test("quadratic intersectionsWithCurve", () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 50.0),
-        new Vector2(100.0, 0.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 50.0), Vector2(100.0, 0.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(0.0, 50.0),
-        new Vector2(50.0, -100.0),
-        new Vector2(100.0, 50.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(0.0, 50.0), Vector2(50.0, -100.0), Vector2(100.0, 50.0)]);
 
       var resultA = curveA.intersectionsWithCurve(curveB);
       expect(resultA, hasLength(2));
@@ -23,18 +17,18 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve", () {
-      final curveA = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(0.0, 50.0),
-        new Vector2(100.0, 50.0),
-        new Vector2(100.0, 0.0)
+      final curveA = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(0.0, 50.0),
+        Vector2(100.0, 50.0),
+        Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new CubicBezier([
-        new Vector2(-10.0, 15.0),
-        new Vector2(10.0, 25.0),
-        new Vector2(90.0, 25.0),
-        new Vector2(110.0, 15.0)
+      final curveB = CubicBezier([
+        Vector2(-10.0, 15.0),
+        Vector2(10.0, 25.0),
+        Vector2(90.0, 25.0),
+        Vector2(110.0, 15.0)
       ]);
 
       var resultA = curveA.intersectionsWithCurve(curveB);
@@ -45,18 +39,15 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve with quadratic curve", () {
-      final curveA = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(0.0, 50.0),
-        new Vector2(100.0, 50.0),
-        new Vector2(100.0, 0.0)
+      final curveA = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(0.0, 50.0),
+        Vector2(100.0, 50.0),
+        Vector2(100.0, 0.0)
       ]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(-10.0, 15.0),
-        new Vector2(50.0, 25.0),
-        new Vector2(110.0, 15.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(-10.0, 15.0), Vector2(50.0, 25.0), Vector2(110.0, 15.0)]);
 
       var resultA = curveA.intersectionsWithCurve(curveB);
       expect(resultA, hasLength(2));
@@ -66,17 +57,11 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, one intersection", () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(50.0, 0.0),
-        new Vector2(150.0, 300.0),
-        new Vector2(250.0, 0.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(50.0, 0.0), Vector2(150.0, 300.0), Vector2(250.0, 0.0)]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
       expect(resultA, hasLength(1));
@@ -86,17 +71,11 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, two intersections", () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(25.0, 100.0),
-        new Vector2(75.0, -100.0),
-        new Vector2(125.0, 100.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(25.0, 100.0), Vector2(75.0, -100.0), Vector2(125.0, 100.0)]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
       expect(resultA, hasLength(2));
@@ -106,17 +85,11 @@ void main() {
     });
 
     test("quadratic intersectionsWithCurve, four intersections", () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 200.0),
-        new Vector2(100.0, 0.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 200.0), Vector2(100.0, 0.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(-50.0, 0.0),
-        new Vector2(250.0, 50.0),
-        new Vector2(-50.0, 100.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(-50.0, 0.0), Vector2(250.0, 50.0), Vector2(-50.0, 100.0)]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
       expect(resultA, hasLength(4));
@@ -128,17 +101,14 @@ void main() {
     test(
         "quadratic intersectionsWithCurve with looped cubic near self-intersection point, two intersections",
         () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
-      final curveB = new CubicBezier([
-        new Vector2(0.0, 100.0),
-        new Vector2(200.0, -66.7),
-        new Vector2(-100.0, -66.7),
-        new Vector2(100.0, 100.0)
+      final curveB = CubicBezier([
+        Vector2(0.0, 100.0),
+        Vector2(200.0, -66.7),
+        Vector2(-100.0, -66.7),
+        Vector2(100.0, 100.0)
       ]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
@@ -153,18 +123,18 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve, five intersections", () {
-      final curveA = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 300.0),
-        new Vector2(50.0, -200.0),
-        new Vector2(100.0, 100.0)
+      final curveA = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(50.0, 300.0),
+        Vector2(50.0, -200.0),
+        Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new CubicBezier([
-        new Vector2(0.0, 100.0),
-        new Vector2(200.0, -66.7),
-        new Vector2(-100.0, -66.7),
-        new Vector2(100.0, 50.0)
+      final curveB = CubicBezier([
+        Vector2(0.0, 100.0),
+        Vector2(200.0, -66.7),
+        Vector2(-100.0, -66.7),
+        Vector2(100.0, 50.0)
       ]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
@@ -175,18 +145,18 @@ void main() {
     });
 
     test("cubic intersectionsWithCurve(), nine intersections", () {
-      final curveA = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 300.0),
-        new Vector2(50.0, -200.0),
-        new Vector2(100.0, 100.0)
+      final curveA = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(50.0, 300.0),
+        Vector2(50.0, -200.0),
+        Vector2(100.0, 100.0)
       ]);
 
-      final curveB = new CubicBezier([
-        new Vector2(0.0, 80.0),
-        new Vector2(350.0, 50.0),
-        new Vector2(-300.0, 50.0),
-        new Vector2(100.0, 20.0)
+      final curveB = CubicBezier([
+        Vector2(0.0, 80.0),
+        Vector2(350.0, 50.0),
+        Vector2(-300.0, 50.0),
+        Vector2(100.0, 20.0)
       ]);
 
       final resultA = curveA.intersectionsWithCurve(curveB);
@@ -199,17 +169,11 @@ void main() {
     test(
         "quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with increased minTValueDifference",
         () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 20.0),
-        new Vector2(100.0, 100.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 20.0), Vector2(100.0, 100.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(0.0, 10.0),
-        new Vector2(50.0, 25.0),
-        new Vector2(100.0, 90.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(0.0, 10.0), Vector2(50.0, 25.0), Vector2(100.0, 90.0)]);
 
       final difference = 0.04;
       final resultA = curveA.intersectionsWithCurve(curveB,
@@ -224,17 +188,11 @@ void main() {
     test(
         "quadratic intersectionsWithCurve with other quadratic at shallow angle, one intersection with decreased curveIntersectionThreshold",
         () {
-      final curveA = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 20.0),
-        new Vector2(100.0, 100.0)
-      ]);
+      final curveA = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 20.0), Vector2(100.0, 100.0)]);
 
-      final curveB = new QuadraticBezier([
-        new Vector2(0.0, 10.0),
-        new Vector2(50.0, 25.0),
-        new Vector2(100.0, 90.0)
-      ]);
+      final curveB = QuadraticBezier(
+          [Vector2(0.0, 10.0), Vector2(50.0, 25.0), Vector2(100.0, 90.0)]);
 
       final threshold = 0.05;
       final resultA = curveA.intersectionsWithCurve(curveB,
@@ -250,12 +208,12 @@ void main() {
   group("intersectionsWithSelf", () {
     test("cubic intersectionsWithSelf, no intersection", () {
       final points = [
-        new Vector2(10.0, 30.0),
-        new Vector2(50.0, 50.0),
-        new Vector2(80.0, 40.0),
-        new Vector2(100.0, 0.0)
+        Vector2(10.0, 30.0),
+        Vector2(50.0, 50.0),
+        Vector2(80.0, 40.0),
+        Vector2(100.0, 0.0)
       ];
-      final curveA = new CubicBezier(points);
+      final curveA = CubicBezier(points);
 
       final result = curveA.intersectionsWithSelf();
       expect(result, isEmpty);
@@ -263,23 +221,23 @@ void main() {
 
     test("cubic intersectionsWithSelf, one intersection", () {
       final points = [
-        new Vector2(0.0, 0.0),
-        new Vector2(200.0, 100.0),
-        new Vector2(-100.0, 100.0),
-        new Vector2(100.0, 0.0)
+        Vector2(0.0, 0.0),
+        Vector2(200.0, 100.0),
+        Vector2(-100.0, 100.0),
+        Vector2(100.0, 0.0)
       ];
-      final curve = new CubicBezier(points);
+      final curve = CubicBezier(points);
 
       final result = curve.intersectionsWithSelf();
       expect(result, hasLength(1));
     });
 
     test("cubic intersectionsWithSelf, one intersection again", () {
-      final curve = new CubicBezier([
-        new Vector2(40.0, 0.0),
-        new Vector2(200.0, 100.0),
-        new Vector2(-100.0, 100.0),
-        new Vector2(100.0, 70.0)
+      final curve = CubicBezier([
+        Vector2(40.0, 0.0),
+        Vector2(200.0, 100.0),
+        Vector2(-100.0, 100.0),
+        Vector2(100.0, 70.0)
       ]);
 
       final result = curve.intersectionsWithSelf();
@@ -289,11 +247,11 @@ void main() {
     test(
         "cubic intersectionsWithSelf with shallow angle, one intersection with reduced curveIntersectionThreshold",
         () {
-      final curve = new CubicBezier([
-        new Vector2(10.0, 0.0),
-        new Vector2(180.0, 200.0),
-        new Vector2(200.0, 180.0),
-        new Vector2(0.0, 10.0)
+      final curve = CubicBezier([
+        Vector2(10.0, 0.0),
+        Vector2(180.0, 200.0),
+        Vector2(200.0, 180.0),
+        Vector2(0.0, 10.0)
       ]);
 
       final threshold = 0.15;
@@ -308,15 +266,15 @@ void main() {
         "cubic intersectionsWithLineSegment, diagonal line with two intersections",
         () {
       final points = [
-        new Vector2(10.0, 30.0),
-        new Vector2(50.0, 50.0),
-        new Vector2(80.0, 40.0),
-        new Vector2(100.0, 0.0)
+        Vector2(10.0, 30.0),
+        Vector2(50.0, 50.0),
+        Vector2(80.0, 40.0),
+        Vector2(100.0, 0.0)
       ];
-      final curve = new CubicBezier(points);
+      final curve = CubicBezier(points);
 
-      final point1 = new Vector2(0.0, 38.0);
-      final point2 = new Vector2(110.0, 2.0);
+      final point1 = Vector2(0.0, 38.0);
+      final point2 = Vector2(110.0, 2.0);
 
       final result = curve.intersectionsWithLineSegment(point1, point2);
       expect(result, hasLength(2));
@@ -326,14 +284,14 @@ void main() {
         "quadratic intersectionsWithLineSegment, diagonal line with two intersections",
         () {
       final points = [
-        new Vector2(10.0, 500.0),
-        new Vector2(50.0, 0.0),
-        new Vector2(90.0, 500.0)
+        Vector2(10.0, 500.0),
+        Vector2(50.0, 0.0),
+        Vector2(90.0, 500.0)
       ];
-      final curve = new QuadraticBezier(points);
+      final curve = QuadraticBezier(points);
 
-      final point1 = new Vector2(0.0, 400.0);
-      final point2 = new Vector2(100.0, 410.0);
+      final point1 = Vector2(0.0, 400.0);
+      final point2 = Vector2(100.0, 410.0);
 
       final result = curve.intersectionsWithLineSegment(point1, point2);
       expect(result, hasLength(2));
@@ -342,13 +300,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, vertical line with single intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
-      final p1 = new Vector2(30.0, 0.0);
-      final p2 = new Vector2(30.0, 100.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
+      final p1 = Vector2(30.0, 0.0);
+      final p2 = Vector2(30.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -357,13 +312,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, horizontal line through left half, single intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
-      final p1 = new Vector2(0.0, 30.0);
-      final p2 = new Vector2(50.0, 30.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
+      final p1 = Vector2(0.0, 30.0);
+      final p2 = Vector2(50.0, 30.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -372,13 +324,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, horizontal line tangent to apex, single intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
-      final p1 = new Vector2(0.0, 50.0);
-      final p2 = new Vector2(100.0, 50.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
+      final p1 = Vector2(0.0, 50.0);
+      final p2 = Vector2(100.0, 50.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -387,13 +336,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, horizontal line just above apex, no intersections",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
-      final p1 = new Vector2(0.0, 50.1);
-      final p2 = new Vector2(100.0, 50.1);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
+      final p1 = Vector2(0.0, 50.1);
+      final p2 = Vector2(100.0, 50.1);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(0));
@@ -402,13 +348,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, horizontal line just below apex, two intersections",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(100.0, 0.0)
-      ]);
-      final p1 = new Vector2(0.0, 49.9);
-      final p2 = new Vector2(100.0, 49.9);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
+      final p1 = Vector2(0.0, 49.9);
+      final p2 = Vector2(100.0, 49.9);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(2));
@@ -417,13 +360,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, horizontal line through diagonal curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(0.0, 50.0);
-      final p2 = new Vector2(100.0, 50.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(0.0, 50.0);
+      final p2 = Vector2(100.0, 50.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -432,13 +372,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, vertical line through diagonal curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(50.0, 100.0);
-      final p2 = new Vector2(50.0, 0.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(50.0, 100.0);
+      final p2 = Vector2(50.0, 0.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -447,13 +384,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, parallel diagonal line through diagonal curve, two intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(20.0, 0.0);
-      final p2 = new Vector2(100.0, 80.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(20.0, 0.0);
+      final p2 = Vector2(100.0, 80.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(2));
@@ -462,13 +396,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, perpendicular diagonal line through diagonal curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(100.0, 0.0);
-      final p2 = new Vector2(0.0, 100.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(100.0, 0.0);
+      final p2 = Vector2(0.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -477,13 +408,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, slanted diagonal line through diagonal curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(100.0, 0.0);
-      final p2 = new Vector2(50.0, 100.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(100.0, 0.0);
+      final p2 = Vector2(50.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -492,13 +420,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, slanted line through linear curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(20.0, 20.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(0.0, 80.0);
-      final p2 = new Vector2(100.0, 30.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(20.0, 20.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(0.0, 80.0);
+      final p2 = Vector2(100.0, 30.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -507,13 +432,10 @@ void main() {
     test(
         "quadratic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection",
         () {
-      final curve = new QuadraticBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(20.0, 20.0),
-        new Vector2(100.0, 100.0)
-      ]);
-      final p1 = new Vector2(0.0, 100.0);
-      final p2 = new Vector2(100.0, 0.0);
+      final curve = QuadraticBezier(
+          [Vector2(0.0, 0.0), Vector2(20.0, 20.0), Vector2(100.0, 100.0)]);
+      final p1 = Vector2(0.0, 100.0);
+      final p2 = Vector2(100.0, 0.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -522,14 +444,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, horizontal line, one intersection",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 100.0),
-        new Vector2(50.0, 0.0),
-        new Vector2(100.0, 100.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(50.0, 100.0),
+        Vector2(50.0, 0.0),
+        Vector2(100.0, 100.0)
       ]);
-      final p1 = new Vector2(0.0, 20.0);
-      final p2 = new Vector2(100.0, 20.0);
+      final p1 = Vector2(0.0, 20.0);
+      final p2 = Vector2(100.0, 20.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -538,14 +460,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, horizontal line, two intersections",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(20.0, 100.0),
-        new Vector2(80.0, 200.0),
-        new Vector2(100.0, 0.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(20.0, 100.0),
+        Vector2(80.0, 200.0),
+        Vector2(100.0, 0.0)
       ]);
-      final p1 = new Vector2(0.0, 20.0);
-      final p2 = new Vector2(100.0, 20.0);
+      final p1 = Vector2(0.0, 20.0);
+      final p2 = Vector2(100.0, 20.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(2));
@@ -554,14 +476,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, horizontal line, three intersections",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 200.0),
-        new Vector2(50.0, -100.0),
-        new Vector2(100.0, 100.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(50.0, 200.0),
+        Vector2(50.0, -100.0),
+        Vector2(100.0, 100.0)
       ]);
-      final p1 = new Vector2(0.0, 50.0);
-      final p2 = new Vector2(100.0, 50.0);
+      final p1 = Vector2(0.0, 50.0);
+      final p2 = Vector2(100.0, 50.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(3));
@@ -569,14 +491,14 @@ void main() {
 
     test("cubic intersectionsWithLineSegment, vertical line, one intersection",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(50.0, 200.0),
-        new Vector2(50.0, -100.0),
-        new Vector2(100.0, 100.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(50.0, 200.0),
+        Vector2(50.0, -100.0),
+        Vector2(100.0, 100.0)
       ]);
-      final p1 = new Vector2(50.0, 0.0);
-      final p2 = new Vector2(50.0, 100.0);
+      final p1 = Vector2(50.0, 0.0);
+      final p2 = Vector2(50.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -585,14 +507,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, vertical line with looped curve, three intersection",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(200.0, 100.0),
-        new Vector2(-100.0, 100.0),
-        new Vector2(100.0, 0.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(200.0, 100.0),
+        Vector2(-100.0, 100.0),
+        Vector2(100.0, 0.0)
       ]);
-      final p1 = new Vector2(40.0, 0.0);
-      final p2 = new Vector2(40.0, 100.0);
+      final p1 = Vector2(40.0, 0.0);
+      final p2 = Vector2(40.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(3));
@@ -601,14 +523,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, perpendicular line through linear curve, one intersection",
         () {
-      final curve = new CubicBezier([
-        new Vector2(0.0, 0.0),
-        new Vector2(20.0, 20.0),
-        new Vector2(50.0, 50.0),
-        new Vector2(100.0, 100.0)
+      final curve = CubicBezier([
+        Vector2(0.0, 0.0),
+        Vector2(20.0, 20.0),
+        Vector2(50.0, 50.0),
+        Vector2(100.0, 100.0)
       ]);
-      final p1 = new Vector2(100.0, 0.0);
-      final p2 = new Vector2(00.0, 100.0);
+      final p1 = Vector2(100.0, 0.0);
+      final p2 = Vector2(00.0, 100.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -617,14 +539,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, y axis through typical curve, one intersection",
         () {
-      final curve = new CubicBezier([
+      final curve = CubicBezier([
         Vector2(-214.5, 80.0),
         Vector2(-52.0, 80.0),
         Vector2(52.0, 530.0),
         Vector2(214.5, 530.0)
       ]);
-      final p1 = new Vector2(0.0, 0.0);
-      final p2 = new Vector2(0.0, 1080.0);
+      final p1 = Vector2(0.0, 0.0);
+      final p2 = Vector2(0.0, 1080.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -634,14 +556,14 @@ void main() {
         "cubic intersectionsWithLineSegment, y axis through typical curve, translated to the right, one intersection",
         () {
       final offset = 429.0;
-      final curve = new CubicBezier([
+      final curve = CubicBezier([
         Vector2(-214.5 + offset, 80.0),
         Vector2(-52.0 + offset, 80.0),
         Vector2(52.0 + offset, 530.0),
         Vector2(214.5 + offset, 530.0)
       ]);
-      final p1 = new Vector2(0.0 + offset, 0.0);
-      final p2 = new Vector2(0.0 + offset, 1080.0);
+      final p1 = Vector2(0.0 + offset, 0.0);
+      final p2 = Vector2(0.0 + offset, 1080.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -650,14 +572,14 @@ void main() {
     test(
         "cubic intersectionsWithLineSegment, horizontal line through typical curve",
         () {
-      final curve = new CubicBezier([
+      final curve = CubicBezier([
         Vector2(214.5, 630.0),
         Vector2(308.25, 630.0),
         Vector2(368.625, 492.5),
         Vector2(429.0, 355.0)
       ]);
-      final p1 = new Vector2(0.0, 580.0);
-      final p2 = new Vector2(430.0, 580.0);
+      final p1 = Vector2(0.0, 580.0);
+      final p2 = Vector2(430.0, 580.0);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -667,14 +589,14 @@ void main() {
         "cubic intersectionsWithLineSegment, horizontal line through typical curve, translated up",
         () {
       final offset = 6.0;
-      final curve = new CubicBezier([
+      final curve = CubicBezier([
         Vector2(214.5, 630.0 + offset),
         Vector2(308.25, 630.0 + offset),
         Vector2(368.625, 492.5 + offset),
         Vector2(429.0, 355.0 + offset)
       ]);
-      final p1 = new Vector2(0.0, 580.0 + offset);
-      final p2 = new Vector2(430.0, 580.0 + offset);
+      final p1 = Vector2(0.0, 580.0 + offset);
+      final p2 = Vector2(430.0, 580.0 + offset);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));
@@ -684,14 +606,14 @@ void main() {
         "cubic intersectionsWithLineSegment, horizontal line through typical curve, translated down",
         () {
       final offset = -6.0;
-      final curve = new CubicBezier([
+      final curve = CubicBezier([
         Vector2(214.5, 630.0 + offset),
         Vector2(308.25, 630.0 + offset),
         Vector2(368.625, 492.5 + offset),
         Vector2(429.0, 355.0 + offset)
       ]);
-      final p1 = new Vector2(0.0, 580.0 + offset);
-      final p2 = new Vector2(430.0, 580.0 + offset);
+      final p1 = Vector2(0.0, 580.0 + offset);
+      final p2 = Vector2(430.0, 580.0 + offset);
 
       final result = curve.intersectionsWithLineSegment(p1, p2);
       expect(result, hasLength(1));

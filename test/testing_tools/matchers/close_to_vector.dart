@@ -42,4 +42,4 @@ class CloseToVectorMatcher extends Matcher {
 }
 
 Matcher closeToVector(Vector vector, [double delta = defaultDelta]) =>
-    new CloseToVectorMatcher(vector, delta);
+    CloseToVectorMatcher(vector, delta);

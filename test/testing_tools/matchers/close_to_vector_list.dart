@@ -44,4 +44,4 @@ class CloseToVectorListMatcher extends Matcher {
 
 Matcher closeToVectorList(List<Vector> vectors,
         [double delta = defaultDelta]) =>
-    new CloseToVectorListMatcher(vectors, delta);
+    CloseToVectorListMatcher(vectors, delta);

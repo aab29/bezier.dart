@@ -9,8 +9,7 @@ class CubicBezier extends Bezier {
   /// be its control points, and the fourth point will be its end point.
   CubicBezier(List<Vector2> points) : super(points) {
     if (points.length != 4) {
-      throw (new ArgumentError(
-          "Cubic Bézier curves require exactly four points"));
+      throw ArgumentError("Cubic Bézier curves require exactly four points");
     }
   }
 
@@ -28,7 +27,7 @@ class CubicBezier extends Bezier {
     final c = mt * t2 * 3;
     final d = t * t2;
 
-    final point = new Vector2.copy(startPoint);
+    final point = Vector2.copy(startPoint);
     point.scale(a);
     point.addScaled(points[1], b);
     point.addScaled(points[2], c);
@@ -47,7 +46,7 @@ class CubicBezier extends Bezier {
     final b = 2.0 * mt * t;
     final c = t * t;
 
-    final localDerivative = new Vector2.copy(derivativePoints[0]);
+    final localDerivative = Vector2.copy(derivativePoints[0]);
     localDerivative.scale(a);
     localDerivative.addScaled(derivativePoints[1], b);
     localDerivative.addScaled(derivativePoints[2], c);

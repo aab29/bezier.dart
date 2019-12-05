@@ -4,49 +4,42 @@ void main() {
   group("constructor", () {
     test("constructor with three-entry look up table", () {
       final lookUpTable = <Vector2>[
-        new Vector2(0.0, 0.0),
-        new Vector2(2.0, 0.0),
-        new Vector2(3.0, 0.0)
+        Vector2(0.0, 0.0),
+        Vector2(2.0, 0.0),
+        Vector2(3.0, 0.0)
       ];
-      final object = new EvenSpacer(lookUpTable);
-      expect(object, new TypeMatcher<EvenSpacer>());
+      final object = EvenSpacer(lookUpTable);
+      expect(object, TypeMatcher<EvenSpacer>());
     });
 
     test("constructor with two-entry look up table", () {
-      final lookUpTable = <Vector2>[
-        new Vector2(0.0, 0.0),
-        new Vector2(100.0, 100.0)
-      ];
+      final lookUpTable = <Vector2>[Vector2(0.0, 0.0), Vector2(100.0, 100.0)];
 
-      final object = new EvenSpacer(lookUpTable);
-      expect(object, new TypeMatcher<EvenSpacer>());
+      final object = EvenSpacer(lookUpTable);
+      expect(object, TypeMatcher<EvenSpacer>());
     });
 
     test("constructor throws error with one-entry look up table", () {
-      final lookUpTable = <Vector2>[new Vector2(100.0, 100.0)];
-      expect(
-          () => new EvenSpacer(lookUpTable), throwsA(new TypeMatcher<Error>()));
+      final lookUpTable = <Vector2>[Vector2(100.0, 100.0)];
+      expect(() => EvenSpacer(lookUpTable), throwsA(TypeMatcher<Error>()));
     });
 
     test("constructor throws error with empty look up table", () {
-      expect(() => new EvenSpacer([]), throwsA(new TypeMatcher<Error>()));
+      expect(() => EvenSpacer([]), throwsA(TypeMatcher<Error>()));
     });
   });
 
   group("arcLength getter", () {
     test("arcLength, two-entry look up table", () {
       final arcLengthCalculator =
-          new EvenSpacer([new Vector2(0.0, 0.0), new Vector2(100.0, 100.0)]);
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(100.0, 100.0)]);
       final result = arcLengthCalculator.arcLength;
       expect(result, closeToDouble(141.4213562373095));
     });
 
     test("arcLength, three-entry look up table", () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(3.0, 0.0),
-        new Vector2(3.0, 1.0)
-      ]);
+      final arcLengthCalculator =
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
       final result = arcLengthCalculator.arcLength;
       expect(result, closeToDouble(4.0));
     });
@@ -54,11 +47,8 @@ void main() {
 
   group("evenTValueAt()", () {
     test("evenTValueAt(), portion at border of or outside normal range", () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(3.0, 0.0),
-        new Vector2(3.0, 1.0)
-      ]);
+      final arcLengthCalculator =
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
       final result1 = arcLengthCalculator.evenTValueAt(-1.0);
       expect(result1, closeToDouble(0.0));
@@ -75,11 +65,8 @@ void main() {
 
     test("evenTValueAt(), portion in normal range, three-entry look up table",
         () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(3.0, 0.0),
-        new Vector2(3.0, 1.0)
-      ]);
+      final arcLengthCalculator =
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
       expect(
           arcLengthCalculator.evenTValueAt(0.1), closeToDouble(0.06666666666));
@@ -96,11 +83,8 @@ void main() {
 
   group("evenTValues", () {
     test("default parametersCount", () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(3.0, 0.0),
-        new Vector2(3.0, 1.0)
-      ]);
+      final arcLengthCalculator =
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
       final result = arcLengthCalculator.evenTValues();
       expect(result, hasLength(51));
@@ -113,11 +97,8 @@ void main() {
     });
 
     test("parametersCount of 100", () {
-      final arcLengthCalculator = new EvenSpacer([
-        new Vector2(0.0, 0.0),
-        new Vector2(3.0, 0.0),
-        new Vector2(3.0, 1.0)
-      ]);
+      final arcLengthCalculator =
+          EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
       final result = arcLengthCalculator.evenTValues(parametersCount: 100);
       expect(result, hasLength(101));
