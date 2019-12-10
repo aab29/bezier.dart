@@ -1,5 +1,13 @@
 # Changelog - bezier
 
+## v 1.1.4 - December 10 2019
+
+- Just updating this changelog file, since I forgot to in 1.1.3
+
+## v 1.1.3 - December 10 2019
+
+- Removed all usages of the `new` keyword in the codebase in order to conform to the latest style recommendations.
+
 ## v 1.1.2 - May 19 2019
 
 - Fixed certain cases, reported by @fidlip (Thank you!), where `intersectionsWithLineSegment` failed to find intersections
