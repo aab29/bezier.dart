@@ -26,11 +26,11 @@ abstract class Bezier {
   /// [CubicBezier].
   factory Bezier.fromPoints(List<Vector2> curvePoints) {
     if (curvePoints.length == 3) {
-      return new QuadraticBezier(curvePoints);
+      return QuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
-      return new CubicBezier(curvePoints);
+      return CubicBezier(curvePoints);
     } else {
-      throw (new UnsupportedError("Unsupported number of curve points"));
+      throw UnsupportedError("Unsupported number of curve points");
     }
   }
 
@@ -63,7 +63,7 @@ abstract class Bezier {
     } else if (derivativeOrder > this.order) {
       return [];
     } else if (derivativeOrder < 1) {
-      throw (new ArgumentError("invalid order for derivatives"));
+      throw ArgumentError("invalid order for derivatives");
     }
 
     final pointsToProcess =
@@ -125,7 +125,7 @@ abstract class Bezier {
     final interpolatedPoints = <Vector2>[];
 
     for (var index = 0; index < pointsToInterpolate.length - 1; index++) {
-      final point = new Vector2.zero();
+      final point = Vector2.zero();
       Vector2.mix(
           pointsToInterpolate[index], pointsToInterpolate[index + 1], t, point);
       interpolatedPoints.add(point);
@@ -137,7 +137,7 @@ abstract class Bezier {
   List<Vector2> _interpolateRecursively(
       List<Vector2> pointsToInterpolate, double t) {
     if (pointsToInterpolate.length > 1) {
-      final result = new List<Vector2>.from(pointsToInterpolate);
+      final result = List<Vector2>.from(pointsToInterpolate);
 
       final interpolatedPoints = _interpolatedPoints(pointsToInterpolate, t);
       result.addAll(_interpolateRecursively(interpolatedPoints, t));
@@ -152,7 +152,7 @@ abstract class Bezier {
   List<Vector2> hullPointsAt(double t) {
     final hullPoints = <Vector2>[];
     for (var index = 0; index <= order; index++) {
-      final hullPoint = new Vector2.copy(points[index]);
+      final hullPoint = Vector2.copy(points[index]);
       hullPoints.add(hullPoint);
     }
 
@@ -167,7 +167,7 @@ abstract class Bezier {
     final d = derivativeAt(t,
         cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)
       ..normalize();
-    return new Vector2(-d.y, d.x);
+    return Vector2(-d.y, d.x);
   }
 
   /// Returns the axis-aligned bounding box of the curve.
@@ -180,9 +180,8 @@ abstract class Bezier {
       extremaTValues.add(1.0);
     }
 
-    final minPoint = new Vector2(double.infinity, double.infinity);
-    final maxPoint =
-        new Vector2(double.negativeInfinity, double.negativeInfinity);
+    final minPoint = Vector2(double.infinity, double.infinity);
+    final maxPoint = Vector2(double.negativeInfinity, double.negativeInfinity);
 
     extremaTValues.forEach((t) {
       final point = pointAt(t);
@@ -190,7 +189,7 @@ abstract class Bezier {
       Vector2.max(maxPoint, point, maxPoint);
     });
 
-    return new Aabb2.minMax(minPoint, maxPoint);
+    return Aabb2.minMax(minPoint, maxPoint);
   }
 
   /// True if the bounding box of [this] intersects with the bounding box of [curve].
@@ -205,7 +204,7 @@ abstract class Bezier {
   /// left of parameter value [t].
   Bezier leftSubcurveAt(double t) {
     if (t <= 0.0) {
-      throw (new ArgumentError("Cannot split curve left of start point"));
+      throw ArgumentError("Cannot split curve left of start point");
     }
 
     t = min(t, 1.0);
@@ -213,12 +212,12 @@ abstract class Bezier {
     final hullPoints = hullPointsAt(t);
 
     if (order == 2) {
-      return new QuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
+      return QuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
     } else if (order == 3) {
-      return new CubicBezier(
+      return CubicBezier(
           [hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
     } else {
-      throw (new UnsupportedError("Unsupported curve order"));
+      throw UnsupportedError("Unsupported curve order");
     }
   }
 
@@ -226,19 +225,19 @@ abstract class Bezier {
   /// right of parameter value [t].
   Bezier rightSubcurveAt(double t) {
     if (t >= 1.0) {
-      throw (new ArgumentError("Cannot split curve right of end point"));
+      throw ArgumentError("Cannot split curve right of end point");
     }
 
     t = max(t, 0.0);
 
     final hullPoints = hullPointsAt(t);
     if (order == 2) {
-      return new QuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
+      return QuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
     } else if (order == 3) {
-      return new CubicBezier(
+      return CubicBezier(
           [hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
     } else {
-      throw (new UnsupportedError("Unsupported curve order"));
+      throw UnsupportedError("Unsupported curve order");
     }
   }
 
@@ -285,7 +284,7 @@ abstract class Bezier {
     roots.addAll(extremaOnX);
     roots.addAll(extremaOnY);
 
-    final rootsSet = new Set<double>.from(roots);
+    final rootsSet = Set<double>.from(roots);
     final uniqueRoots = rootsSet.toList();
     uniqueRoots.sort();
     return uniqueRoots;
@@ -310,15 +309,15 @@ abstract class Bezier {
         tangentScaleFactor = -1.0;
       }
 
-      final tangentVector = new Vector2.copy(points[pointIndex]);
+      final tangentVector = Vector2.copy(points[pointIndex]);
       tangentVector.sub(points[endPointIndex]);
       tangentVector.scale(tangentScaleFactor);
       final tangentMagnitude = tangentVector.normalize();
       if (tangentMagnitude != 0.0) {
-        return new Vector2(-tangentVector.y, tangentVector.x);
+        return Vector2(-tangentVector.y, tangentVector.x);
       }
     }
-    return new Vector2.zero();
+    return Vector2.zero();
   }
 
   /// True if the normal vectors at the start and end points form an angle less
@@ -368,7 +367,7 @@ abstract class Bezier {
         extremityIndex++) {
       final t2 = extremaTValues[extremityIndex];
       final subcurve = subcurveBetween(t1, t2);
-      final reductionResult = new BezierSlice(subcurve, t1, t2);
+      final reductionResult = BezierSlice(subcurve, t1, t2);
       curvePortionsBetweenExtrema.add(reductionResult);
       t1 = t2;
     }
@@ -408,7 +407,7 @@ abstract class Bezier {
             subcurve = slice.subcurve.subcurveBetween(t1, t2);
             final subcurveT1 = mix(slice.t1, slice.t2, t1);
             final subcurveT2 = mix(slice.t1, slice.t2, t2);
-            final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
+            final result = BezierSlice(subcurve, subcurveT1, subcurveT2);
             simpleSlices.add(result);
             t1 = t2;
             break;
@@ -419,7 +418,7 @@ abstract class Bezier {
         subcurve = slice.subcurve.subcurveBetween(t1, 1.0);
         final subcurveT1 = mix(slice.t1, slice.t2, t1);
         final subcurveT2 = slice.t2;
-        final result = new BezierSlice(subcurve, subcurveT1, subcurveT2);
+        final result = BezierSlice(subcurve, subcurveT1, subcurveT2);
         simpleSlices.add(result);
       }
     }
@@ -493,11 +492,11 @@ abstract class Bezier {
         _nonOverlappingNormalVectorAt(0.0, 0, firstOrderDerivativePoints);
     final translatedPoints = <Vector2>[];
     for (final point in points) {
-      final translatedPoint = new Vector2.copy(point);
+      final translatedPoint = Vector2.copy(point);
       translatedPoint.addScaled(normalVector, distance);
       translatedPoints.add(translatedPoint);
     }
-    return new Bezier.fromPoints(translatedPoints);
+    return Bezier.fromPoints(translatedPoints);
   }
 
   /// Returns the origin used for calculating control point positions in scaled curves.
@@ -514,7 +513,7 @@ abstract class Bezier {
     final intersectionPoint = intersectionPointBetweenTwoLines(
         offsetStart, startPoint, offsetEnd, endPoint);
     if (intersectionPoint == null) {
-      final centerPoint = new Vector2.zero();
+      final centerPoint = Vector2.zero();
       Vector2.mix(startPoint, endPoint, 0.5, centerPoint);
       return centerPoint;
     } else {
@@ -550,7 +549,7 @@ abstract class Bezier {
     var origin = _scalingOrigin;
 
     final listLength = order + 1;
-    final scaledCurvePoints = new List<Vector2>(listLength);
+    final scaledCurvePoints = List<Vector2>(listLength);
 
     final firstOrderPoints = firstOrderDerivativePoints;
 
@@ -562,7 +561,7 @@ abstract class Bezier {
         _nonOverlappingOffsetPointAt(1.0, distance, order, firstOrderPoints);
     scaledCurvePoints[order] = scaledEndPoint;
 
-    final startTangentPoint = new Vector2.copy(scaledStartPoint);
+    final startTangentPoint = Vector2.copy(scaledStartPoint);
     startTangentPoint.add(
         derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
     scaledCurvePoints[1] = intersectionPointBetweenTwoLines(
@@ -571,7 +570,7 @@ abstract class Bezier {
     scaledCurvePoints[1] ??= startTangentPoint;
 
     if (order == 3) {
-      final endTangentPoint = new Vector2.copy(scaledEndPoint);
+      final endTangentPoint = Vector2.copy(scaledEndPoint);
       endTangentPoint.add(derivativeAt(1.0,
           cachedFirstOrderDerivativePoints: firstOrderPoints));
       scaledCurvePoints[2] = intersectionPointBetweenTwoLines(
@@ -580,7 +579,7 @@ abstract class Bezier {
       scaledCurvePoints[2] ??= endTangentPoint;
     }
 
-    return new Bezier.fromPoints(scaledCurvePoints);
+    return Bezier.fromPoints(scaledCurvePoints);
   }
 
   /// Returns a [List] of intersection results after removing duplicates in [intersectionsToFilter].
@@ -688,20 +687,20 @@ abstract class Bezier {
   /// the line segment defined by [lineStartPoint] and [lineEndPoint].
   List<double> intersectionsWithLineSegment(
       Vector2 lineStartPoint, Vector2 lineEndPoint) {
-    final minPoint = new Vector2.zero();
+    final minPoint = Vector2.zero();
     Vector2.min(lineStartPoint, lineEndPoint, minPoint);
 
-    final maxPoint = new Vector2.zero();
+    final maxPoint = Vector2.zero();
     Vector2.max(lineStartPoint, lineEndPoint, maxPoint);
 
-    final boundingBox = new Aabb2.minMax(minPoint, maxPoint);
+    final boundingBox = Aabb2.minMax(minPoint, maxPoint);
 
     final roots = rootsAlongLine(points, lineStartPoint, lineEndPoint);
     roots.retainWhere((t) {
       final p = pointAt(t);
       return pointIntersectsBoundingBoxApproximately(p, boundingBox);
     });
-    final rootsSet = new Set<double>.from(roots);
+    final rootsSet = Set<double>.from(roots);
     final uniqueRoots = rootsSet.toList();
     return uniqueRoots;
   }

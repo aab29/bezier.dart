@@ -9,8 +9,8 @@ class QuadraticBezier extends Bezier {
   /// point, and the third its end point.
   QuadraticBezier(List<Vector2> points) : super(points) {
     if (points.length != 3) {
-      throw (new ArgumentError(
-          "Quadratic Bézier curves require exactly three points"));
+      throw ArgumentError(
+          "Quadratic Bézier curves require exactly three points");
     }
   }
 
@@ -27,7 +27,7 @@ class QuadraticBezier extends Bezier {
     final b = 2.0 * mt * t;
     final c = t2;
 
-    final point = new Vector2.copy(startPoint);
+    final point = Vector2.copy(startPoint);
     point.scale(a);
     point.addScaled(points[1], b);
     point.addScaled(points[2], c);
@@ -40,7 +40,7 @@ class QuadraticBezier extends Bezier {
       {List<Vector2> cachedFirstOrderDerivativePoints}) {
     final derivativePoints =
         cachedFirstOrderDerivativePoints ?? firstOrderDerivativePoints;
-    final result = new Vector2.zero();
+    final result = Vector2.zero();
     Vector2.mix(derivativePoints[0], derivativePoints[1], t, result);
     return result;
   }
@@ -49,7 +49,7 @@ class QuadraticBezier extends Bezier {
   /// and control points positioned so it produces identical points along the
   /// curve as [this].
   CubicBezier toCubicBezier() {
-    final cubicCurvePoints = new List<Vector2>();
+    final cubicCurvePoints = List<Vector2>();
     cubicCurvePoints.add(startPoint);
 
     final pointsCount = points.length;
@@ -57,7 +57,7 @@ class QuadraticBezier extends Bezier {
     for (var index = 1; index < pointsCount; index++) {
       final currentPoint = points[index];
       final previousPoint = points[index - 1];
-      final raisedPoint = new Vector2.zero();
+      final raisedPoint = Vector2.zero();
       raisedPoint.addScaled(currentPoint, (pointsCount - index) / pointsCount);
       raisedPoint.addScaled(previousPoint, index / pointsCount);
 
@@ -66,7 +66,7 @@ class QuadraticBezier extends Bezier {
 
     cubicCurvePoints.add(endPoint);
 
-    return new CubicBezier(cubicCurvePoints);
+    return CubicBezier(cubicCurvePoints);
   }
 
   @override
