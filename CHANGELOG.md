@@ -1,5 +1,10 @@
 # Changelog - bezier
 
+## v 1.1.5 - December 21 2019
+
+- Replaced all usages of double quotes with single quotes in order to conform to the latest style recommendations.
+- Fixed one instance (in `quadratic_bezier.dart`) where we used a `List()` constructor instead of the `[]` literal. 
+
 ## v 1.1.4 - December 10 2019
 
 - Just updating this changelog file, since I forgot to in 1.1.3
