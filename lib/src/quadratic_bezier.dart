@@ -49,7 +49,7 @@ class QuadraticBezier extends Bezier {
   /// and control points positioned so it produces identical points along the
   /// curve as [this].
   CubicBezier toCubicBezier() {
-    final cubicCurvePoints = List<Vector2>();
+    final cubicCurvePoints = <Vector2>[];
     cubicCurvePoints.add(startPoint);
 
     final pointsCount = points.length;
