@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("constructor", () {
-    test("constructor with three-entry look up table", () {
+  group('constructor', () {
+    test('constructor with three-entry look up table', () {
       final lookUpTable = <Vector2>[
         Vector2(0.0, 0.0),
         Vector2(2.0, 0.0),
@@ -12,32 +12,32 @@ void main() {
       expect(object, TypeMatcher<EvenSpacer>());
     });
 
-    test("constructor with two-entry look up table", () {
+    test('constructor with two-entry look up table', () {
       final lookUpTable = <Vector2>[Vector2(0.0, 0.0), Vector2(100.0, 100.0)];
 
       final object = EvenSpacer(lookUpTable);
       expect(object, TypeMatcher<EvenSpacer>());
     });
 
-    test("constructor throws error with one-entry look up table", () {
+    test('constructor throws error with one-entry look up table', () {
       final lookUpTable = <Vector2>[Vector2(100.0, 100.0)];
       expect(() => EvenSpacer(lookUpTable), throwsA(TypeMatcher<Error>()));
     });
 
-    test("constructor throws error with empty look up table", () {
+    test('constructor throws error with empty look up table', () {
       expect(() => EvenSpacer([]), throwsA(TypeMatcher<Error>()));
     });
   });
 
-  group("arcLength getter", () {
-    test("arcLength, two-entry look up table", () {
+  group('arcLength getter', () {
+    test('arcLength, two-entry look up table', () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(100.0, 100.0)]);
       final result = arcLengthCalculator.arcLength;
       expect(result, closeToDouble(141.4213562373095));
     });
 
-    test("arcLength, three-entry look up table", () {
+    test('arcLength, three-entry look up table', () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
       final result = arcLengthCalculator.arcLength;
@@ -45,8 +45,8 @@ void main() {
     });
   });
 
-  group("evenTValueAt()", () {
-    test("evenTValueAt(), portion at border of or outside normal range", () {
+  group('evenTValueAt()', () {
+    test('evenTValueAt(), portion at border of or outside normal range', () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
@@ -63,7 +63,7 @@ void main() {
       expect(result4, closeToDouble(1.0));
     });
 
-    test("evenTValueAt(), portion in normal range, three-entry look up table",
+    test('evenTValueAt(), portion in normal range, three-entry look up table',
         () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
@@ -81,8 +81,8 @@ void main() {
     });
   });
 
-  group("evenTValues", () {
-    test("default parametersCount", () {
+  group('evenTValues', () {
+    test('default parametersCount', () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 
@@ -96,7 +96,7 @@ void main() {
       expect(result[50], closeToDouble(1.0));
     });
 
-    test("parametersCount of 100", () {
+    test('parametersCount of 100', () {
       final arcLengthCalculator =
           EvenSpacer([Vector2(0.0, 0.0), Vector2(3.0, 0.0), Vector2(3.0, 1.0)]);
 

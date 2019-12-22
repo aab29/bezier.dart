@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("unnamed constructor", () {
-    test("quadratic constructor", () {
+  group('unnamed constructor', () {
+    test('quadratic constructor', () {
       final points = [
         Vector2(40.0, 40.0),
         Vector2(30.0, 10.0),
@@ -15,7 +15,7 @@ void main() {
       expect(curve.points, hasLength(3));
     });
 
-    test("cubic constructor", () {
+    test('cubic constructor', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -30,8 +30,8 @@ void main() {
     });
   });
 
-  group("fromPoints constructor", () {
-    test("fromPoints, three entries", () {
+  group('fromPoints constructor', () {
+    test('fromPoints, three entries', () {
       final points = <Vector2>[
         Vector2(0.0, 0.0),
         Vector2(250.0, -50.0),
@@ -44,7 +44,7 @@ void main() {
       expect(curve.points, hasLength(3));
     });
 
-    test("fromPoints, four entries", () {
+    test('fromPoints, four entries', () {
       final points = <Vector2>[
         Vector2(0.0, 0.0),
         Vector2(170.0, 90.0),
@@ -58,7 +58,7 @@ void main() {
       expect(curve.points, hasLength(4));
     });
 
-    test("fromPoints, error thrown with five entries", () {
+    test('fromPoints, error thrown with five entries', () {
       final points = <Vector2>[
         Vector2(0.0, 0.0),
         Vector2(170.0, 90.0),

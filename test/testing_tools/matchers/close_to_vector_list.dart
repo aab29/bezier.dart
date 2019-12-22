@@ -1,9 +1,9 @@
-import "package:test/test.dart";
+import 'package:test/test.dart';
 
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "close_to_double.dart";
-import "close_to_vector.dart";
+import 'close_to_double.dart';
+import 'close_to_vector.dart';
 
 class CloseToVectorListMatcher extends Matcher {
   List<Vector> vectors;

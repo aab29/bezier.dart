@@ -9,9 +9,9 @@
 /// [Bezier.js](https://pomax.github.io/bezierjs/).
 library bezier;
 
-export "src/bezier.dart";
-export "src/bezier_slice.dart";
-export "src/cubic_bezier.dart";
-export "src/even_spacer.dart";
-export "src/intersection.dart";
-export "src/quadratic_bezier.dart";
+export 'src/bezier.dart';
+export 'src/bezier_slice.dart';
+export 'src/cubic_bezier.dart';
+export 'src/even_spacer.dart';
+export 'src/intersection.dart';
+export 'src/quadratic_bezier.dart';

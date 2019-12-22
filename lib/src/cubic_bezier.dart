@@ -1,6 +1,6 @@
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
 /// Concrete class of cubic Bézier curves.
 class CubicBezier extends Bezier {
@@ -9,7 +9,7 @@ class CubicBezier extends Bezier {
   /// be its control points, and the fourth point will be its end point.
   CubicBezier(List<Vector2> points) : super(points) {
     if (points.length != 4) {
-      throw ArgumentError("Cubic Bézier curves require exactly four points");
+      throw ArgumentError('Cubic Bézier curves require exactly four points');
     }
   }
 
@@ -55,5 +55,5 @@ class CubicBezier extends Bezier {
 
   @override
   String toString() =>
-      "BDCubicBezier([${points[0]}, ${points[1]}, ${points[2]}, ${points[3]}])";
+      'BDCubicBezier([${points[0]}, ${points[1]}, ${points[2]}, ${points[3]}])';
 }

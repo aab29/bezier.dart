@@ -1,8 +1,8 @@
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
-import "bezier_tools.dart";
+import 'bezier_tools.dart';
 
 /// Class for calculating parameter values of points in a [Bezier] evenly spaced
 /// along its arc length.
@@ -18,7 +18,7 @@ class EvenSpacer {
   /// calculated at evenly spaced parameter values within a [Bezier].
   EvenSpacer(this.curveLookUpTable) {
     if (curveLookUpTable.length < 2) {
-      throw ArgumentError("look up table requires at least two entries");
+      throw ArgumentError('look up table requires at least two entries');
     }
 
     for (var index = 1; index < curveLookUpTable.length; index++) {

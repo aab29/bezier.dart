@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("leftSubcurveAt", () {
-    test("quadratic leftSubcurveAt", () {
+  group('leftSubcurveAt', () {
+    test('quadratic leftSubcurveAt', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -28,7 +28,7 @@ void main() {
       expect(curve3.points[2], closeToVector(Vector2(30.0, 42.0)));
     });
 
-    test("cubic leftSubcurveAt", () {
+    test('cubic leftSubcurveAt', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -63,7 +63,7 @@ void main() {
           closeToVector(Vector2(59.400001525878906, 69.30000305175781)));
     });
 
-    test("quadratic leftSubcurveAt, t > 1.0", () {
+    test('quadratic leftSubcurveAt, t > 1.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -76,7 +76,7 @@ void main() {
               [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]));
     });
 
-    test("cubic leftSubcurveAt, t > 1.0", () {
+    test('cubic leftSubcurveAt, t > 1.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -97,14 +97,14 @@ void main() {
           ]));
     });
 
-    test("quadratic leftSubcurveAt, t == 0.0", () {
+    test('quadratic leftSubcurveAt, t == 0.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
       expect(() => curve.leftSubcurveAt(0.0), throwsArgumentError);
     });
 
-    test("cubic leftSubcurveAt, t == 0.0", () {
+    test('cubic leftSubcurveAt, t == 0.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -115,14 +115,14 @@ void main() {
       expect(() => curve.leftSubcurveAt(0.0), throwsArgumentError);
     });
 
-    test("quadratic leftSubcurveAt, t < 0.0", () {
+    test('quadratic leftSubcurveAt, t < 0.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
       expect(() => curve.leftSubcurveAt(-0.2), throwsArgumentError);
     });
 
-    test("cubic leftSubcurveAt, t < 0.0", () {
+    test('cubic leftSubcurveAt, t < 0.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -134,8 +134,8 @@ void main() {
     });
   });
 
-  group("rightSubcurveAt", () {
-    test("quadratic rightSubcurveAt", () {
+  group('rightSubcurveAt', () {
+    test('quadratic rightSubcurveAt', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -161,7 +161,7 @@ void main() {
       expect(curve3.points[2], closeToVector(Vector2(100.0, 0.0)));
     });
 
-    test("cubic rightSubcurveAt", () {
+    test('cubic rightSubcurveAt', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -196,7 +196,7 @@ void main() {
       expect(curve3.points[3], closeToVector(Vector2(100.0, 0.0)));
     });
 
-    test("quadratic rightSubcurveAt, t < 0.0", () {
+    test('quadratic rightSubcurveAt, t < 0.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -209,7 +209,7 @@ void main() {
               [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]));
     });
 
-    test("cubic rightSubcurveAt, t < 0.0", () {
+    test('cubic rightSubcurveAt, t < 0.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -230,14 +230,14 @@ void main() {
           ]));
     });
 
-    test("quadratic rightSubcurveAt, t == 1.0", () {
+    test('quadratic rightSubcurveAt, t == 1.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
       expect(() => curve.rightSubcurveAt(1.0), throwsArgumentError);
     });
 
-    test("cubic rightSubcurveAt, t == 1.0", () {
+    test('cubic rightSubcurveAt, t == 1.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -248,14 +248,14 @@ void main() {
       expect(() => curve.rightSubcurveAt(1.0), throwsArgumentError);
     });
 
-    test("quadratic rightSubcurveAt, t > 1.0", () {
+    test('quadratic rightSubcurveAt, t > 1.0', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
       expect(() => curve.rightSubcurveAt(1.1), throwsArgumentError);
     });
 
-    test("cubic rightSubcurveAt, t > 1.0", () {
+    test('cubic rightSubcurveAt, t > 1.0', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(150.0, 200.0),
@@ -267,8 +267,8 @@ void main() {
     });
   });
 
-  group("subcurveBetween", () {
-    test("cubic subcurveBetween", () {
+  group('subcurveBetween', () {
+    test('cubic subcurveBetween', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -286,7 +286,7 @@ void main() {
       expect(curve1.points[3], closeToVector(Vector2(26.875, 55.703125)));
     });
 
-    test("quadratic subcurveBetween", () {
+    test('quadratic subcurveBetween', () {
       final points = [
         Vector2(70.0, 95.0),
         Vector2(25.0, 20.0),
@@ -306,8 +306,8 @@ void main() {
     });
   });
 
-  group("simpleSubcurves", () {
-    test("cubic simpleSubcurves", () {
+  group('simpleSubcurves', () {
+    test('cubic simpleSubcurves', () {
       final points = [
         Vector2(105.0, -70.0),
         Vector2(50.0, 50.0),
@@ -365,7 +365,7 @@ void main() {
           ]));
     });
 
-    test("quadratic simpleSubcurves", () {
+    test('quadratic simpleSubcurves', () {
       final points = [
         Vector2(50.0, 50.0),
         Vector2(10.0, 80.0),
@@ -401,7 +401,7 @@ void main() {
           ]));
     });
 
-    test("quadratic simpleSubcurves, second test", () {
+    test('quadratic simpleSubcurves, second test', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
       final result = curve.simpleSubcurves();
@@ -441,7 +441,7 @@ void main() {
           ]));
     });
 
-    test("cubic simpleSubcurves, wavy curve", () {
+    test('cubic simpleSubcurves, wavy curve', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(50.0, 20.0),
@@ -452,7 +452,7 @@ void main() {
       expect(result, hasLength(4));
     });
 
-    test("cubic simpleSubcurves, arched curve", () {
+    test('cubic simpleSubcurves, arched curve', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(50.0, 20.0),
@@ -463,7 +463,7 @@ void main() {
       expect(result, hasLength(2));
     });
 
-    test("quadratic simpleSubcurves, linear curve", () {
+    test('quadratic simpleSubcurves, linear curve', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(5.0, 5.0), Vector2(100.0, 100.0)]);
 
@@ -476,7 +476,7 @@ void main() {
               [Vector2(0.0, 0.0), Vector2(5.0, 5.0), Vector2(100.0, 100.0)]));
     });
 
-    test("quadratic simpleSubcurves, degenerate curve", () {
+    test('quadratic simpleSubcurves, degenerate curve', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(250.0, 250.0), Vector2(100.0, 100.0)]);
 
