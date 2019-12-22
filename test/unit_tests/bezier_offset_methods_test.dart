@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("scaledCurve", () {
-    test("cubic scaledCurve", () {
+  group('scaledCurve', () {
+    test('cubic scaledCurve', () {
       final points = [
         Vector2(0.0, 0.0),
         Vector2(5.0, 15.0),
@@ -25,7 +25,7 @@ void main() {
           ]));
     });
 
-    test("quadratic scaledCurve", () {
+    test('quadratic scaledCurve', () {
       final points = [
         Vector2(10.0, 0.0),
         Vector2(30.0, 1.0),
@@ -46,7 +46,7 @@ void main() {
           ]));
     });
 
-    test("quadratic scaledCurve, linear curve", () {
+    test('quadratic scaledCurve, linear curve', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 50.0), Vector2(100.0, 100.0)]);
 
@@ -62,7 +62,7 @@ void main() {
           ]));
     });
 
-    test("cubic scaledCurve, parallel endpoint normals", () {
+    test('cubic scaledCurve, parallel endpoint normals', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(0.0, 100.0),
@@ -83,7 +83,7 @@ void main() {
           ]));
     });
 
-    test("cubic scaledCurve, parallel endpoint normals, another test", () {
+    test('cubic scaledCurve, parallel endpoint normals, another test', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(50.0, 0.0),
@@ -104,7 +104,7 @@ void main() {
           ]));
     });
 
-    test("cubic scaledCurve, anti-parallel endpoint normals", () {
+    test('cubic scaledCurve, anti-parallel endpoint normals', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(0.0, 100.0),
@@ -126,7 +126,7 @@ void main() {
     });
 
     test(
-        "cubic scaledCurve, non-linear curve with first control point overlapping start point",
+        'cubic scaledCurve, non-linear curve with first control point overlapping start point',
         () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
@@ -148,7 +148,7 @@ void main() {
     });
 
     test(
-        "cubic scaledCurve, non-linear curve with second control point overlapping end point",
+        'cubic scaledCurve, non-linear curve with second control point overlapping end point',
         () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
@@ -170,7 +170,7 @@ void main() {
     });
 
     test(
-        "quadratic scaledCurve, linear curve with control point overlapping start point",
+        'quadratic scaledCurve, linear curve with control point overlapping start point',
         () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(0.0, 0.0), Vector2(100.0, 0.0)]);
@@ -184,7 +184,7 @@ void main() {
     });
 
     test(
-        "cubic scaledCurve, linear curve with first control point overlapping start point",
+        'cubic scaledCurve, linear curve with first control point overlapping start point',
         () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
@@ -206,8 +206,8 @@ void main() {
     });
   });
 
-  group("toCubicBezier", () {
-    test("quadratic toCubicBezier", () {
+  group('toCubicBezier', () {
+    test('quadratic toCubicBezier', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -230,8 +230,8 @@ void main() {
     });
   });
 
-  group("offsetCurve", () {
-    test("cubic offsetCurve", () {
+  group('offsetCurve', () {
+    test('cubic offsetCurve', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(15.0, 95.0),
@@ -280,7 +280,7 @@ void main() {
           ]));
     });
 
-    test("quadratic offsetCurve", () {
+    test('quadratic offsetCurve', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(20.0, 20.0),
@@ -308,7 +308,7 @@ void main() {
           ]));
     });
 
-    test("linear cubic offsetCurve", () {
+    test('linear cubic offsetCurve', () {
       final points = [
         Vector2(100.0, 100.0),
         Vector2(100.0, 200.0),
@@ -330,7 +330,7 @@ void main() {
           ]));
     });
 
-    test("linear quadratic offsetCurve", () {
+    test('linear quadratic offsetCurve', () {
       final points = [
         Vector2(0.0, 0.0),
         Vector2(20.0, 5.0),

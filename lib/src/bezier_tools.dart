@@ -1,8 +1,8 @@
-import "dart:math";
+import 'dart:math';
 
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
 /// The roots of the Legendre polynomial for n == 30.
 ///
@@ -275,7 +275,7 @@ List<double> polynomialRoots(List<double> polynomial) {
     return <double>[];
   } else {
     throw UnsupportedError(
-        "Fourth and higher order polynomials not supported.");
+        'Fourth and higher order polynomials not supported.');
   }
 }
 

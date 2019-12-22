@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("pointAt", () {
-    test("quadratic pointAt", () {
+  group('pointAt', () {
+    test('quadratic pointAt', () {
       final curve = QuadraticBezier(
           [Vector2(10.0, 10.0), Vector2(70.0, 95.0), Vector2(15.0, 80.0)]);
 
@@ -16,7 +16,7 @@ void main() {
           closeToVector(Vector2(28.912500381469727, 82.25)));
     });
 
-    test("cubic pointAt", () {
+    test('cubic pointAt', () {
       final curve = CubicBezier([
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -35,8 +35,8 @@ void main() {
     });
   });
 
-  group("hullPointsAt", () {
-    test("quadratic hullPointsAt", () {
+  group('hullPointsAt', () {
+    test('quadratic hullPointsAt', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -59,7 +59,7 @@ void main() {
       expect(hull2[5], closeToVector(Vector2(20.0, 32.0)));
     });
 
-    test("cubic hullPointsAt", () {
+    test('cubic hullPointsAt', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(0.0, 100.0),
@@ -94,7 +94,7 @@ void main() {
       expect(hull2[9], closeToVector(Vector2(5.6, 28.8)));
     });
 
-    test("cubic hullPointsAt, second test", () {
+    test('cubic hullPointsAt, second test', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -133,7 +133,7 @@ void main() {
           closeToVector(Vector2(24.079999923706055, 57.84000015258789)));
     });
 
-    test("quadratic hullPointsAt, second test", () {
+    test('quadratic hullPointsAt, second test', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(25.0, 20.0),
@@ -161,8 +161,8 @@ void main() {
     });
   });
 
-  group("derivativeAt", () {
-    test("quadratic derivativeAt", () {
+  group('derivativeAt', () {
+    test('quadratic derivativeAt', () {
       final curve = QuadraticBezier(
           [Vector2(10.0, 10.0), Vector2(70.0, 95.0), Vector2(15.0, 80.0)]);
 
@@ -179,7 +179,7 @@ void main() {
       expect(curve.derivativeAt(1.0), closeToVector(Vector2(-110.0, -30.0)));
     });
 
-    test("cubic derivativeAt", () {
+    test('cubic derivativeAt', () {
       final curve = CubicBezier([
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -202,7 +202,7 @@ void main() {
       expect(curve.derivativeAt(1.0), closeToVector(Vector2(-30.0, 180.0)));
     });
 
-    test("quadratic derivativeAt, specified cachedFirstOrderDerivativePoints",
+    test('quadratic derivativeAt, specified cachedFirstOrderDerivativePoints',
         () {
       final curve = QuadraticBezier(
           [Vector2(10.0, 10.0), Vector2(70.0, 95.0), Vector2(15.0, 80.0)]);
@@ -252,7 +252,7 @@ void main() {
           closeToVector(Vector2(-110.0, -30.0)));
     });
 
-    test("cubic derivativeAt, specified cachedFirstOrderDerivativePoints", () {
+    test('cubic derivativeAt, specified cachedFirstOrderDerivativePoints', () {
       final curve = CubicBezier([
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -307,8 +307,8 @@ void main() {
     });
   });
 
-  group("normalAt", () {
-    test("cubic normalAt", () {
+  group('normalAt', () {
+    test('cubic normalAt', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -329,7 +329,7 @@ void main() {
           closeToVector(Vector2(-0.986393928527832, -0.16439898312091827)));
     });
 
-    test("quadratic normalAt", () {
+    test('quadratic normalAt', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(25.0, 20.0),
@@ -349,7 +349,7 @@ void main() {
           closeToVector(Vector2(-0.986393928527832, -0.16439898312091827)));
     });
 
-    test("cubic normalAt, specified cachedFirstOrderDerivativePoints", () {
+    test('cubic normalAt, specified cachedFirstOrderDerivativePoints', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(30.0, 100.0),
@@ -388,7 +388,7 @@ void main() {
           closeToVector(Vector2(-0.9805806875228882, 0.1961161345243454)));
     });
 
-    test("quadratic normalAt, specified cachedFirstOrderDerivativePoints", () {
+    test('quadratic normalAt, specified cachedFirstOrderDerivativePoints', () {
       final curve = QuadraticBezier(
           [Vector2(130.0, -40.0), Vector2(110.0, 85.0), Vector2(-45.0, 170.0)]);
 
@@ -423,8 +423,8 @@ void main() {
     });
   });
 
-  group("offsetPointAt", () {
-    test("cubic offsetPointAt", () {
+  group('offsetPointAt', () {
+    test('cubic offsetPointAt', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -450,7 +450,7 @@ void main() {
           closeToVector(Vector2(25.980581283569336, 20.196115493774414)));
     });
 
-    test("quadratic offsetPointAt", () {
+    test('quadratic offsetPointAt', () {
       final points = [
         Vector2(15.0, 70.0),
         Vector2(65.0, 20.0),
@@ -475,7 +475,7 @@ void main() {
           pointD, closeToVector(Vector2(62.01771926879883, 95.53215026855469)));
     });
 
-    test("quadratic offsetPointAt, negative distance", () {
+    test('quadratic offsetPointAt, negative distance', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -493,7 +493,7 @@ void main() {
           closeToVector(Vector2(89.44271850585938, -44.72135925292969)));
     });
 
-    test("cubic offsetPointAt, negativeDistance", () {
+    test('cubic offsetPointAt, negativeDistance', () {
       final curve = CubicBezier([
         Vector2(0.0, 100.0),
         Vector2(250.0, 0.0),
@@ -515,7 +515,7 @@ void main() {
           closeToVector(Vector2(-37.139068603515625, 7.1523284912109375)));
     });
 
-    test("quadratic offsetPointAt, specified cachedFirstOrderDerivativePoints",
+    test('quadratic offsetPointAt, specified cachedFirstOrderDerivativePoints',
         () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
@@ -557,7 +557,7 @@ void main() {
           closeToVector(Vector2(91.05572509765625, -4.4721360206604)));
     });
 
-    test("cubic offsetPointAt, specified cachedFirstOrderDerivativePoints", () {
+    test('cubic offsetPointAt, specified cachedFirstOrderDerivativePoints', () {
       final curve = CubicBezier([
         Vector2(0.0, 100.0),
         Vector2(250.0, 0.0),
@@ -604,8 +604,8 @@ void main() {
     });
   });
 
-  group("positionLookUpTable", () {
-    test("quadratic positionLookUpTable, default intervalsCount", () {
+  group('positionLookUpTable', () {
+    test('quadratic positionLookUpTable, default intervalsCount', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(50.0, 100.0), Vector2(100.0, 0.0)]);
 
@@ -622,7 +622,7 @@ void main() {
       expect(table[50], closeToVector(Vector2(100.0, 0.0)));
     });
 
-    test("cubic positionLookUpTable, default intervalsCount", () {
+    test('cubic positionLookUpTable, default intervalsCount', () {
       final curve = CubicBezier([
         Vector2(0.0, 0.0),
         Vector2(50.0, 100.0),

@@ -1,4 +1,4 @@
-import "dart:math";
+import 'dart:math';
 
 /// Describes intersections between two Bézier curves.
 class Intersection {
@@ -25,5 +25,5 @@ class Intersection {
       (maxTValueDifference(other) <= tValueDifference);
 
   @override
-  String toString() => "BDIntersection($t1, $t2)";
+  String toString() => 'BDIntersection($t1, $t2)';
 }

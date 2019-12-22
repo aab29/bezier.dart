@@ -1,10 +1,10 @@
-import "dart:math";
+import 'dart:math';
 
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
-import "bezier_tools.dart";
+import 'bezier_tools.dart';
 
 /// Abstract base class of Bézier curves.
 abstract class Bezier {
@@ -30,7 +30,7 @@ abstract class Bezier {
     } else if (curvePoints.length == 4) {
       return CubicBezier(curvePoints);
     } else {
-      throw UnsupportedError("Unsupported number of curve points");
+      throw UnsupportedError('Unsupported number of curve points');
     }
   }
 
@@ -63,7 +63,7 @@ abstract class Bezier {
     } else if (derivativeOrder > this.order) {
       return [];
     } else if (derivativeOrder < 1) {
-      throw ArgumentError("invalid order for derivatives");
+      throw ArgumentError('invalid order for derivatives');
     }
 
     final pointsToProcess =
@@ -204,7 +204,7 @@ abstract class Bezier {
   /// left of parameter value [t].
   Bezier leftSubcurveAt(double t) {
     if (t <= 0.0) {
-      throw ArgumentError("Cannot split curve left of start point");
+      throw ArgumentError('Cannot split curve left of start point');
     }
 
     t = min(t, 1.0);
@@ -217,7 +217,7 @@ abstract class Bezier {
       return CubicBezier(
           [hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
     } else {
-      throw UnsupportedError("Unsupported curve order");
+      throw UnsupportedError('Unsupported curve order');
     }
   }
 
@@ -225,7 +225,7 @@ abstract class Bezier {
   /// right of parameter value [t].
   Bezier rightSubcurveAt(double t) {
     if (t >= 1.0) {
-      throw ArgumentError("Cannot split curve right of end point");
+      throw ArgumentError('Cannot split curve right of end point');
     }
 
     t = max(t, 0.0);
@@ -237,7 +237,7 @@ abstract class Bezier {
       return CubicBezier(
           [hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
     } else {
-      throw UnsupportedError("Unsupported curve order");
+      throw UnsupportedError('Unsupported curve order');
     }
   }
 

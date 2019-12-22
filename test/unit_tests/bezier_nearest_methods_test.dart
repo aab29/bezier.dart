@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("indexOfNearestPoint", () {
-    test("one point", () {
+  group('indexOfNearestPoint', () {
+    test('one point', () {
       final points = [Vector2(80.0, -40.0)];
 
       expect(indexOfNearestPoint(points, Vector2(-30.0, -30.0)), equals(0));
@@ -11,7 +11,7 @@ void main() {
       expect(indexOfNearestPoint(points, Vector2(80.0, -40.0)), equals(0));
     });
 
-    test("two points", () {
+    test('two points', () {
       final points = [Vector2(-1.0, -1.0), Vector2(1.0, 1.0)];
 
       expect(indexOfNearestPoint(points, Vector2(-1.0, -1.0)), equals(0));
@@ -24,13 +24,13 @@ void main() {
       expect(indexOfNearestPoint(points, Vector2(7.0, -200.0)), equals(0));
     });
 
-    test("equidistant solutions prefers earlier element", () {
+    test('equidistant solutions prefers earlier element', () {
       final points = [Vector2(-100.0, 0.0), Vector2(100.0, 0.0)];
 
       expect(indexOfNearestPoint(points, Vector2(0.0, 0.0)), equals(0));
     });
 
-    test("distribution a", () {
+    test('distribution a', () {
       final points = [
         Vector2(500.0, 10.0),
         Vector2(0.0, 0.0),
@@ -61,7 +61,7 @@ void main() {
       expect(indexOfNearestPoint(points, Vector2(-100.0, 0.0)), equals(1));
     });
 
-    test("from a look-up table", () {
+    test('from a look-up table', () {
       final curve = CubicBezier([
         Vector2(-100.0, 25.0),
         Vector2(-65.0, -110.0),
@@ -84,8 +84,8 @@ void main() {
     });
   });
 
-  group("nearestTValue", () {
-    test("quadratic", () {
+  group('nearestTValue', () {
+    test('quadratic', () {
       final curve = QuadraticBezier(
           [Vector2(90.0, 0.0), Vector2(-10.0, -50.0), Vector2(-45.0, 45.0)]);
 
@@ -135,7 +135,7 @@ void main() {
           closeToDouble(0.586599999999));
     });
 
-    test("quadratic, equidistant solutions prefers earlier t value", () {
+    test('quadratic, equidistant solutions prefers earlier t value', () {
       final curve = QuadraticBezier([
         Vector2(-1.0, 0.0),
         Vector2(0.0, 100.0),
@@ -146,7 +146,7 @@ void main() {
       expect(curve.nearestTValue(Vector2(0.0, 20.0)), closeToDouble(0.112));
     });
 
-    test("cubic", () {
+    test('cubic', () {
       final curve = CubicBezier([
         Vector2(-100.0, -100.0),
         Vector2(-80.0, 50.0),

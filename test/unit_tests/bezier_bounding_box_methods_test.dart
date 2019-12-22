@@ -1,8 +1,8 @@
-import "../testing_tools/testing_tools.dart";
+import '../testing_tools/testing_tools.dart';
 
 void main() {
-  group("boundingBox", () {
-    test("cubic boundingBox", () {
+  group('boundingBox', () {
+    test('cubic boundingBox', () {
       final points = [
         Vector2(10.0, -10.0),
         Vector2(70.0, 95.0),
@@ -19,7 +19,7 @@ void main() {
       expect(box.max, closeToVector(Vector2(30.47231674194336, 80.0)));
     });
 
-    test("quadratic boundingBox", () {
+    test('quadratic boundingBox', () {
       final points = [
         Vector2(65.0, 95.0),
         Vector2(-25.0, -20.0),
@@ -38,8 +38,8 @@ void main() {
     });
   });
 
-  group("overlaps", () {
-    test("cubic overlaps with other cubic curve", () {
+  group('overlaps', () {
+    test('cubic overlaps with other cubic curve', () {
       final curveA = CubicBezier([
         Vector2(-10.0, -10.0),
         Vector2(-70.0, -95.0),
@@ -71,7 +71,7 @@ void main() {
       expect(curveC.overlaps(curveB), isTrue);
     });
 
-    test("quadratic overlaps with other quadratic curve", () {
+    test('quadratic overlaps with other quadratic curve', () {
       final curveA = QuadraticBezier([
         Vector2(-70.0, -95.0),
         Vector2(-25.0, -20.0),
@@ -94,7 +94,7 @@ void main() {
       expect(curveC.overlaps(curveB), isTrue);
     });
 
-    test("quadratic overlaps with quadratic and cubic curves", () {
+    test('quadratic overlaps with quadratic and cubic curves', () {
       final curveA = QuadraticBezier(
           [Vector2(-70.0, -95.0), Vector2(-25.0, -20.0), Vector2(-15.0, 5.0)]);
 
@@ -119,8 +119,8 @@ void main() {
     });
   });
 
-  group("extremaOnX", () {
-    test("cubic extremaOnX", () {
+  group('extremaOnX', () {
+    test('cubic extremaOnX', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -137,7 +137,7 @@ void main() {
       expect(result[1], closeToDouble(0.75));
     });
 
-    test("quadratic extremaOnX", () {
+    test('quadratic extremaOnX', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -153,8 +153,8 @@ void main() {
     });
   });
 
-  group("extremaOnY", () {
-    test("cubic extremaOnY", () {
+  group('extremaOnY', () {
+    test('cubic extremaOnY', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -172,7 +172,7 @@ void main() {
       expect(result[2], closeToDouble(0.6200436558467092));
     });
 
-    test("quadratic extremaOnY", () {
+    test('quadratic extremaOnY', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -188,8 +188,8 @@ void main() {
     });
   });
 
-  group("extrema", () {
-    test("cubic extrema", () {
+  group('extrema', () {
+    test('cubic extrema', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -209,7 +209,7 @@ void main() {
       expect(result[4], closeToDouble(0.75));
     });
 
-    test("quadratic extrema", () {
+    test('quadratic extrema', () {
       final points = [
         Vector2(10.0, 10.0),
         Vector2(70.0, 95.0),
@@ -225,7 +225,7 @@ void main() {
       expect(result[1], closeToDouble(0.5714285714285714));
     });
 
-    test("quadratic extrema, degenerate curve", () {
+    test('quadratic extrema, degenerate curve', () {
       final curve = QuadraticBezier(
           [Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(50.0, 0.0)]);
 

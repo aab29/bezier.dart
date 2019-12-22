@@ -1,4 +1,4 @@
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
 /// Class wrapping a [Bezier] instance and the parameter values for the
 /// start and end points of the instance in a parent [Bezier] instance.
@@ -15,5 +15,5 @@ class BezierSlice {
   BezierSlice(this.subcurve, this.t1, this.t2);
 
   @override
-  String toString() => "BDBezierSlice($subcurve, t1: $t1, t2: $t2)";
+  String toString() => 'BDBezierSlice($subcurve, t1: $t1, t2: $t2)';
 }

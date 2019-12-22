@@ -1,6 +1,6 @@
-import "package:vector_math/vector_math.dart";
+import 'package:vector_math/vector_math.dart';
 
-import "package:bezier/bezier.dart";
+import 'package:bezier/bezier.dart';
 
 /// Concrete class of quadratic Bézier curves.
 class QuadraticBezier extends Bezier {
@@ -10,7 +10,7 @@ class QuadraticBezier extends Bezier {
   QuadraticBezier(List<Vector2> points) : super(points) {
     if (points.length != 3) {
       throw ArgumentError(
-          "Quadratic Bézier curves require exactly three points");
+          'Quadratic Bézier curves require exactly three points');
     }
   }
 
@@ -49,7 +49,7 @@ class QuadraticBezier extends Bezier {
   /// and control points positioned so it produces identical points along the
   /// curve as [this].
   CubicBezier toCubicBezier() {
-    final cubicCurvePoints = List<Vector2>();
+    final cubicCurvePoints = <Vector2>[];
     cubicCurvePoints.add(startPoint);
 
     final pointsCount = points.length;
@@ -71,5 +71,5 @@ class QuadraticBezier extends Bezier {
 
   @override
   String toString() =>
-      "BDQuadraticBezier([${points[0]}, ${points[1]}, ${points[2]}])";
+      'BDQuadraticBezier([${points[0]}, ${points[1]}, ${points[2]}])';
 }
