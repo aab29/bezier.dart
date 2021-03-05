@@ -102,17 +102,17 @@ bool pointIntersectsBoundingBoxApproximately(Vector2 point, Aabb2 boundingBox,
 /// the result raised to the third power equals [realNumber].
 double principalCubeRoot(double realNumber) {
   if (realNumber < 0.0) {
-    return -pow(-realNumber, 1.0 / 3.0);
+    return -pow(-realNumber, 1.0 / 3.0) as double;
   } else {
-    return pow(realNumber, 1.0 / 3.0);
+    return pow(realNumber, 1.0 / 3.0) as double;
   }
 }
 
 /// Returns a [List] of [Vector2] describing the derivative function of the
 /// polynomial function described by [points].
-List<Vector2/*!*/> computeDerivativePoints(List<Vector2> points) {
+List<Vector2> computeDerivativePoints(List<Vector2> points) {
   final derivativePointsCount = points.length - 1;
-  final derivativePoints = List<Vector2>(derivativePointsCount);
+  final derivativePoints = List<Vector2?>(derivativePointsCount);
   final multiplier = derivativePointsCount.toDouble();
 
   for (var index = 0; index < derivativePointsCount; index++) {
@@ -122,7 +122,7 @@ List<Vector2/*!*/> computeDerivativePoints(List<Vector2> points) {
     derivativePoints[index] = point;
   }
 
-  return derivativePoints;
+  return derivativePoints as List<Vector2>;
 }
 
 /// Returns the signed angle in radians between the lines formed by [cornerPoint]
@@ -214,7 +214,7 @@ List<double> cubicRoots(double pa, double pb, double pc, double pd) {
     final minusThirdOfPCubed = -(thirdOfP * thirdOfP * thirdOfP);
     final r = sqrt(minusThirdOfPCubed);
     final t = -q / (2.0 * r);
-    final cosineOfPhi = t.clamp(-1.0, 1.0);
+    final num cosineOfPhi = t.clamp(-1.0, 1.0);
     final phi = acos(cosineOfPhi);
     final cubeRootOfR = principalCubeRoot(r);
     final t1 = 2.0 * cubeRootOfR;
@@ -301,7 +301,7 @@ List<double> rootsAlongLine(
 ///
 /// The first line passes through [p1] and [p2].  The second line passes through
 /// [p3] and [p4].  Returns [null] if the lines are parallel or coincident.
-Vector2 intersectionPointBetweenTwoLines(
+Vector2? intersectionPointBetweenTwoLines(
     Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
   final cross1 = (p1.x * p2.y - p1.y * p2.x);
   final cross2 = (p3.x * p4.y - p3.y * p4.x);
@@ -394,7 +394,7 @@ List<Intersection> locateIntersectionsRecursively(
 
 /// Returns the index of the point in [points] that is closest (in terms of
 /// geometric distance) to [targetPoint].
-int indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+int? indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
   var minSquaredDistance = double.maxFinite;
   var index;
 

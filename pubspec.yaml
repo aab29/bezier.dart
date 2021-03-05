@@ -10,7 +10,7 @@ description: >-
   Live examples can be found at <www.dartographer.com/bezier>.
 homepage: https://github.com/aab29/bezier.dart
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
   vector_math: ^2.0.0
 dev_dependencies:
