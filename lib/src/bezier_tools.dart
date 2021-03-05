@@ -1,8 +1,7 @@
 import 'dart:math';
 
-import 'package:vector_math/vector_math.dart';
-
 import 'package:bezier/bezier.dart';
+import 'package:vector_math/vector_math.dart';
 
 /// The roots of the Legendre polynomial for n == 30.
 ///
@@ -77,12 +76,10 @@ const legendrePolynomialWeights = [
 ];
 
 /// True if [a] and [b] are within [precision] units of each other.
-bool isApproximately(double a, double b, {double precision = 0.000001}) =>
-    ((a - b).abs() <= precision);
+bool isApproximately(double a, double b, {double precision = 0.000001}) => ((a - b).abs() <= precision);
 
 /// True if [point] intersects [boundingBox], or is within [precision] of the border.
-bool pointIntersectsBoundingBoxApproximately(Vector2 point, Aabb2 boundingBox,
-    {double precision = 0.0001}) {
+bool pointIntersectsBoundingBoxApproximately(Vector2 point, Aabb2 boundingBox, {double precision = 0.0001}) {
   final x = point.x;
   final y = point.y;
   final min = boundingBox.min;
@@ -112,7 +109,7 @@ double principalCubeRoot(double realNumber) {
 /// polynomial function described by [points].
 List<Vector2> computeDerivativePoints(List<Vector2> points) {
   final derivativePointsCount = points.length - 1;
-  final derivativePoints = List<Vector2?>(derivativePointsCount);
+  final derivativePoints = List<Vector2>.filled(derivativePointsCount, Vector2.zero());
   final multiplier = derivativePointsCount.toDouble();
 
   for (var index = 0; index < derivativePointsCount; index++) {
@@ -122,13 +119,12 @@ List<Vector2> computeDerivativePoints(List<Vector2> points) {
     derivativePoints[index] = point;
   }
 
-  return derivativePoints as List<Vector2>;
+  return derivativePoints;
 }
 
 /// Returns the signed angle in radians between the lines formed by [cornerPoint]
 /// to [firstEndpoint] and [cornerPoint] to [secondEndpoint].
-double cornerAngle(
-    Vector2 cornerPoint, Vector2 firstEndpoint, Vector2 secondEndpoint) {
+double cornerAngle(Vector2 cornerPoint, Vector2 firstEndpoint, Vector2 secondEndpoint) {
   final deltaVector1 = Vector2.copy(firstEndpoint);
   deltaVector1.sub(cornerPoint);
 
@@ -141,8 +137,7 @@ double cornerAngle(
 /// Returns a [List] of [Vector2] positions from [points] translated so that
 /// [lineStartPoint] is at the origin and rotated so that [lineEndPoint] is on
 /// the positive X axis.
-List<Vector2> alignWithLineSegment(
-    List<Vector2> points, Vector2 lineStartPoint, Vector2 lineEndPoint) {
+List<Vector2> alignWithLineSegment(List<Vector2> points, Vector2 lineStartPoint, Vector2 lineEndPoint) {
   final lineDeltaVector = Vector2.copy(lineEndPoint);
   lineDeltaVector.sub(lineStartPoint);
 
@@ -265,8 +260,7 @@ List<double> linearRoots(double a, double b) {
 /// by [polynomial].
 List<double> polynomialRoots(List<double> polynomial) {
   if (polynomial.length == 4) {
-    return cubicRoots(
-        polynomial[0], polynomial[1], polynomial[2], polynomial[3]);
+    return cubicRoots(polynomial[0], polynomial[1], polynomial[2], polynomial[3]);
   } else if (polynomial.length == 3) {
     return quadraticRoots(polynomial[0], polynomial[1], polynomial[2]);
   } else if (polynomial.length == 2) {
@@ -274,15 +268,13 @@ List<double> polynomialRoots(List<double> polynomial) {
   } else if (polynomial.length < 2) {
     return <double>[];
   } else {
-    throw UnsupportedError(
-        'Fourth and higher order polynomials not supported.');
+    throw UnsupportedError('Fourth and higher order polynomials not supported.');
   }
 }
 
 /// Returns the roots of the polynomial equation derived after aligning [points] along
 /// the line passing through [lineStart] and [lineEnd].
-List<double> rootsAlongLine(
-    List<Vector2> points, Vector2 lineStart, Vector2 lineEnd) {
+List<double> rootsAlongLine(List<Vector2> points, Vector2 lineStart, Vector2 lineEnd) {
   final alignedPoints = alignWithLineSegment(points, lineStart, lineEnd);
 
   final yValues = <double>[];
@@ -301,15 +293,13 @@ List<double> rootsAlongLine(
 ///
 /// The first line passes through [p1] and [p2].  The second line passes through
 /// [p3] and [p4].  Returns [null] if the lines are parallel or coincident.
-Vector2? intersectionPointBetweenTwoLines(
-    Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
+Vector2? intersectionPointBetweenTwoLines(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
   final cross1 = (p1.x * p2.y - p1.y * p2.x);
   final cross2 = (p3.x * p4.y - p3.y * p4.x);
 
   final xNumerator = cross1 * (p3.x - p4.x) - (p1.x - p2.x) * cross2;
   final yNumerator = cross1 * (p3.y - p4.y) - (p1.y - p2.y) * cross2;
-  final denominator =
-      (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
+  final denominator = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
   if (denominator == 0.0) {
     return null;
   }
@@ -325,8 +315,7 @@ bool boundingBoxIsSmallerThanSize(Aabb2 box, double maxSize) {
 
 /// Returns the indices of pairs of curve segments that overlap from [pairLeftSides]
 /// and [pairRightSides].
-List<int> indicesOfOverlappingSegmentPairs(
-    List<BezierSlice> pairLeftSides, List<BezierSlice> pairRightSides) {
+List<int> indicesOfOverlappingSegmentPairs(List<BezierSlice> pairLeftSides, List<BezierSlice> pairRightSides) {
   final overlappingIndices = <int>[];
   for (var pairIndex = 0; pairIndex < pairLeftSides.length; pairIndex++) {
     final leftSegment = pairLeftSides[pairIndex].subcurve;
@@ -374,8 +363,7 @@ List<Intersection> locateIntersectionsRecursively(
   final pairLeftSides = [curve1Left, curve1Left, curve1Right, curve1Right];
   final pairRightSides = [curve2Left, curve2Right, curve2Left, curve2Right];
 
-  final overlappingPairIndices =
-      indicesOfOverlappingSegmentPairs(pairLeftSides, pairRightSides);
+  final overlappingPairIndices = indicesOfOverlappingSegmentPairs(pairLeftSides, pairRightSides);
 
   final results = <Intersection>[];
   if (overlappingPairIndices.isEmpty) {
@@ -385,8 +373,7 @@ List<Intersection> locateIntersectionsRecursively(
   overlappingPairIndices.forEach((pairIndex) {
     final left = pairLeftSides[pairIndex];
     final right = pairRightSides[pairIndex];
-    results.addAll(locateIntersectionsRecursively(
-        left, right, curveIntersectionThreshold));
+    results.addAll(locateIntersectionsRecursively(left, right, curveIntersectionThreshold));
   });
 
   return results;
