@@ -16,7 +16,7 @@ const normalLineLength = 70.0;
 
 const outlineDistance = 50.0;
 
-final canvas = querySelector("#canvas") as CanvasElement;
+final canvas = querySelector("#canvas") as CanvasElement/*!*/;
 final context = canvas.context2D;
 
 void main() {

@@ -110,7 +110,7 @@ double principalCubeRoot(double realNumber) {
 
 /// Returns a [List] of [Vector2] describing the derivative function of the
 /// polynomial function described by [points].
-List<Vector2> computeDerivativePoints(List<Vector2> points) {
+List<Vector2/*!*/> computeDerivativePoints(List<Vector2> points) {
   final derivativePointsCount = points.length - 1;
   final derivativePoints = List<Vector2>(derivativePointsCount);
   final multiplier = derivativePointsCount.toDouble();
