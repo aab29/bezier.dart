@@ -210,7 +210,7 @@ List<double> cubicRoots(double pa, double pb, double pc, double pd) {
     final minusThirdOfPCubed = -(thirdOfP * thirdOfP * thirdOfP);
     final r = sqrt(minusThirdOfPCubed);
     final t = -q / (2.0 * r);
-    final num cosineOfPhi = t.clamp(-1.0, 1.0);
+    final cosineOfPhi = t.clamp(-1.0, 1.0);
     final phi = acos(cosineOfPhi);
     final cubeRootOfR = principalCubeRoot(r);
     final t1 = 2.0 * cubeRootOfR;
