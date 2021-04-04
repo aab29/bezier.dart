@@ -1,8 +1,7 @@
 import 'dart:math';
 
-import 'package:vector_math/vector_math.dart';
-
 import 'package:bezier/bezier.dart';
+import 'package:vector_math/vector_math.dart';
 
 import 'bezier_tools.dart';
 
@@ -15,7 +14,7 @@ abstract class Bezier {
   static const originIntersectionTestDistance = 10.0;
 
   /// The start point, end point and control points of the Bézier curve.
-  final List<Vector2> points;
+  final List<Vector2 > points;
 
   /// Constructs a Bézier curve from a [List] of [Vector2].
   Bezier(this.points);
@@ -24,7 +23,7 @@ abstract class Bezier {
   /// the number of entries in [curvePoints].  If [curvePoints] contains three points,
   /// returns a [QuadraticBezier].  If [curvePoints] contains four points, returns a
   /// [CubicBezier].
-  factory Bezier.fromPoints(List<Vector2> curvePoints) {
+  factory Bezier.fromPoints(List<Vector2 > curvePoints) {
     if (curvePoints.length == 3) {
       return QuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
@@ -49,15 +48,14 @@ abstract class Bezier {
   Vector2 get endPoint => points.last;
 
   /// Derivative points for the first order.
-  List<Vector2> get firstOrderDerivativePoints =>
-      computeDerivativePoints(points);
+  List<Vector2 > get firstOrderDerivativePoints => computeDerivativePoints(points);
 
   /// Derivative points for the order [derivativeOrder].  Derivative points describe
   /// the derivative function of the polynomial function of [this] and are
   /// used by other methods to calculate derivative values.
   ///
   /// Orders beyond the first are calculated with the previous order.
-  List<Vector2> derivativePoints({int derivativeOrder = 1}) {
+  List<Vector2 > derivativePoints({int derivativeOrder = 1}) {
     if (derivativeOrder == 1) {
       return firstOrderDerivativePoints;
     } else if (derivativeOrder > this.order) {
@@ -66,8 +64,7 @@ abstract class Bezier {
       throw ArgumentError('invalid order for derivatives');
     }
 
-    final pointsToProcess =
-        derivativePoints(derivativeOrder: derivativeOrder - 1);
+    final pointsToProcess = derivativePoints(derivativeOrder: derivativeOrder - 1);
 
     return computeDerivativePoints(pointsToProcess);
   }
@@ -77,8 +74,7 @@ abstract class Bezier {
   /// The return value is not normalized.  The optional parameter [cachedFirstOrderDerivativePoints]
   /// allows the method to use previously calculated values for [firstOrderDerivativePoints] instead
   /// of repeating the calculations.
-  Vector2 derivativeAt(double t,
-      {List<Vector2> cachedFirstOrderDerivativePoints});
+  Vector2 derivativeAt(double t, {List<Vector2 >? cachedFirstOrderDerivativePoints});
 
   /// True if the curve is clockwise.
   ///
@@ -120,22 +116,19 @@ abstract class Bezier {
     return z * sum;
   }
 
-  List<Vector2> _interpolatedPoints(
-      List<Vector2> pointsToInterpolate, double t) {
+  List<Vector2> _interpolatedPoints(List<Vector2> pointsToInterpolate, double t) {
     final interpolatedPoints = <Vector2>[];
 
     for (var index = 0; index < pointsToInterpolate.length - 1; index++) {
       final point = Vector2.zero();
-      Vector2.mix(
-          pointsToInterpolate[index], pointsToInterpolate[index + 1], t, point);
+      Vector2.mix(pointsToInterpolate[index], pointsToInterpolate[index + 1], t, point);
       interpolatedPoints.add(point);
     }
 
     return interpolatedPoints;
   }
 
-  List<Vector2> _interpolateRecursively(
-      List<Vector2> pointsToInterpolate, double t) {
+  List<Vector2> _interpolateRecursively(List<Vector2> pointsToInterpolate, double t) {
     if (pointsToInterpolate.length > 1) {
       final result = List<Vector2>.from(pointsToInterpolate);
 
@@ -163,10 +156,8 @@ abstract class Bezier {
   ///
   /// The return value is normalized.  See [derivativeAt] for information about
   /// the optional parameter [cachedFirstOrderDerivativePoints].
-  Vector2 normalAt(double t, {List<Vector2> cachedFirstOrderDerivativePoints}) {
-    final d = derivativeAt(t,
-        cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)
-      ..normalize();
+  Vector2 normalAt(double t, {List<Vector2>? cachedFirstOrderDerivativePoints}) {
+    final d = derivativeAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints)..normalize();
     return Vector2(-d.y, d.x);
   }
 
@@ -214,8 +205,7 @@ abstract class Bezier {
     if (order == 2) {
       return QuadraticBezier([hullPoints[0], hullPoints[3], hullPoints[5]]);
     } else if (order == 3) {
-      return CubicBezier(
-          [hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
+      return CubicBezier([hullPoints[0], hullPoints[4], hullPoints[7], hullPoints[9]]);
     } else {
       throw UnsupportedError('Unsupported curve order');
     }
@@ -234,8 +224,7 @@ abstract class Bezier {
     if (order == 2) {
       return QuadraticBezier([hullPoints[5], hullPoints[4], hullPoints[2]]);
     } else if (order == 3) {
-      return CubicBezier(
-          [hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
+      return CubicBezier([hullPoints[9], hullPoints[8], hullPoints[6], hullPoints[3]]);
     } else {
       throw UnsupportedError('Unsupported curve order');
     }
@@ -259,8 +248,7 @@ abstract class Bezier {
 
     if (order == 3) {
       final secondOrderPoints = derivativePoints(derivativeOrder: 2);
-      final secondOrderPolynomial =
-          secondOrderPoints.map(mappingFunction).toList();
+      final secondOrderPolynomial = secondOrderPoints.map(mappingFunction).toList();
       result.addAll(polynomialRoots(secondOrderPolynomial));
     }
 
@@ -292,10 +280,8 @@ abstract class Bezier {
 
   /// The normal vector at [t] taking into account overlapping control
   /// points at the end point with index [endPointIndex] in [points].
-  Vector2 _nonOverlappingNormalVectorAt(
-      double t, int endPointIndex, List<Vector2> cachedPoints) {
-    final normalVector =
-        normalAt(t, cachedFirstOrderDerivativePoints: cachedPoints);
+  Vector2 _nonOverlappingNormalVectorAt(double t, int endPointIndex, List<Vector2> cachedPoints) {
+    final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedPoints);
     if ((normalVector.x != 0.0) || (normalVector.y != 0.0)) {
       return normalVector;
     }
@@ -329,20 +315,17 @@ abstract class Bezier {
     if (order == 3) {
       final startAngle = cornerAngle(startPoint, endPoint, points[1]);
       final endAngle = cornerAngle(startPoint, endPoint, points[2]);
-      if (((startAngle > 0.0) && (endAngle < 0.0)) ||
-          ((startAngle < 0.0) && (endAngle > 0.0))) {
+      if (((startAngle > 0.0) && (endAngle < 0.0)) || ((startAngle < 0.0) && (endAngle > 0.0))) {
         return false;
       }
     }
 
     final firstOrderPoints = firstOrderDerivativePoints;
-    final startPointNormal =
-        _nonOverlappingNormalVectorAt(0.0, 0, firstOrderPoints);
-    final endPointNormal =
-        _nonOverlappingNormalVectorAt(1.0, order, firstOrderPoints);
+    final startPointNormal = _nonOverlappingNormalVectorAt(0.0, 0, firstOrderPoints);
+    final endPointNormal = _nonOverlappingNormalVectorAt(1.0, order, firstOrderPoints);
 
     final normalDotProduct = startPointNormal.dot(endPointNormal);
-    final clampedDotProduct = normalDotProduct.clamp(-1.0, 1.0);
+    final num clampedDotProduct = normalDotProduct.clamp(-1.0, 1.0);
     final angle = (acos(clampedDotProduct)).abs();
 
     return (angle < pi / 3.0);
@@ -362,9 +345,7 @@ abstract class Bezier {
     }
 
     var t1 = extremaTValues[0];
-    for (var extremityIndex = 1;
-        extremityIndex < extremaTValues.length;
-        extremityIndex++) {
+    for (var extremityIndex = 1; extremityIndex < extremaTValues.length; extremityIndex++) {
       final t2 = extremaTValues[extremityIndex];
       final subcurve = subcurveBetween(t1, t2);
       final reductionResult = BezierSlice(subcurve, t1, t2);
@@ -381,8 +362,7 @@ abstract class Bezier {
   /// value to an ending parameter value in search of non-simple portions.  When
   /// a non-simple portion is found, it backtracks and adds the last known simple
   /// portion to the returned value.
-  List<BezierSlice> _divideNonSimpleSlices(
-      List<BezierSlice> slicesToProcess, double stepSize) {
+  List<BezierSlice> _divideNonSimpleSlices(List<BezierSlice> slicesToProcess, double stepSize) {
     final simpleSlices = <BezierSlice>[];
 
     for (final slice in slicesToProcess) {
@@ -460,11 +440,9 @@ abstract class Bezier {
   /// the point along the curve at parameter value [t].
   ///
   /// See [derivativeAt] for information about the optional parameter [cachedFirstOrderDerivativePoints].
-  Vector2 offsetPointAt(double t, double distance,
-      {List<Vector2> cachedFirstOrderDerivativePoints}) {
+  Vector2 offsetPointAt(double t, double distance, {List<Vector2>? cachedFirstOrderDerivativePoints}) {
     final offsetPoint = pointAt(t);
-    final normalVector = normalAt(t,
-        cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints);
+    final normalVector = normalAt(t, cachedFirstOrderDerivativePoints: cachedFirstOrderDerivativePoints);
 
     offsetPoint.addScaled(normalVector, distance);
 
@@ -488,8 +466,7 @@ abstract class Bezier {
   /// Returns a [Bezier] instance with [points] translated by [distance] units
   /// along the normal vector at the start point.
   Bezier _translatedLinearCurve(double distance) {
-    final normalVector =
-        _nonOverlappingNormalVectorAt(0.0, 0, firstOrderDerivativePoints);
+    final normalVector = _nonOverlappingNormalVectorAt(0.0, 0, firstOrderDerivativePoints);
     final translatedPoints = <Vector2>[];
     for (final point in points) {
       final translatedPoint = Vector2.copy(point);
@@ -506,12 +483,9 @@ abstract class Bezier {
   /// the origin is the midpoint between the start and end points.
   Vector2 get _scalingOrigin {
     final firstOrderPoints = firstOrderDerivativePoints;
-    final offsetStart = _nonOverlappingOffsetPointAt(
-        0.0, originIntersectionTestDistance, 0, firstOrderPoints);
-    final offsetEnd = _nonOverlappingOffsetPointAt(
-        1.0, originIntersectionTestDistance, order, firstOrderPoints);
-    final intersectionPoint = intersectionPointBetweenTwoLines(
-        offsetStart, startPoint, offsetEnd, endPoint);
+    final offsetStart = _nonOverlappingOffsetPointAt(0.0, originIntersectionTestDistance, 0, firstOrderPoints);
+    final offsetEnd = _nonOverlappingOffsetPointAt(1.0, originIntersectionTestDistance, order, firstOrderPoints);
+    final intersectionPoint = intersectionPointBetweenTwoLines(offsetStart, startPoint, offsetEnd, endPoint);
     if (intersectionPoint == null) {
       final centerPoint = Vector2.zero();
       Vector2.mix(startPoint, endPoint, 0.5, centerPoint);
@@ -523,11 +497,9 @@ abstract class Bezier {
 
   /// Returns the point at [t] offset by [distance] along the normal vector calculated
   /// by [_nonOverlappingNormalVectorAt].
-  Vector2 _nonOverlappingOffsetPointAt(double t, double distance,
-      int endPointIndex, List<Vector2> cachedPoints) {
+  Vector2 _nonOverlappingOffsetPointAt(double t, double distance, int endPointIndex, List<Vector2> cachedPoints) {
     final offsetPoint = pointAt(t);
-    final normalVector =
-        _nonOverlappingNormalVectorAt(t, endPointIndex, cachedPoints);
+    final normalVector = _nonOverlappingNormalVectorAt(t, endPointIndex, cachedPoints);
     offsetPoint.addScaled(normalVector, distance);
     return offsetPoint;
   }
@@ -549,37 +521,31 @@ abstract class Bezier {
     var origin = _scalingOrigin;
 
     final listLength = order + 1;
-    final scaledCurvePoints = List<Vector2>(listLength);
+    final scaledCurvePoints = List<Vector2?>.filled(listLength, Vector2.zero());
 
     final firstOrderPoints = firstOrderDerivativePoints;
 
-    final scaledStartPoint =
-        _nonOverlappingOffsetPointAt(0.0, distance, 0, firstOrderPoints);
+    final scaledStartPoint = _nonOverlappingOffsetPointAt(0.0, distance, 0, firstOrderPoints);
     scaledCurvePoints[0] = scaledStartPoint;
 
-    final scaledEndPoint =
-        _nonOverlappingOffsetPointAt(1.0, distance, order, firstOrderPoints);
+    final scaledEndPoint = _nonOverlappingOffsetPointAt(1.0, distance, order, firstOrderPoints);
     scaledCurvePoints[order] = scaledEndPoint;
 
     final startTangentPoint = Vector2.copy(scaledStartPoint);
-    startTangentPoint.add(
-        derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
-    scaledCurvePoints[1] = intersectionPointBetweenTwoLines(
-        scaledStartPoint, startTangentPoint, origin, points[1]);
+    startTangentPoint.add(derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
+    scaledCurvePoints[1] = intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]);
 
     scaledCurvePoints[1] ??= startTangentPoint;
 
     if (order == 3) {
       final endTangentPoint = Vector2.copy(scaledEndPoint);
-      endTangentPoint.add(derivativeAt(1.0,
-          cachedFirstOrderDerivativePoints: firstOrderPoints));
-      scaledCurvePoints[2] = intersectionPointBetweenTwoLines(
-          scaledEndPoint, endTangentPoint, origin, points[2]);
+      endTangentPoint.add(derivativeAt(1.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
+      scaledCurvePoints[2] = intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]);
 
       scaledCurvePoints[2] ??= endTangentPoint;
     }
 
-    return Bezier.fromPoints(scaledCurvePoints);
+    return Bezier.fromPoints(scaledCurvePoints as List<Vector2>);
   }
 
   /// Returns a [List] of intersection results after removing duplicates in [intersectionsToFilter].
@@ -594,8 +560,7 @@ abstract class Bezier {
     final filteredList = <Intersection>[firstIntersection];
     while (sublist.isNotEmpty) {
       sublist.removeWhere((intersection) {
-        return intersection.isWithinTValueOf(
-            firstIntersection, minTValueDifference);
+        return intersection.isWithinTValueOf(firstIntersection, minTValueDifference);
       });
 
       if (sublist.isNotEmpty) {
@@ -608,11 +573,8 @@ abstract class Bezier {
   }
 
   /// Returns a [List] of intersection results between [curve1] and [curve2].
-  static List<Intersection> _locateIntersections(
-      List<BezierSlice> curve1,
-      List<BezierSlice> curve2,
-      double curveIntersectionThreshold,
-      double minTValueDifference) {
+  static List<Intersection> _locateIntersections(List<BezierSlice> curve1, List<BezierSlice> curve2,
+      double curveIntersectionThreshold, double minTValueDifference) {
     final leftOverlappingSegments = <BezierSlice>[];
     final rightOverlappingSegments = <BezierSlice>[];
     curve1.forEach((left) {
@@ -629,8 +591,7 @@ abstract class Bezier {
     for (var pairIndex = 0; pairIndex < overlappingSegmentsCount; pairIndex++) {
       final leftCurve = leftOverlappingSegments[pairIndex];
       final rightCurve = rightOverlappingSegments[pairIndex];
-      final result = locateIntersectionsRecursively(
-          leftCurve, rightCurve, curveIntersectionThreshold);
+      final result = locateIntersectionsRecursively(leftCurve, rightCurve, curveIntersectionThreshold);
       intersections.addAll(result);
     }
 
@@ -652,31 +613,25 @@ abstract class Bezier {
   /// [curveIntersectionThreshold] or increasing [minTValueDifference] may
   /// reduce the number of intersections returned in such cases.
   List<Intersection> intersectionsWithCurve(Bezier curve,
-      {double curveIntersectionThreshold = 0.5,
-      double minTValueDifference = 0.003}) {
+      {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
     final reducedSegments = simpleSlices();
     final curveReducedSegments = curve.simpleSlices();
 
-    return _locateIntersections(reducedSegments, curveReducedSegments,
-        curveIntersectionThreshold, minTValueDifference);
+    return _locateIntersections(reducedSegments, curveReducedSegments, curveIntersectionThreshold, minTValueDifference);
   }
 
   /// Returns the [List] of intersections between [this] and itself.
   ///
   /// See [intersectionsWithCurve] for information about the optional parameters.
   List<Intersection> intersectionsWithSelf(
-      {double curveIntersectionThreshold = 0.5,
-      double minTValueDifference = 0.003}) {
+      {double curveIntersectionThreshold = 0.5, double minTValueDifference = 0.003}) {
     final reducedSegments = simpleSlices();
     final results = <Intersection>[];
 
-    for (var segmentIndex = 0;
-        segmentIndex < reducedSegments.length - 2;
-        segmentIndex++) {
+    for (var segmentIndex = 0; segmentIndex < reducedSegments.length - 2; segmentIndex++) {
       final left = reducedSegments.sublist(segmentIndex, segmentIndex + 1);
       final right = reducedSegments.sublist(segmentIndex + 2);
-      final result = _locateIntersections(
-          left, right, curveIntersectionThreshold, minTValueDifference);
+      final result = _locateIntersections(left, right, curveIntersectionThreshold, minTValueDifference);
       results.addAll(result);
     }
 
@@ -685,8 +640,7 @@ abstract class Bezier {
 
   /// Returns the [List] of parameter values for intersections between [this] and
   /// the line segment defined by [lineStartPoint] and [lineEndPoint].
-  List<double> intersectionsWithLineSegment(
-      Vector2 lineStartPoint, Vector2 lineEndPoint) {
+  List<double> intersectionsWithLineSegment(Vector2 lineStartPoint, Vector2 lineEndPoint) {
     final minPoint = Vector2.zero();
     Vector2.min(lineStartPoint, lineEndPoint, minPoint);
 
@@ -740,8 +694,7 @@ abstract class Bezier {
   /// [stepSize] value of 0.1 means that the function will do around twenty
   /// iterations.  Reducing the value of [stepSize] will increase the number of
   /// iterations.
-  double nearestTValue(Vector2 point,
-      {List<Vector2> cachedPositionLookUpTable, double stepSize = 0.1}) {
+  double nearestTValue(Vector2 point, {List<Vector2>? cachedPositionLookUpTable, double stepSize = 0.1}) {
     final lookUpTable = cachedPositionLookUpTable ?? positionLookUpTable();
 
     final index = indexOfNearestPoint(lookUpTable, point);
@@ -755,7 +708,7 @@ abstract class Bezier {
     }
 
     final intervalsCount = maxIndex.toDouble();
-    final t1 = (index - 1) / intervalsCount;
+    final t1 = (index! - 1) / intervalsCount;
     final t2 = (index + 1) / intervalsCount;
 
     final tIncrement = stepSize / intervalsCount;

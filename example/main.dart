@@ -30,7 +30,7 @@ void animate() {
 void drawFrame(num time) {
   clearCanvas();
 
-  final points = pointsAtTime(time);
+  final points = pointsAtTime(time as double);
   final curve = new CubicBezier(points);
 
   drawMainCurve(curve);
@@ -53,14 +53,14 @@ void drawFrame(num time) {
 List<Vector2> pointsAtTime(double time) => timeOffsets.map((offset) {
       final adjustedTime = slitherRate * time + offset;
       return new Vector2(
-          canvas.width *
+          canvas.width! *
               (0.5 + cos(oscillationRateX * adjustedTime) * slitherRadius),
-          canvas.height *
+          canvas.height! *
               (0.5 + sin(oscillationRateY * adjustedTime) * slitherRadius));
     }).toList();
 
 void clearCanvas() {
-  context.clearRect(0.0, 0.0, canvas.width, canvas.height);
+  context.clearRect(0.0, 0.0, canvas.width!, canvas.height!);
 }
 
 void drawCircle(Vector2 center, {double radius = 3.0}) {
@@ -135,8 +135,8 @@ void drawOutlines(CubicBezier curve) {
 }
 
 Vector2 lineSegmentPointAtTime(double radius, double time) => new Vector2(
-      canvas.width * (0.5 + radius * cos(time * 0.00042)),
-      canvas.height * (0.5 + radius * sin(time * 0.00042)),
+      canvas.width! * (0.5 + radius * cos(time * 0.00042)),
+      canvas.height! * (0.5 + radius * sin(time * 0.00042)),
     );
 
 void drawLineSegmentIntersections(CubicBezier curve, double time) {
