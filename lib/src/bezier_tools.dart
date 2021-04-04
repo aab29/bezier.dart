@@ -108,15 +108,16 @@ double principalCubeRoot(double realNumber) {
 /// Returns a [List] of [Vector2] describing the derivative function of the
 /// polynomial function described by [points].
 List<Vector2> computeDerivativePoints(List<Vector2> points) {
+  final derivativePoints = <Vector2>[];
+
   final derivativePointsCount = points.length - 1;
-  final derivativePoints = List<Vector2>.filled(derivativePointsCount, Vector2.zero());
   final multiplier = derivativePointsCount.toDouble();
 
   for (var index = 0; index < derivativePointsCount; index++) {
     final point = Vector2.copy(points[index + 1]);
     point.sub(points[index]);
     point.scale(multiplier);
-    derivativePoints[index] = point;
+    derivativePoints.add(point);
   }
 
   return derivativePoints;
