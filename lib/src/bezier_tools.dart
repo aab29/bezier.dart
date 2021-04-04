@@ -382,7 +382,11 @@ List<Intersection> locateIntersectionsRecursively(
 
 /// Returns the index of the point in [points] that is closest (in terms of
 /// geometric distance) to [targetPoint].
-int? indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+int indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+  if (points.isEmpty) {
+    throw ArgumentError.value('points', 'must contain at least one point');
+  }
+
   var minSquaredDistance = double.maxFinite;
   var index;
 

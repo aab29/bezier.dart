@@ -704,7 +704,7 @@ abstract class Bezier {
     }
 
     final intervalsCount = maxIndex.toDouble();
-    final t1 = (index! - 1) / intervalsCount;
+    final t1 = (index - 1) / intervalsCount;
     final t2 = (index + 1) / intervalsCount;
 
     final tIncrement = stepSize / intervalsCount;
