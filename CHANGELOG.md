@@ -1,5 +1,13 @@
 # Changelog - bezier
 
+## v 1.2.0 - April 4 2021
+
+- Migrate to null safety (Thanks to @fzyzcjy for doing most of the work)
+- Update SDK constraints to `'>=2.12.0 <3.0.0'`
+- Updated dependencies (`vector_math` and `test`) to support null safety as well
+- Removing usage of the `new` keyword in the code in `README.md`
+- Updating a URL in `README.md`
+
 ## v 1.1.5 - December 21 2019
 
 - Replaced all usages of double quotes with single quotes in order to conform to the latest style recommendations.

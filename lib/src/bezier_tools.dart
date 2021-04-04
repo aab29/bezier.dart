@@ -108,15 +108,16 @@ double principalCubeRoot(double realNumber) {
 /// Returns a [List] of [Vector2] describing the derivative function of the
 /// polynomial function described by [points].
 List<Vector2> computeDerivativePoints(List<Vector2> points) {
+  final derivativePoints = <Vector2>[];
+
   final derivativePointsCount = points.length - 1;
-  final derivativePoints = List<Vector2>.filled(derivativePointsCount, Vector2.zero());
   final multiplier = derivativePointsCount.toDouble();
 
   for (var index = 0; index < derivativePointsCount; index++) {
     final point = Vector2.copy(points[index + 1]);
     point.sub(points[index]);
     point.scale(multiplier);
-    derivativePoints[index] = point;
+    derivativePoints.add(point);
   }
 
   return derivativePoints;
@@ -209,7 +210,7 @@ List<double> cubicRoots(double pa, double pb, double pc, double pd) {
     final minusThirdOfPCubed = -(thirdOfP * thirdOfP * thirdOfP);
     final r = sqrt(minusThirdOfPCubed);
     final t = -q / (2.0 * r);
-    final num cosineOfPhi = t.clamp(-1.0, 1.0);
+    final cosineOfPhi = t.clamp(-1.0, 1.0);
     final phi = acos(cosineOfPhi);
     final cubeRootOfR = principalCubeRoot(r);
     final t1 = 2.0 * cubeRootOfR;
@@ -381,7 +382,11 @@ List<Intersection> locateIntersectionsRecursively(
 
 /// Returns the index of the point in [points] that is closest (in terms of
 /// geometric distance) to [targetPoint].
-int? indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+int indexOfNearestPoint(List<Vector2> points, Vector2 targetPoint) {
+  if (points.isEmpty) {
+    throw ArgumentError.value('points', 'must contain at least one point');
+  }
+
   var minSquaredDistance = double.maxFinite;
   var index;
 

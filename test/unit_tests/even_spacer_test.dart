@@ -21,11 +21,11 @@ void main() {
 
     test('constructor throws error with one-entry look up table', () {
       final lookUpTable = <Vector2>[Vector2(100.0, 100.0)];
-      expect(() => EvenSpacer(lookUpTable), throwsA(TypeMatcher<Error>()));
+      expect(() => EvenSpacer(lookUpTable), throwsArgumentError);
     });
 
     test('constructor throws error with empty look up table', () {
-      expect(() => EvenSpacer([]), throwsA(TypeMatcher<Error>()));
+      expect(() => EvenSpacer([]), throwsArgumentError);
     });
   });
 
