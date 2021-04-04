@@ -33,7 +33,8 @@ void main() {
     test('empty list throws error', () {
       final points = <Vector2>[];
 
-      expect(() => indexOfNearestPoint(points, Vector2(5.0, 5.0)), throwsArgumentError);
+      expect(() => indexOfNearestPoint(points, Vector2(5.0, 5.0)),
+          throwsArgumentError);
     });
 
     test('distribution a', () {
