@@ -520,26 +520,26 @@ abstract class Bezier {
 
     var origin = _scalingOrigin;
 
-    final listLength = order + 1;
-    final scaledCurvePoints = List<Vector2>.filled(listLength, Vector2.zero());
+    final scaledCurvePoints = <Vector2>[];
 
     final firstOrderPoints = firstOrderDerivativePoints;
 
     final scaledStartPoint = _nonOverlappingOffsetPointAt(0.0, distance, 0, firstOrderPoints);
-    scaledCurvePoints[0] = scaledStartPoint;
+    scaledCurvePoints.add(scaledStartPoint);
 
     final scaledEndPoint = _nonOverlappingOffsetPointAt(1.0, distance, order, firstOrderPoints);
-    scaledCurvePoints[order] = scaledEndPoint;
 
     final startTangentPoint = Vector2.copy(scaledStartPoint);
     startTangentPoint.add(derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
-    scaledCurvePoints[1] = intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]) ?? startTangentPoint;
+    scaledCurvePoints.add(intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]) ?? startTangentPoint);
 
     if (order == 3) {
       final endTangentPoint = Vector2.copy(scaledEndPoint);
       endTangentPoint.add(derivativeAt(1.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
-      scaledCurvePoints[2] = intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]) ?? endTangentPoint;
+      scaledCurvePoints.add(intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]) ?? endTangentPoint);
     }
+
+    scaledCurvePoints.add(scaledEndPoint);
 
     return Bezier.fromPoints(scaledCurvePoints);
   }
