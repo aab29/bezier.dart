@@ -66,7 +66,7 @@ void main() {
         Vector2(100.0, -100.0),
         Vector2(-30.0, 100.0)
       ];
-      expect(() => Bezier.fromPoints(points), throwsA(TypeMatcher<Error>()));
+      expect(() => Bezier.fromPoints(points), throwsUnsupportedError);
     });
   });
 }
