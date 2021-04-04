@@ -14,7 +14,7 @@ abstract class Bezier {
   static const originIntersectionTestDistance = 10.0;
 
   /// The start point, end point and control points of the Bézier curve.
-  final List<Vector2 > points;
+  final List<Vector2> points;
 
   /// Constructs a Bézier curve from a [List] of [Vector2].
   Bezier(this.points);
@@ -23,7 +23,7 @@ abstract class Bezier {
   /// the number of entries in [curvePoints].  If [curvePoints] contains three points,
   /// returns a [QuadraticBezier].  If [curvePoints] contains four points, returns a
   /// [CubicBezier].
-  factory Bezier.fromPoints(List<Vector2 > curvePoints) {
+  factory Bezier.fromPoints(List<Vector2> curvePoints) {
     if (curvePoints.length == 3) {
       return QuadraticBezier(curvePoints);
     } else if (curvePoints.length == 4) {
@@ -48,14 +48,14 @@ abstract class Bezier {
   Vector2 get endPoint => points.last;
 
   /// Derivative points for the first order.
-  List<Vector2 > get firstOrderDerivativePoints => computeDerivativePoints(points);
+  List<Vector2> get firstOrderDerivativePoints => computeDerivativePoints(points);
 
   /// Derivative points for the order [derivativeOrder].  Derivative points describe
   /// the derivative function of the polynomial function of [this] and are
   /// used by other methods to calculate derivative values.
   ///
   /// Orders beyond the first are calculated with the previous order.
-  List<Vector2 > derivativePoints({int derivativeOrder = 1}) {
+  List<Vector2> derivativePoints({int derivativeOrder = 1}) {
     if (derivativeOrder == 1) {
       return firstOrderDerivativePoints;
     } else if (derivativeOrder > this.order) {
@@ -74,7 +74,7 @@ abstract class Bezier {
   /// The return value is not normalized.  The optional parameter [cachedFirstOrderDerivativePoints]
   /// allows the method to use previously calculated values for [firstOrderDerivativePoints] instead
   /// of repeating the calculations.
-  Vector2 derivativeAt(double t, {List<Vector2 >? cachedFirstOrderDerivativePoints});
+  Vector2 derivativeAt(double t, {List<Vector2>? cachedFirstOrderDerivativePoints});
 
   /// True if the curve is clockwise.
   ///
