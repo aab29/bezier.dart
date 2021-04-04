@@ -521,7 +521,7 @@ abstract class Bezier {
     var origin = _scalingOrigin;
 
     final listLength = order + 1;
-    final scaledCurvePoints = List<Vector2?>.filled(listLength, Vector2.zero());
+    final scaledCurvePoints = List<Vector2>.filled(listLength, Vector2.zero());
 
     final firstOrderPoints = firstOrderDerivativePoints;
 
@@ -533,19 +533,15 @@ abstract class Bezier {
 
     final startTangentPoint = Vector2.copy(scaledStartPoint);
     startTangentPoint.add(derivativeAt(0.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
-    scaledCurvePoints[1] = intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]);
-
-    scaledCurvePoints[1] ??= startTangentPoint;
+    scaledCurvePoints[1] = intersectionPointBetweenTwoLines(scaledStartPoint, startTangentPoint, origin, points[1]) ?? startTangentPoint;
 
     if (order == 3) {
       final endTangentPoint = Vector2.copy(scaledEndPoint);
       endTangentPoint.add(derivativeAt(1.0, cachedFirstOrderDerivativePoints: firstOrderPoints));
-      scaledCurvePoints[2] = intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]);
-
-      scaledCurvePoints[2] ??= endTangentPoint;
+      scaledCurvePoints[2] = intersectionPointBetweenTwoLines(scaledEndPoint, endTangentPoint, origin, points[2]) ?? endTangentPoint;
     }
 
-    return Bezier.fromPoints(scaledCurvePoints as List<Vector2>);
+    return Bezier.fromPoints(scaledCurvePoints);
   }
 
   /// Returns a [List] of intersection results after removing duplicates in [intersectionsToFilter].
