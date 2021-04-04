@@ -47,18 +47,18 @@ import "package:bezier/bezier.dart";
 
 void main() {
   // bezier.dart supports both quadratic curves...
-  final quadraticCurve = new QuadraticBezier([
-    new Vector2(-40.0, -40.0),
-    new Vector2(30.0, 10.0),
-    new Vector2(55.0, 25.0)
+  final quadraticCurve = QuadraticBezier([
+    Vector2(-40.0, -40.0),
+    Vector2(30.0, 10.0),
+    Vector2(55.0, 25.0)
   ]);
 
   // ...and cubic curves!
-  final cubicCurve = new CubicBezier([
-    new Vector2(10.0, 10.0),
-    new Vector2(70.0, 95.0),
-    new Vector2(25.0, 20.0),
-    new Vector2(15.0, 80.0)
+  final cubicCurve = CubicBezier([
+    Vector2(10.0, 10.0),
+    Vector2(70.0, 95.0),
+    Vector2(25.0, 20.0),
+    Vector2(15.0, 80.0)
   ]);
 }
 ```
@@ -70,10 +70,10 @@ import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
-  final curve = new QuadraticBezier([
-    new Vector2(10.0, 10.0),
-    new Vector2(70.0, 95.0),
-    new Vector2(15.0, 80.0)
+  final curve = QuadraticBezier([
+    Vector2(10.0, 10.0),
+    Vector2(70.0, 95.0),
+    Vector2(15.0, 80.0)
   ]);
 
   final computedPoint = curve.pointAt(0.75);
@@ -87,11 +87,11 @@ import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
-  final curve = new CubicBezier([
-    new Vector2(10.0, 10.0),
-    new Vector2(70.0, 95.0),
-    new Vector2(25.0, 20.0),
-    new Vector2(15.0, 80.0)
+  final curve = CubicBezier([
+    Vector2(10.0, 10.0),
+    Vector2(70.0, 95.0),
+    Vector2(25.0, 20.0),
+    Vector2(15.0, 80.0)
   ]);
 
   final subcurve = curve.subcurveBetween(0.2, 0.6);
@@ -105,14 +105,14 @@ import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
-  final curve = new QuadraticBezier([
-    new Vector2(10.0, 500.0),
-    new Vector2(50.0, 0.0),
-    new Vector2(90.0, 500.0)
+  final curve = QuadraticBezier([
+    Vector2(10.0, 500.0),
+    Vector2(50.0, 0.0),
+    Vector2(90.0, 500.0)
   ]);
 
-  final lineStart = new Vector2(0.0, 400.0);
-  final lineEnd = new Vector2(100.0, 410.0);
+  final lineStart = Vector2(0.0, 400.0);
+  final lineEnd = Vector2(100.0, 410.0);
 
   final intersections = curve.intersectionsWithLineSegment(lineStart, lineEnd);
 }
@@ -125,11 +125,11 @@ import "package:vector_math/vector_math.dart";
 import "package:bezier/bezier.dart";
 
 void main() {
-  final curve = new CubicBezier([
-    new Vector2(10.0, 10.0),
-    new Vector2(15.0, 95.0),
-    new Vector2(20.0, 95.0),
-    new Vector2(25.0, 10.0)
+  final curve = CubicBezier([
+    Vector2(10.0, 10.0),
+    Vector2(15.0, 95.0),
+    Vector2(20.0, 95.0),
+    Vector2(25.0, 10.0)
   ]);
 
   final subcurves = curve.offsetCurve(12.0);
