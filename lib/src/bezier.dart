@@ -325,7 +325,7 @@ abstract class Bezier {
     final endPointNormal = _nonOverlappingNormalVectorAt(1.0, order, firstOrderPoints);
 
     final normalDotProduct = startPointNormal.dot(endPointNormal);
-    final num clampedDotProduct = normalDotProduct.clamp(-1.0, 1.0);
+    final clampedDotProduct = normalDotProduct.clamp(-1.0, 1.0);
     final angle = (acos(clampedDotProduct)).abs();
 
     return (angle < pi / 3.0);
